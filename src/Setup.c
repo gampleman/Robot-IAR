@@ -241,6 +241,8 @@ int setup()
 		return 0;
 	}
 	MCDisplayProperties(motoControl);
+	CPhidgetMotorControl_setAcceleration (motoControl, 0, 50.00);
+	CPhidgetMotorControl_setAcceleration (motoControl, 1, 50.00);
 
   // Setup AdvancedServo
 	CPhidgetAdvancedServo_create(&servo);
@@ -260,7 +262,8 @@ int setup()
 
 	//Display the properties of the attached device
 	ASDisplayProperties(servo);
-  
+  CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
+	state.ServoPosition = 120;
 	return 0;
 }
 

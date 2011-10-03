@@ -12,19 +12,29 @@
 #include <phidget21.h>
 #include <unistd.h>
 #include <math.h>
+#include "Types.c"
 #include "Setup.c"
 #include "Movement.c"
-
 
 
 int main(int argc, char* argv[])
 {
 	setup();
+<<<<<<< HEAD
 	//turnOnSpotRight();
 	goTowards(45);
 	getchar();
 	goTowards(135);
 	getchar();
+=======
+	orientStraightAndDrive();
+  
+	while(1)
+	{
+		
+		sleep(0.2);
+	}
+>>>>>>> 0c24d0a41d3d57b020edc4c597b1a1fd56ab18bb
 	stop();
 	teardown();
 	return 0;
