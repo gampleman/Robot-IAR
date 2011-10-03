@@ -12,12 +12,7 @@ int driveRightMotor(float Value)
 	return 0;
 }
 
-int turnOnSpotLeft()
-{
-	turnServo(-50);
-	driveRightMotor(-40);
-	driveLeftMotor(50);
-}
+
 
 int turnServo(float Value)
 {
@@ -31,6 +26,13 @@ int turnOnSpotRight()
 	driveRightMotor(50);
 	driveLeftMotor(-40);
 	
+}
+
+int turnOnSpotLeft()
+{
+	turnServo(-50);
+	driveRightMotor(-40);
+	driveLeftMotor(50);
 }
 
 int stop()
