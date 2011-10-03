@@ -22,7 +22,8 @@
 int main(int argc, char* argv[])
 {
 	setup();
-  
+  	power_button_reset();
+
 	while(power_button_get_value()==0)
 	{
 		sleep(1);
