@@ -22,8 +22,14 @@
 int main(int argc, char* argv[])
 {
 	setup();
-	orientStraightAndDrive();
   
+	while(power_button_get_value()==0)
+	{
+		sleep(1);
+	}
+	
+	orientStraightAndDrive();
+
 	while(power_button_get_value()<2)
 	{
 		if(state.RightWhisker) {
