@@ -19,7 +19,7 @@ int driveRightMotor(float Value)
 int turnServoBy(double Value)
 {
 
-	CPhidgetAdvancedServo_setPosition (servo, 0, Value);
+	CPhidgetAdvancedServo_setPosition(servo, 0, Value);
 	CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
 
 }
@@ -33,8 +33,8 @@ int motorHasntReachedDesiredPosition(double expected)
 
 int turnOnSpotRight()
 {
-	turnServoBy(90);
-	sleep(2);
+	turnServoBy(20);
+	sleep(3);
 	driveRightMotor(50);
 	driveLeftMotor(-40);
 	return 0;
@@ -43,8 +43,8 @@ int turnOnSpotRight()
 int turnOnSpotLeft()
 {
 
-	turnServoBy(-90);
-	sleep(2);
+	turnServoBy(220);
+	sleep(3);
 	driveRightMotor(-40);
 	driveLeftMotor(50);
 }
@@ -53,6 +53,5 @@ int stop()
 {
 	driveRightMotor(0.0);
 	driveLeftMotor(0.0);
-	CPhidgetAdvancedServo_setEngaged(servo, 0, 0);
 	return 0;
 }

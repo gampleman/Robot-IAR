@@ -267,12 +267,18 @@ int setup()
 int teardown()
 {
   printf("Closing...\n");
+	CPhidgetAdvancedServo_setPosition(servo, 0, 120);
+	sleep(2);
 	// Close IFKIT
 	CPhidget_close((CPhidgetHandle)ifKit);
 	CPhidget_delete((CPhidgetHandle)ifKit);
 	// close motoControl
-  CPhidget_close((CPhidgetHandle)motoControl);
+  	CPhidget_close((CPhidgetHandle)motoControl);
 	CPhidget_delete((CPhidgetHandle)motoControl);
+	// disengage and close servo
+	CPhidgetAdvancedServo_setEngaged(servo, 0, 0);
+	CPhidget_close((CPhidgetHandle)servo);
+	CPhidget_delete((CPhidgetHandle)servo);
 	//all done, exit
 	return 0;
 }
