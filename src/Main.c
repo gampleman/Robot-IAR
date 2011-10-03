@@ -12,16 +12,21 @@
 #include <phidget21.h>
 #include <unistd.h>
 #include <math.h>
+#include "Types.c"
 #include "Setup.c"
 #include "Movement.c"
-
 
 
 int main(int argc, char* argv[])
 {
 	setup();
-	turnOnSpotRight();
-  getchar();
+	orientStraightAndDrive();
+  
+	while(1)
+	{
+		
+		sleep(0.2);
+	}
 	stop();
   teardown();
 	return 0;
