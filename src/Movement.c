@@ -1,5 +1,3 @@
-
-
 int driveLeftMotor(float Value)
 {
 	CPhidgetMotorControl_setAcceleration (motoControl, 0, 50.00);
@@ -16,12 +14,24 @@ int driveRightMotor(float Value)
 
 
 
-int turnServoBy(double Value)
+int turnServoTo(double Value)
 {
 
 	CPhidgetAdvancedServo_setPosition(servo, 0, Value);
 	CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
 
+}
+
+int goTowards(double angle)
+{
+	// angle must be within 0 and 180 degrees
+	// 0 is the servo motor turned fully to the right
+	// 180 is the servo motor turned fully to the left
+	turnServoTo(20+(angle*(5/9)));
+	sleep(1.2);
+	driveLeftMotor(35*(angle/180));
+	driveRightMotor(35*(1-(angle/180)));
+	return 0;
 }
 
 int motorHasntReachedDesiredPosition(double expected)
@@ -33,18 +43,19 @@ int motorHasntReachedDesiredPosition(double expected)
 
 int turnOnSpotRight()
 {
-	turnServoBy(20);
-	sleep(3);
-	driveRightMotor(50);
-	driveLeftMotor(-40);
+	//turnServoTo(20);
+	//sleep(0.8);
+	//driveRightMotor(50);
+	//driveLeftMotor(-40);
+	goTowards(0);
 	return 0;
 }
 
 int turnOnSpotLeft()
 {
 
-	turnServoBy(220);
-	sleep(3);
+	turnServoTo(220);
+	sleep(0.8);
 	driveRightMotor(-40);
 	driveLeftMotor(50);
 }

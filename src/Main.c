@@ -20,10 +20,13 @@
 int main(int argc, char* argv[])
 {
 	setup();
-	turnOnSpotRight();
-  getchar();
+	//turnOnSpotRight();
+	goTowards(45);
+	getchar();
+	goTowards(135);
+	getchar();
 	stop();
-  teardown();
+	teardown();
 	return 0;
 }
 
