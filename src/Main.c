@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
 	setup();
 	turnOnSpotRight();
   getchar();
+	stop();
   teardown();
 	return 0;
 }
