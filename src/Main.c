@@ -20,13 +20,6 @@
 int main(int argc, char* argv[])
 {
 	setup();
-<<<<<<< HEAD
-	//turnOnSpotRight();
-	goTowards(45);
-	getchar();
-	goTowards(135);
-	getchar();
-=======
 	orientStraightAndDrive();
   
 	while(1)
@@ -34,7 +27,6 @@ int main(int argc, char* argv[])
 		
 		sleep(0.2);
 	}
->>>>>>> 0c24d0a41d3d57b020edc4c597b1a1fd56ab18bb
 	stop();
 	teardown();
 	return 0;
