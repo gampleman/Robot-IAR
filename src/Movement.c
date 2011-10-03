@@ -33,7 +33,7 @@ int motorHasntReachedDesiredPosition(double expected)
 
 int turnOnSpotRight()
 {
-	turnServoBy(50);
+	turnServoBy(90);
 	sleep(2);
 	driveRightMotor(50);
 	driveLeftMotor(-40);
@@ -43,7 +43,7 @@ int turnOnSpotRight()
 int turnOnSpotLeft()
 {
 
-	turnServoBy(-50);
+	turnServoBy(-90);
 	sleep(2);
 	driveRightMotor(-40);
 	driveLeftMotor(50);
