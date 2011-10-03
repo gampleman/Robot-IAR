@@ -14,23 +14,45 @@ int driveRightMotor(float Value)
 
 
 
-int turnServo(float Value)
+int turnServoBy(double Value, double *expected)
 {
-	CPhidgetAdvancedServo_setPosition (servo, 0, Value);
-	CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
+	double curr_pos;
+	if(CPhidgetAdvancedServo_getPosition(servo, 0, &curr_pos) == EPHIDGET_OK)
+	{
+		expected = Value + curr_pos;
+		CPhidgetAdvancedServo_setPosition (servo, 0, expected);
+		CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
+	} else {
+		return -1;
+	}
+}
+
+int motorHasntReachedDesiredPosition(expected)
+{
+	double current;
+	CPhidgetAdvancedServo_getPosition(servo, 0, &current);
+	return fabs(result - expectedResult) > 0.1;
 }
 
 int turnOnSpotRight()
 {
-	turnServo(50);
+	double expected;
+	turnServoBy(50, &expected);
+	while(motorHasntReachedDesiredPosition(expected)) {
+		sleep(0.5);
+	}
 	driveRightMotor(50);
 	driveLeftMotor(-40);
-	
+	return 0;
 }
 
 int turnOnSpotLeft()
 {
-	turnServo(-50);
+	double expected;
+	turnServoBy(-50, &expected);
+	while(motorHasntReachedDesiredPosition(expected)) {
+		sleep(0.5);
+	}
 	driveRightMotor(-40);
 	driveLeftMotor(50);
 }
