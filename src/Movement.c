@@ -1,3 +1,6 @@
+#include <unistd.h>
+#include <math.h>
+
 int driveLeftMotor(float Value)
 {
 	CPhidgetMotorControl_setAcceleration (motoControl, 0, 50.00);
@@ -19,19 +22,20 @@ int turnServoBy(double Value, double *expected)
 	double curr_pos;
 	if(CPhidgetAdvancedServo_getPosition(servo, 0, &curr_pos) == EPHIDGET_OK)
 	{
-		expected = Value + curr_pos;
-		CPhidgetAdvancedServo_setPosition (servo, 0, expected);
+		*expected = Value + curr_pos;
+		CPhidgetAdvancedServo_setPosition (servo, 0, Value + curr_pos);
 		CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
 	} else {
+		printf("FAIL");
 		return -1;
 	}
 }
 
-int motorHasntReachedDesiredPosition(expected)
+int motorHasntReachedDesiredPosition(double expected)
 {
 	double current;
 	CPhidgetAdvancedServo_getPosition(servo, 0, &current);
-	return fabs(result - expectedResult) > 0.1;
+	return fabs(current - expected) > 0.1;
 }
 
 int turnOnSpotRight()
