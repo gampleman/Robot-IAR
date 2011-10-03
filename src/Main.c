@@ -16,17 +16,28 @@
 #include "Setup.c"
 #include "Movement.c"
 
+#include <libpowerbutton.h>
+
 
 int main(int argc, char* argv[])
 {
 	setup();
 	orientStraightAndDrive();
   
-	while(1)
+	while(power_button_get_value()<2)
 	{
-		if(state.RightWhisker) break;
+		if(state.RightWhisker) {
+			turnOnSpotLeft();
+		}
+		else if(state.LeftWhisker) {
+			turnOnSpotRight();
+		}
+		else {
+			orientStraightAndDrive();
+		}
 		sleep(0.2);
 	}
+	power_button_reset();
 	stop();
 	teardown();
 	return 0;
