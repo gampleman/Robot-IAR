@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <phidget21.h>
+#include <unistd.h>
+#include <math.h>
 #include "Setup.c"
 #include "Movement.c"
 
