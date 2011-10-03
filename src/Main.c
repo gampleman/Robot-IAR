@@ -18,6 +18,7 @@
 int main(int argc, char* argv[])
 {
 	setup();
+	turnOnSpotRight();
   getchar();
   teardown();
 	return 0;
