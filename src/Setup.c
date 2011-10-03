@@ -40,6 +40,7 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 			printf("Left Whisker: %d", State);
 			break;
 		case 1: 
+			state.RightWhisker = State;
 			printf("Right Whisker: %d", State);
 			break;
 		default: 
@@ -264,6 +265,7 @@ int setup()
 	ASDisplayProperties(servo);
   CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
 	state.ServoPosition = 120;
+	state.RightWhisker = 0;
 	return 0;
 }
 

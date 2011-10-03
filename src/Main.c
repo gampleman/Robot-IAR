@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
   
 	while(1)
 	{
-		
+		if(state.RightWhisker) break;
 		sleep(0.2);
 	}
 	stop();

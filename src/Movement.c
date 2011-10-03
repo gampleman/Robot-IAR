@@ -49,7 +49,7 @@ int orientStraightAndDrive()
 	//sleep(0.8);
 	//driveRightMotor(50);
 	//driveLeftMotor(-40);
-	goTowards(0);
+	goTowards(90);
 	return 0;
 }
 
