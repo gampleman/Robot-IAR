@@ -25,7 +25,7 @@ int goTowards(double angle)
 	// angle must be within 0 and 180 degrees
 	// 0 is the servo motor turned fully to the right
 	// 180 is the servo motor turned fully to the left
-	SERVO(20+(angle*(5/9)));
+	SERVO(20+(angle*(10/9)));
 	sleep(1.2);
 	DRIVE_LEFT(35*(angle/180));
 	DRIVE_RIGHT(35*(1-(angle/180)));
