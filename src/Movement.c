@@ -53,16 +53,6 @@ int orientStraightAndDrive()
 	return 0;
 }
 
-int turnOnSpotLeft()
-{
-	if(state.ServoPosition != 0)
-	{
-		SERVO(110);
-		sleep(2);
-	}
-	DRIVE_LEFT(50);
-	DRIVE_RIGHT(50);
-}
 
 int stop()
 {
