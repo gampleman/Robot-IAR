@@ -35,13 +35,20 @@ int main(int argc, char* argv[])
 	{
 		printf("state.ServoPositon = %d", state.ServoPosition);
 		if(state.LeftWhisker)  {
-			retreat(1);
+			retreat(0);
+			sleep(1);
+			driveBack();
 		}
 		else if(state.RightWhisker) {
-			retreat(0);
+			retreat(1);
+			sleep(1);
+			driveBack();
 		}
 		else if(state.FrontFacingIR > 350) {
-			retreat(0);
+			driveBack();
+			retreat(1);
+			sleep(1);
+			driveBack();
 		}
 		else {
 			orientStraightAndDrive();

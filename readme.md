@@ -6,6 +6,10 @@
 
 1. Left Whisker
 2. Right Whisker
+3. Black Bumper
+4. Red Bumper
+5. Red Plate Bumper
+6. Blue Bumper
 
 ### Analogue ###
 

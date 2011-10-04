@@ -44,6 +44,22 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 			state.RightWhisker = State;
 			printf("Right Whisker: %d", State);
 			break;
+		//case 3:
+		//	state.BlackBumper = State;
+		//	printf("Black Bumper: %d", State);
+		//	break;
+		//case 4:
+		//	state.RedBumper = State;
+		//	printf("Red Bumper: %d", State);
+		//	break;
+		//case 5:
+		//	state.RedPlateBumper = State;
+		//	printf("Red plate Bumper: %d", State);
+		//	break;
+		//case 6:
+		//	state.BlueBumper = State;
+		//	printf("Blue Bumper: %d", State);
+		//	break;
 		default: 
 			printf("Digital Input: %d > State: %d\n", Index, State);
 	}

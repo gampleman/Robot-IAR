@@ -81,8 +81,9 @@ int retreat(int right)
 
 int driveBack()
 {
+	SERVO(120);
 	DRIVE_RIGHT(-40);
 	DRIVE_LEFT(-40);
-	sleep(0.8);
+	sleep(1);
 	return 0;
 }
