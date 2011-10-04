@@ -266,7 +266,7 @@ int setup()
 	//Display the properties of the attached device
 	ASDisplayProperties(servo);
   CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
-	state.ServoPosition = 120;
+	state.ServoPosition = 0;
 	state.RightWhisker = 0;
 	state.LeftWhisker = 0;
 	state.FrontFacingIR = 0;
