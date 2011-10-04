@@ -62,12 +62,14 @@ int orientStraightAndDrive()
 	return 0;
 }
 
-int retreat()
+int retreat(int left)
 {
-	SERVO(150);
+	SERVO(120);
 	state.ServoPosition = 0;
-	DRIVE_LEFT(-10);
-	DRIVE_RIGHT(-60);
-	sleep(0.5);
+	DRIVE_LEFT(-40);
+	DRIVE_RIGHT(-40);
+	sleep(0.8);
+	left ? turnOnSpotLeft() : turnOnSpotRight();
 	
+	return 0;
 }
