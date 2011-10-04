@@ -33,7 +33,10 @@ int main(int argc, char* argv[])
 
 	while(power_button_get_value()<2)
 	{
-		if(state.RightWhisker) {
+		if (state.FrontFacingIR > 400) {
+			retreat();
+		}
+		else if(state.RightWhisker) {
 			turnOnSpotLeft();
 		}
 		else if(state.LeftWhisker) {
@@ -45,6 +48,7 @@ int main(int argc, char* argv[])
 		sleep(0.2);
 	}
 	power_button_reset();
+	stop();
 	while(power_button_get_value()==0)
 	{
 		sleep(1);

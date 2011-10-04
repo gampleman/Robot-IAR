@@ -36,11 +36,11 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 {	
 	switch(Index)
 	{
-		case 0: 
+		case 1: 
 			state.LeftWhisker = State;
 			printf("Left Whisker: %d", State);
 			break;
-		case 1: 
+		case 2: 
 			state.RightWhisker = State;
 			printf("Right Whisker: %d", State);
 			break;
@@ -72,6 +72,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 2:
 			printf("Front-facing IR: %d", Value);
+			state.FrontFacingIR = Value;
 			break;
 		case 3: 
 			printf("Sonar: %d", Value);
@@ -268,6 +269,7 @@ int setup()
 	state.ServoPosition = 120;
 	state.RightWhisker = 0;
 	state.LeftWhisker = 0;
+	state.FrontFacingIR = 0;
 	return 0;
 }
 
