@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
 	while(power_button_get_value()<2)
 	{
-		printf("state.ServoPositon = %d", state.ServoPositon);
+		printf("state.ServoPositon = %d", state.ServoPosition);
 		if (state.FrontFacingIR > 400) {
 			retreat();
 		}
