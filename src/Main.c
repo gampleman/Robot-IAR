@@ -40,8 +40,8 @@ int main(int argc, char* argv[])
 		else if(state.RightWhisker) {
 			retreat(0);
 		}
-		else if(state.FrontFacingIR > 400) {
-			retreat(1);
+		else if(state.FrontFacingIR > 350) {
+			retreat(0);
 		}
 		else {
 			orientStraightAndDrive();
