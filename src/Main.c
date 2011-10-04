@@ -34,14 +34,14 @@ int main(int argc, char* argv[])
 	while(power_button_get_value()<2)
 	{
 		printf("state.ServoPositon = %d", state.ServoPosition);
-		if (state.FrontFacingIR > 400) {
-			retreat();
+		if(state.LeftWhisker)  {
+			retreat(1);
 		}
 		else if(state.RightWhisker) {
-			turnOnSpotLeft();
+			retreat(0);
 		}
-		else if(state.LeftWhisker) {
-			turnOnSpotRight();
+		else if(state.FrontFacingIR > 400) {
+			retreat(1);
 		}
 		else {
 			orientStraightAndDrive();
