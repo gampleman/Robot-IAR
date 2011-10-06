@@ -1,3 +1,5 @@
 .DS_Store
 bin/main
 *~
+reports/*.html
+reports/tmp*.md
