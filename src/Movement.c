@@ -17,7 +17,7 @@ int goTowards(double angle)
 	// 0 is the servo motor turned fully to the right
 	// 180 is the servo motor turned fully to the left
 	SERVO(20+(angle*(10/9)));
-	sleep(0.2);
+	//sleep(0.2);
 	DRIVE_LEFT(60*(angle/180));
 	DRIVE_RIGHT(60*(1-(angle/180)));
 	return 0;
