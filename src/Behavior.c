@@ -1,10 +1,15 @@
 #define TURNING_DURATION 4
+#define LIGHT_THRESHOLD 160
 void behave() {
   if(state.LeftLight > LIGHT_THRESHOLD && state.RightLight < LIGHT_THRESHOLD) {
     turnOnSpotLeft();
+    stop();
+    sleep(2);
   }
   else if (state.LeftLight < LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
     turnOnSpotRight(); 
+    stop();
+    sleep(2);
   }
   else if (state.LeftLight > LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
     // orientStraightAndDrive();

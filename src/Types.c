@@ -1,4 +1,4 @@
-#define LIGHT_THRESHOLD 160
+
 struct stateT {
 	unsigned int ServoPosition;
 	unsigned int LeftWhisker;
