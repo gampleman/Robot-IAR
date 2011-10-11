@@ -5,7 +5,9 @@ ifeq ($(UNAME),Linux)
 	g++ src/Main.c -o bin/main -lphidget21 -lpowerbutton
 endif
 ifeq ($(UNAME),Darwin)
-	g++ src/Main.c -o bin/main -framework Phidget21 -I /Library/Frameworks/Phidget21.framework/Headers
+	echo "#define NO_POWERLIB 1"|cat - src/Main.c > src/CompileMain.c
+	g++ src/CompileMain.c -o bin/main -framework Phidget21 -I /Library/Frameworks/Phidget21.framework/Headers
+	rm src/CompileMain.c
 endif
 
 report:

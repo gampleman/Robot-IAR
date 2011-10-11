@@ -289,12 +289,14 @@ int setup()
   timer.threshold = 10;
   timer.iteration = 0;
 	
+	#ifndef NO_POWERLIB
 	power_button_reset();
+	
 	while(power_button_get_value()==0)
 	{
 		sleep(1);
 	}
-	
+	#endif
 	
 	return 0;
 }
@@ -302,7 +304,10 @@ int setup()
 int teardown()
 {
   printf("Closing...\n");
-  power_button_reset();
+  #ifndef NO_POWERLIB
+	power_button_reset();
+	#endif
+  
 	
 	CPhidgetAdvancedServo_setPosition(servo, 0, 120);
 	sleep(2);
