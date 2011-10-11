@@ -6,6 +6,6 @@ struct stateT {
 } state;
 
 struct timerT {
-  int iteration = 0;
+  int iteration;
   int threshold;
   } timer;

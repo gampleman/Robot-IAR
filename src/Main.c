@@ -34,6 +34,7 @@ int main(int argc, char* argv[])
     }
 		sleep(0.2);
 	}
+	stop();
 	teardown();
 	return 0;
 }
