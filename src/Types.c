@@ -1,11 +1,11 @@
-#define LIGHT_THRESHOLD 180
+#define LIGHT_THRESHOLD 160
 struct stateT {
 	unsigned int ServoPosition;
 	unsigned int LeftWhisker;
 	unsigned int RightWhisker;
 	int FrontFacingIR;
-  int LeftLight;
-  int RightLight;
+  	int LeftLight;
+  	int RightLight;
 } state;
 
 struct timerT {

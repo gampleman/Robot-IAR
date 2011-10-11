@@ -95,7 +95,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 4:
 			printf("Right Light sensor: %d", Value);
-      state.RightLight = Value;
+      			state.RightLight = Value;
 			break;
 		case 5:
 			printf("Left Light sensor: %d", Value);

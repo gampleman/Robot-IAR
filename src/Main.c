@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
       timer.iteration = 0;
       timer.threshold += 2;
     }
-		sleep(0.2);
+		sleep(0.1);
 	}
 	stop();
 	teardown();

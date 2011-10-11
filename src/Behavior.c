@@ -15,20 +15,22 @@ void behave() {
     // sleep(2);
     // turnOnSpotLeft();
     // sleep(2);
+    stop();
+    sleep(2);
     if(state.LeftWhisker && state.RightWhisker == 0)  {
       goTowards(80);
-  	} else if(state.RightWhisker && state.LeftWhisker == 0)  {
+    } else if(state.RightWhisker && state.LeftWhisker == 0)  {
   	  goTowards(100);
-  	else if(state.RightWhisker && state.LeftWhisker)  {
-      stop();
-      sleep(2);
-      driveBack();
-      sleep(4);
-      turnOnSpotLeft();
-      sleep(3);
-  	else {
+    } else if(state.RightWhisker && state.LeftWhisker)  {
+     	  stop();
+      	  sleep(2);
+      	  driveBack();
+      	  sleep(4);
+      	  turnOnSpotLeft();
+      	  sleep(3);
+    } else {
       orientStraightAndDrive();
-  	}
+    }
   }
 	else if(state.LeftWhisker)  {
 		retreat(0);
