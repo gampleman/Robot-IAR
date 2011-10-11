@@ -1,5 +1,6 @@
 UNAME := $(shell uname -s)
 default:
+	mkdir -p bin
 ifeq ($(UNAME),Linux)
 	g++ src/Main.c -o bin/main -lphidget21 -lpowerbutton
 endif

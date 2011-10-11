@@ -1,4 +1,4 @@
-#define TURNING_DURATION 5
+#define TURNING_DURATION 4
 void behave() {
 	if(state.LeftWhisker)  {
 		retreat(0);
