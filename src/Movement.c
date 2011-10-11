@@ -11,21 +11,6 @@ int stop()
 	return 0;
 }
 
-int turnOnSpotRight()
-{
-	if(state.ServoPosition != 1) 
-	{
-		stop();
-		SERVO(20);
-		sleep(0.5);
-		state.ServoPosition = 1;
-	}
-	DRIVE_RIGHT(50);
-	DRIVE_LEFT(-40);
-	return 0;
-}
-
-
 int goTowards(double angle)
 {
 	// angle must be within 0 and 180 degrees
@@ -37,6 +22,21 @@ int goTowards(double angle)
 	DRIVE_RIGHT(60*(1-(angle/180)));
 	return 0;
 }
+
+int turnOnSpotRight()
+{
+	if(state.ServoPosition != 1) 
+	{
+		//stop();
+		SERVO(20);
+		//sleep(0.5);
+		state.ServoPosition = 1;
+	}
+	DRIVE_RIGHT(50);
+	DRIVE_LEFT(-40);
+	return 0;
+}
+
 
 int turnOnSpotLeft()
 {

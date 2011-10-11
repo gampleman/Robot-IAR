@@ -1,6 +1,16 @@
 #define TURNING_DURATION 4
 void behave() {
-	if(state.LeftWhisker)  {
+  if(state.LeftLight > LIGHT_THRESHOLD && state.RightLight < LIGHT_THRESHOLD) {
+    turnOnSpotLeft();
+  }
+  else if (state.LeftLight < LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
+    turnOnSpotRight(); 
+  }
+  else if (state.LeftLight > LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
+    stop();
+    exit(0);
+  }
+	else if(state.LeftWhisker)  {
 		retreat(0);
 		sleep(1);
 		driveBack();

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <phidget21.h>
 #include <unistd.h>
 #include <math.h>
