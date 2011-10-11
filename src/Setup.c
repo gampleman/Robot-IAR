@@ -286,12 +286,23 @@ int setup()
 	state.RightWhisker = 0;
 	state.LeftWhisker = 0;
 	state.FrontFacingIR = 0;
+  timer.threshold = 10;
+	
+	power_button_reset();
+	while(power_button_get_value()==0)
+	{
+		sleep(1);
+	}
+	
+	
 	return 0;
 }
 
 int teardown()
 {
   printf("Closing...\n");
+  power_button_reset();
+	stop();
 	CPhidgetAdvancedServo_setPosition(servo, 0, 120);
 	sleep(2);
 	// Close IFKIT

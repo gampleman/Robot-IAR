@@ -5,4 +5,7 @@ struct stateT {
 	int FrontFacingIR;
 } state;
 
-
+struct timerT {
+  int iteration = 0;
+  int threshold;
+  } timer;

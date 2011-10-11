@@ -42,9 +42,9 @@ int turnOnSpotLeft()
 {
 	if(state.ServoPosition != -1)
 	{
-		stop();
+		//stop();
 		SERVO(220);
-		sleep(0.5);
+		//sleep(0.5);
 		state.ServoPosition = -1;
 	}
 	DRIVE_RIGHT(-40);
