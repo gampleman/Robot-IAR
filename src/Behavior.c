@@ -1,13 +1,13 @@
 #define TURNING_DURATION 4
 #define LIGHT_THRESHOLD 160
 void behave() {
-  printf("\n\n\n\nLeft Light: %d, Right Light: %d\n\n\n\n\n", state.LeftLight, state.RightLight);
+  printf("\n\n\nLeft Light: %d, Right Light: %d\n\n\n", state.LeftLight, state.RightLight);
   if(state.LeftLight > LIGHT_THRESHOLD && state.RightLight < LIGHT_THRESHOLD) {
-    turnOnSpotLeft();
+    goTowards(20);
 
   }
   else if (state.LeftLight < LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
-    turnOnSpotRight(); 
+    goTowards(160);
 
   }
   else if (state.LeftLight > LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
@@ -21,7 +21,6 @@ void behave() {
     // sleep(2);
     //stop();
     //sleep(2);
-    exit(0);
     if(state.LeftWhisker && state.RightWhisker == 0)  {
       goTowards(80);
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
