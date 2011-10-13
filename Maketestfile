@@ -1,7 +1,0 @@
-UNAME := $(shell uname -s)
-default:
-	mkdir -p bin
-ifeq ($(UNAME),Linux)
-	g++ src/Testing.c -o bin/test -lphidget21 -lpowerbutton
-endif
-

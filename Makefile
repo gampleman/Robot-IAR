@@ -24,3 +24,4 @@ ifeq ($(UNAME),Darwin)
 	redcarpet reports/tmp1.md > reports/report1.html
 	rm reports/tmp1.md
 endif
+
