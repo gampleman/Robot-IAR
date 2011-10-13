@@ -12,7 +12,7 @@ int stop()
 	return 0;
 }
 
-int goTowards(double angle)
+int goTowards(double angle, double percent)
 {
   MovementLog("goTowards(%f)", angle);
 	// angle must be within 0 and 180 degrees
@@ -20,8 +20,8 @@ int goTowards(double angle)
 	// 180 is the servo motor turned fully to the left
 	SERVO(20+(angle*(10/9)));
 	//sleep(0.2);
-	DRIVE_RIGHT(60*(angle/180));
-	DRIVE_LEFT(60*(1-(angle/180)));
+	DRIVE_RIGHT(60*(angle/180)*percent);
+	DRIVE_LEFT(60*(1-(angle/180))*percent);
 	return 0;
 }
 
@@ -55,13 +55,13 @@ int turnOnSpotLeft()
 	DRIVE_LEFT(50);
 }
 
-int orientStraightAndDrive()
+int orientStraightAndDrive(double percent)
 {
   MovementLog("orientStraightAndDrive()");
 	SERVO(120);
 	//sleep(0.8);
-	DRIVE_RIGHT(60);
-	DRIVE_LEFT(60);
+	DRIVE_RIGHT(60*percent);
+	DRIVE_LEFT(60*percent);
 	//goTowards(90);
 	state.ServoPosition = 0;
 	return 0;

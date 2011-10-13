@@ -17,7 +17,7 @@
 int main(int argc, char* argv[])
 {
 	setup();
-	orientStraightAndDrive();
+	orientStraightAndDrive(1);
 	#ifdef NO_POWERLIB
 	while(1)
 	#else
