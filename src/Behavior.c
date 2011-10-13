@@ -3,11 +3,11 @@
 void behave() {
   printf("\n\n\nLeft Light: %d, Right Light: %d\n\n\n", state.LeftLight, state.RightLight);
   if(state.LeftLight > LIGHT_THRESHOLD && state.RightLight < LIGHT_THRESHOLD) {
-    goTowards(20);
+    goTowards(30);
 
   }
   else if (state.LeftLight < LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
-    goTowards(160);
+    goTowards(150);
 
   }
   else if (state.LeftLight > LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
@@ -22,9 +22,9 @@ void behave() {
     //stop();
     //sleep(2);
     if(state.LeftWhisker && state.RightWhisker == 0)  {
-      goTowards(80);
+      goTowards(75);
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
-  	  goTowards(100);
+  	  goTowards(105);
     } else if(state.RightWhisker && state.LeftWhisker)  {
      	  stop();
       	  sleep(2);
