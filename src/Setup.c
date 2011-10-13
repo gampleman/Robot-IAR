@@ -1,3 +1,19 @@
+#ifdef SHOULD_DEBUG_SETUP
+#define SetupLog(...) printf(__VA_ARGS__); printf("\n");
+#define SetupIDebug(arg) printf("arg = %d\n", arg);
+#else
+#define SetupLog(...) 
+#define SetupIDebug(arg)
+#endif
+
+#ifndef SHOULD_DEBUG_SENSOR
+#define SensorLog(...) 
+#define SensorIDebug(arg)
+#else
+#define SensorLog(...) printf(__VA_ARGS__); printf("\n");
+#define SensorIDebug(arg) printf("arg = %d\n", arg);
+#endif
+
 int AttachHandler(CPhidgetHandle IFK, void *userptr)
 {
 	int serialNo;
@@ -6,7 +22,7 @@ int AttachHandler(CPhidgetHandle IFK, void *userptr)
 	CPhidget_getDeviceName(IFK, &name);
 	CPhidget_getSerialNumber(IFK, &serialNo);
 
-	printf("%s %10d attached!\n", name, serialNo);
+	SetupLog("%s %10d attached!", name, serialNo);
 
 	return 0;
 }
@@ -19,14 +35,14 @@ int DetachHandler(CPhidgetHandle IFK, void *userptr)
 	CPhidget_getDeviceName (IFK, &name);
 	CPhidget_getSerialNumber(IFK, &serialNo);
 
-	printf("%s %10d detached!\n", name, serialNo);
+	SetupLog("%s %10d detached!", name, serialNo);
 
 	return 0;
 }
 
 int ErrorHandler(CPhidgetHandle IFK, void *userptr, int ErrorCode, const char *unknown)
 {
-	printf("Error handled. %d - %s", ErrorCode, unknown);
+	SetupLog("Error handled. %d - %s", ErrorCode, unknown);
 	return 0;
 }
 
@@ -38,11 +54,11 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 	{
 		case 1: 
 			state.LeftWhisker = State;
-			printf("Left Whisker: %d", State);
+      SensorIDebug(state.LeftWhisker);
 			break;
 		case 2: 
 			state.RightWhisker = State;
-			printf("Right Whisker: %d", State);
+      SensorIDebug(state.RightWhisker);
 			break;
 		//case 3:
 		//	state.BlackBumper = State;
@@ -61,7 +77,7 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 		//	printf("Blue Bumper: %d", State);
 		//	break;
 		default: 
-			printf("Digital Input: %d > State: %d\n", Index, State);
+			SensorLog("Digital Input: %d > State: %d", Index, State);
 	}
 	return 0;
 }
@@ -81,31 +97,31 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	switch(Index)
 	{
 		case 0: 
-			printf("Spinning sensor: %d", Value);
+			SensorLog("Spinning sensor: %d", Value);
 			break;
 		case 1:
-			printf("Wheel-attached IR: %d", Value);
+			SensorLog("Wheel-attached IR: %d", Value);
 			break;
 		case 2:
-			printf("Front-facing IR: %d", Value);
+			SensorLog("Front-facing IR: %d", Value);
 			state.FrontFacingIR = Value;
 			break;
 		case 3: 
-			printf("Sonar: %d", Value);
+			SensorLog("Sonar: %d", Value);
 			break;
 		case 4:
-			printf("Right Light sensor: %d", Value);
+			SensorLog("Right Light sensor: %d", Value);
       			state.RightLight = Value;
 			break;
 		case 5:
-			printf("Left Light sensor: %d", Value);
+			SensorLog("Left Light sensor: %d", Value);
 			state.LeftLight = Value;
 			break;
 		case 6:
-			printf("Light sensor: %d", Value);
+			SensorLog("Light sensor: %d", Value);
 			break;
 		case 7:
-			printf("Light sensor: %d", Value);
+			SensorLog("Light sensor: %d", Value);
 			break;
 	}
 	return 0;
@@ -128,17 +144,17 @@ int IKDisplayProperties(CPhidgetInterfaceKitHandle phid)
 	CPhidgetInterfaceKit_getSensorCount(phid, &numSensors);
 	CPhidgetInterfaceKit_getRatiometric(phid, &ratiometric);
 
-	printf("%s\n", ptr);
-	printf("Serial Number: %10d\nVersion: %8d\n", serialNo, version);
-	printf("# Digital Inputs: %d\n# Digital Outputs: %d\n", numInputs, numOutputs);
-	printf("# Sensors: %d\n", numSensors);
-	printf("Ratiometric: %d\n", ratiometric);
+	SetupLog("%s", ptr);
+	SetupLog("Serial Number: %10d\nVersion: %8d", serialNo, version);
+	SetupLog("# Digital Inputs: %d\n# Digital Outputs: %d", numInputs, numOutputs);
+	SetupLog("# Sensors: %d", numSensors);
+	SetupLog("Ratiometric: %d", ratiometric);
 
 	for(i = 0; i < numSensors; i++)
 	{
 		CPhidgetInterfaceKit_getSensorChangeTrigger (phid, i, &triggerVal);
 
-		printf("Sensor#: %d > Sensitivity Trigger: %d\n", i, triggerVal);
+		SetupLog("Sensor#: %d > Sensitivity Trigger: %d\n", i, triggerVal);
 	}
 
 	return 0;
@@ -147,19 +163,19 @@ int IKDisplayProperties(CPhidgetInterfaceKitHandle phid)
 
 int MCInputChangeHandler(CPhidgetMotorControlHandle MC, void *usrptr, int Index, int State)
 {
-	printf("Input %d > State: %d\n", Index, State);
+	SetupLog("Input %d > State: %d", Index, State);
 	return 0;
 }
 
 int MCVelocityChangeHandler(CPhidgetMotorControlHandle MC, void *usrptr, int Index, double Value)
 {
-	printf("Motor %d > Current Speed: %f\n", Index, Value);
+	SetupLog("Motor %d > Current Speed: %f", Index, Value);
 	return 0;
 }
 
 int MCCurrentChangeHandler(CPhidgetMotorControlHandle MC, void *usrptr, int Index, double Value)
 {
-	printf("Motor: %d > Current Draw: %f\n", Index, Value);
+	SetupLog("Motor: %d > Current Draw: %f", Index, Value);
 	return 0;
 }
 
@@ -175,9 +191,9 @@ int MCDisplayProperties(CPhidgetMotorControlHandle phid)
 	CPhidgetMotorControl_getInputCount(phid, &numInputs);
 	CPhidgetMotorControl_getMotorCount(phid, &numMotors);
 
-	printf("%s\n", ptr);
-	printf("Serial Number: %10d\nVersion: %8d\n", serialNo, version);
-	printf("# Inputs: %d\n# Motors: %d\n", numInputs, numMotors);
+	SetupLog("%s", ptr);
+	SetupLog("Serial Number: %10d\nVersion: %8d", serialNo, version);
+	SetupLog("# Inputs: %d\n# Motors: %d", numInputs, numMotors);
 
 	return 0;
 }
@@ -185,7 +201,7 @@ int MCDisplayProperties(CPhidgetMotorControlHandle phid)
 
 int ASPositionChangeHandler(CPhidgetAdvancedServoHandle ADVSERVO, void *usrptr, int Index, double Value)
 {
-	printf("Motor: %d > Current Position: %f\n", Index, Value);
+	SetupLog("Motor: %d > Current Position: %f", Index, Value);
 	return 0;
 }
 
@@ -201,8 +217,8 @@ int ASDisplayProperties(CPhidgetAdvancedServoHandle phid)
 
 	CPhidgetAdvancedServo_getMotorCount (phid, &numMotors);
 
-	printf("%s\n", ptr);
-	printf("Serial Number: %10d\nVersion: %8d\n# Motors: %d\n", serialNo, version, numMotors);
+	SetupLog("%s", ptr);
+	SetupLog("Serial Number: %10d\nVersion: %8d\n# Motors: %d", serialNo, version, numMotors);
 
 	return 0;
 }
@@ -234,7 +250,7 @@ int setup()
 	CPhidget_open((CPhidgetHandle)ifKit, -1);
   
 	//get the program to wait for an interface kit device to be attached
-	printf("Waiting for interface kit to be attached....");
+	SetupLog("Waiting for interface kit to be attached....");
 	if((result = CPhidget_waitForAttachment((CPhidgetHandle)ifKit, 10000)))
 	{
 		CPhidget_getErrorDescription(result, &err);
@@ -254,7 +270,7 @@ int setup()
 	CPhidgetMotorControl_set_OnVelocityChange_Handler (motoControl, MCVelocityChangeHandler, NULL);
 	CPhidgetMotorControl_set_OnCurrentChange_Handler (motoControl, MCCurrentChangeHandler, NULL);
 	CPhidget_open((CPhidgetHandle)motoControl, -1);
-	printf("Waiting for MotorControl to be attached....");
+	SetupLog("Waiting for MotorControl to be attached....");
 	if((result = CPhidget_waitForAttachment((CPhidgetHandle)motoControl, 10000)))
 	{
 		CPhidget_getErrorDescription(result, &err);
@@ -273,7 +289,7 @@ int setup()
 
 	CPhidgetAdvancedServo_set_OnPositionChange_Handler(servo, ASPositionChangeHandler, NULL);
 	CPhidget_open((CPhidgetHandle)servo, -1);
-	printf("Waiting for Phidget to be attached....");
+	SetupLog("Waiting for Phidget to be attached....");
 	if((result = CPhidget_waitForAttachment((CPhidgetHandle)servo, 10000)))
 	{
 		CPhidget_getErrorDescription(result, &err);
@@ -305,7 +321,7 @@ int setup()
 
 int teardown()
 {
-  printf("Closing...\n");
+  SetupLog("Closing...\n");
   #ifndef NO_POWERLIB
 	power_button_reset();
 	#endif
