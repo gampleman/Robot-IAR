@@ -14,7 +14,7 @@ int stop()
 
 int goTowards(double angle)
 {
-  MovementLog("goTowards(%d)", angle);
+  MovementLog("goTowards(%f)", angle);
 	// angle must be within 0 and 180 degrees
 	// 0 is the servo motor turned fully to the right
 	// 180 is the servo motor turned fully to the left
