@@ -42,28 +42,28 @@ void behave() {
       orientStraightAndDrive();
     }
   }
-  // else if(state.LeftWhisker)  {
-  // BehaviorLog("Left whisker triggered");  
-  //  retreat(0);
-  //  sleep(1);
-  //  driveBack();
-  // }
-  // else if(state.RightWhisker) {
-  // BehaviorLog("Reft whisker triggered");  
-  //  retreat(1);
-  //  sleep(1); 
-  //  driveBack();
-  // }
-  // else if(state.FrontFacingIR > 350) {
-  //  BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
-  //  driveBack();
-  //  retreat(1);
-  //  sleep(1);
-  //  driveBack();
-  // }
+   else if(state.LeftWhisker)  {
+   BehaviorLog("Left whisker triggered");  
+   retreat(0);
+   sleep(1);
+   driveBack();
+  }
+  else if(state.RightWhisker) {
+    BehaviorLog("Reft whisker triggered");  
+    retreat(1);
+    sleep(1); 
+    driveBack();
+  }
+  else if(state.FrontFacingIR > 350) {
+    BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
+    driveBack();
+    retreat(1);
+    sleep(1);
+    driveBack();
+  }
 	else if(timer.iteration > timer.threshold && timer.iteration < timer.threshold + TURNING_DURATION) {
     BehaviorLog("Turning %d", timer.threshold + TURNING_DURATION - timer.iteration);
-    turnOnSpotLeft();
+    goTowards(30);
 	}
 	else {
 		orientStraightAndDrive();
