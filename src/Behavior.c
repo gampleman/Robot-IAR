@@ -1,13 +1,3 @@
-#ifdef SHOULD_DEBUG_BEHAVIOR
-#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n");
-#define BehaviorIDebug(arg) printf("arg = %d\n", arg);
-#else
-#define BehaviorLog(...) 
-#define BehaviorIDebug(arg)
-#endif
-
-
-
 #define TURNING_DURATION 4
 #define LIGHT_THRESHOLD 160
 void behave() {

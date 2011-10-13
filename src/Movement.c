@@ -1,12 +1,3 @@
-#ifdef SHOULD_DEBUG_MOVEMENT
-#define MovementLog(...) printf(__VA_ARGS__); printf("\n");
-#define MovementIDebug(arg) printf("arg = %d\n", arg);
-#else
-#define MovementLog(...) 
-#define MovementIDebug(arg)
-#endif
-
-
 #define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, -0.75 *Value)
 #define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, 0.75 * Value)
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)

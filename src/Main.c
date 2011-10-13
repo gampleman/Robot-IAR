@@ -6,10 +6,7 @@
 #ifndef NO_POWERLIB
 #include <libpowerbutton.h>
 #endif
-
-#define Log(...) printf(__VA_ARGS__); printf("\n");
-#define IDebug(arg) printf("arg = %d\n", arg);
-
+#include "Debug.c"
 #include "Types.c"
 #include "Setup.c"
 #include "Movement.c"

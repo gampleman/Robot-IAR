@@ -1,19 +1,3 @@
-#ifdef SHOULD_DEBUG_SETUP
-#define SetupLog(...) printf(__VA_ARGS__); printf("\n");
-#define SetupIDebug(arg) printf("arg = %d\n", arg);
-#else
-#define SetupLog(...) 
-#define SetupIDebug(arg)
-#endif
-
-#ifndef SHOULD_DEBUG_SENSOR
-#define SensorLog(...) 
-#define SensorIDebug(arg)
-#else
-#define SensorLog(...) printf(__VA_ARGS__); printf("\n");
-#define SensorIDebug(arg) printf("arg = %d\n", arg);
-#endif
-
 int AttachHandler(CPhidgetHandle IFK, void *userptr)
 {
 	int serialNo;
