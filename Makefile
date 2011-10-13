@@ -10,8 +10,8 @@ ifeq ($(UNAME),Darwin)
 endif
 
 report:
-	cat reports/1.md > reports/tmp1.md
-	ruby -e "File.open('reports/tmp1.md', 'a') { |file| \
+	cat reports/2.md > reports/tmp2.md
+	ruby -e "File.open('reports/tmp2.md', 'a') { |file| \
 		file.puts '## Code listing'; \
 		Dir['src/*.c'].each{|f| \
 			file.puts ''; \
@@ -20,7 +20,7 @@ report:
 		} \
 	}"
 ifeq ($(UNAME),Darwin)
-	redcarpet reports/tmp1.md > reports/report1.html
-	rm reports/tmp1.md
+	redcarpet reports/tmp2.md > reports/report1.html
+	rm reports/tmp2.md
 endif
 

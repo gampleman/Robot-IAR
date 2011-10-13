@@ -9,11 +9,9 @@
 #define BehaviorIDebug(arg)
 #endif
 
-
-
 #ifdef SHOULD_DEBUG_MOVEMENT
 #define MovementLog(...) printf(__VA_ARGS__); printf("\n");
-#define MovementIDebug(arg) printf("arg = %d\n", arg);
+#define MovementIDebug(arg) printf("arg = %d\n", arg)
 #else
 #define MovementLog(...) 
 #define MovementIDebug(arg)
