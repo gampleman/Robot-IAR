@@ -1,4 +1,9 @@
+# Dodo #
+
+![Blueprint](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/Blueprint.png)
+
 # Connection specs #
+
 
 ## Sensors ##
 
