@@ -312,7 +312,7 @@ int setup()
   timer.iteration = 0;
   state.AverageBaseLight = 10000.0;
   state.TopLight = 0;
-  state.AverageTopLight = 0;
+  state.AverageTopLight = 1000;
   time(&(timer.lastTimeChange));
 	#ifndef NO_POWERLIB
 	power_button_reset();
