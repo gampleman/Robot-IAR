@@ -2,7 +2,7 @@
 #define LIGHT_INCREASE_THRESHOLD 0.3
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > LIGHT_INCREASE_THRESHOLD)
+#define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
 void behave() {
   BehaviorIDebug(state.LeftLight);
