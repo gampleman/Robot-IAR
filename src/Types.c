@@ -1,5 +1,5 @@
 #define TURNING_DURATION 4
-#define LIGHT_INCREASE_THRESHOLD 0.3
+#define LIGHT_INCREASE_THRESHOLD 0.12
 struct stateT {
 	unsigned int ServoPosition;
 	unsigned int LeftWhisker;

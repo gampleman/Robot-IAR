@@ -29,12 +29,12 @@ void behave() {
     driveBack();
   }
   else if(state.RightWhisker) {
-    BehaviorLog("Reft whisker triggered");  
+    BehaviorLog("Right whisker triggered");  
     retreat(1);
     sleep(1); 
     driveBack();
   }
-  else if(state.FrontFacingIR > 350) {
+  else if(state.FrontFacingIR > 420) {
     BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
     driveBack();
     retreat(1);

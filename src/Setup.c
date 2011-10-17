@@ -77,7 +77,7 @@ int IKOutputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT (state.TopLight > 500)
+#define TOP_LIGHT (state.TopLight > 200)
 
 /// state.AverageTopLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
