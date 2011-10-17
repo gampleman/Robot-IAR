@@ -3,6 +3,7 @@
 #include <phidget21.h>
 #include <unistd.h>
 #include <math.h>
+#include <string.h>
 #ifndef NO_POWERLIB
 #include <libpowerbutton.h>
 #endif

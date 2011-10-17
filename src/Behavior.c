@@ -31,22 +31,22 @@ void behave() {
   	  goTowards(100,0.5);
     } else if(state.RightWhisker && state.LeftWhisker)  {
       BehaviorLog("Both light and both whiskers");
-     	  stop();
-      	  sleep(2);
-      	  driveBack();
-      	  sleep(3);
-      	  turnOnSpotLeft();
-      	  sleep(3);
+   	  stop();
+  	  sleep(2);
+  	  driveBack();
+  	  sleep(3);
+  	  turnOnSpotLeft();
+  	  sleep(3);
     } else {
       BehaviorLog("Both light and no whiskers");
       orientStraightAndDrive(0.5);
     }
   }
-   else if(state.LeftWhisker)  {
-   BehaviorLog("Left whisker triggered");  
-   retreat(0);
-   sleep(1);
-   driveBack();
+  else if(state.LeftWhisker)  {
+    BehaviorLog("Left whisker triggered");  
+    retreat(0);
+    sleep(1);
+    driveBack();
   }
   else if(state.RightWhisker) {
     BehaviorLog("Reft whisker triggered");  
