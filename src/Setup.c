@@ -300,6 +300,9 @@ int setup()
 	}
 	#endif
 	
+  previous_log = malloc(300);
+  current_log = malloc(300);
+	
 	return 0;
 }
 
@@ -323,6 +326,8 @@ int teardown()
 	CPhidgetAdvancedServo_setEngaged(servo, 0, 0);
 	CPhidget_close((CPhidgetHandle)servo);
 	CPhidget_delete((CPhidgetHandle)servo);
+  free(previous_log);
+  free(current_log);
 	//all done, exit
 	return 0;
 }
