@@ -4,12 +4,6 @@
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
 void behave() {
-  BehaviorIDebug(state.LeftLight);
-  BehaviorIDebug(state.RightLight);
-  if(!LEFT_LIGHT && !RIGHT_LIGHT) {
-    state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
-    BehaviorLog("Assigned average: %f", state.AverageBaseLight);
-  }
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(20,0.5);
     BehaviorLog("Left light triggered");
@@ -25,14 +19,9 @@ void behave() {
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
   	  goTowards(100,0.5);
-    } else if(state.RightWhisker && state.LeftWhisker)  {
-      BehaviorLog("Both light and both whiskers");
-   	  stop();
-  	  sleep(2);
-  	  driveBack();
-  	  sleep(3);
-  	  turnOnSpotLeft();
-  	  sleep(3);
+    } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
+      BehaviorLog("Both light and left whisker");
+  	  goTowards(80,0.5);
     } else {
       BehaviorLog("Both light and no whiskers");
       orientStraightAndDrive(0.5);

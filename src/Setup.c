@@ -117,7 +117,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	
 	if(!LEFT_LIGHT && !RIGHT_LIGHT) {
     state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
-    BehaviorLog("Assigned average: %f", state.AverageBaseLight);
+    SensorLog("Assigned average: %f", state.AverageBaseLight);
   }
 	
 	if(!TOP_LIGHT) {
@@ -126,6 +126,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     time_t now;
     time(&now);
     timer.frequency = difftime(timer.lastTimeChange, now);
+    BehaviorLog("Sensed frequency %f", timer.frequency);
     timer.lastTimeChange = now;
 	}
 	return 0;
