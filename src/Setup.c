@@ -299,10 +299,10 @@ int setup()
 		sleep(1);
 	}
 	#endif
-	
-  previous_log = malloc(300);
-  current_log = malloc(300);
-	
+	#ifdef SHOULD_DEBUG_BEHAVIOR
+  previous_log = (char *) malloc(300 * sizeof(char));
+  current_log = (char *) malloc(300 * sizeof(char));
+	#endif
 	return 0;
 }
 
@@ -326,8 +326,10 @@ int teardown()
 	CPhidgetAdvancedServo_setEngaged(servo, 0, 0);
 	CPhidget_close((CPhidgetHandle)servo);
 	CPhidget_delete((CPhidgetHandle)servo);
+	#ifdef SHOULD_DEBUG_BEHAVIOR
   free(previous_log);
   free(current_log);
+  #endif
 	//all done, exit
 	return 0;
 }
