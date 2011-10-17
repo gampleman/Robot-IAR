@@ -18,10 +18,10 @@ void behave() {
       stop();
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
-  	  goTowards(100,0.5);
+  	  goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
-  	  goTowards(80,0.5);
+  	  goTowards(60,0.5);
     } else {
       BehaviorLog("Both light and no whiskers");
       orientStraightAndDrive(0.5);
