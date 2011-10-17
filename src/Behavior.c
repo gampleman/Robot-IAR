@@ -7,9 +7,9 @@
 void behave() {
   BehaviorIDebug(state.LeftLight);
   BehaviorIDebug(state.RightLight);
-  BehaviorIDebug(state.AverageBaseLight);
   if(!LEFT_LIGHT && !RIGHT_LIGHT) {
     state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
+    BehaviorLog("Assigned average: %f", state.AverageBaseLight);
   }
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(20,0.5);
