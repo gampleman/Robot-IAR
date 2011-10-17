@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	{
     timer.iteration++;
     behave();
-    if(timer.iteration == timer.threshold + TURNING_DURATION) {
+    if(timer.iteration == (timer.threshold + TURNING_DURATION)) {
       timer.iteration = 0;
       timer.threshold += 2;
     }

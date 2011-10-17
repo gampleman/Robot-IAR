@@ -61,8 +61,8 @@ void behave() {
     sleep(1);
     driveBack();
   }
-	else if(timer.iteration > timer.threshold && timer.iteration < timer.threshold + TURNING_DURATION) {
-    BehaviorLog("Turning %d", timer.threshold + TURNING_DURATION - timer.iteration);
+	else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
+    BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
     goTowards(30,1);
 	}
 	else {
