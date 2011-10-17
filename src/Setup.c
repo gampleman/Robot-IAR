@@ -290,7 +290,7 @@ int setup()
 	state.FrontFacingIR = 0;
   timer.threshold = 10;
   timer.iteration = 0;
-	
+  state.AverageBaseLight = 10000.0;
 	#ifndef NO_POWERLIB
 	power_button_reset();
 	

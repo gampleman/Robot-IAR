@@ -1,28 +1,24 @@
 #define TURNING_DURATION 4
-#define LIGHT_THRESHOLD 160
+#define LIGHT_INCREASE_THRESHOLD 0.3
+
+#define LEFT_LIGHT (state.AverageBaseLight / state.LeftLight > LIGHT_INCREASE_THRESHOLD)
+#define RIGHT_LIGHT (state.AverageBaseLight / state.RightLight > LIGHT_INCREASE_THRESHOLD)
+
 void behave() {
-  //BehaviorIDebug(state.LeftLight);
-  //BehaviorIDebug(state.RightLight);
-  if(state.LeftLight > LIGHT_THRESHOLD && state.RightLight < LIGHT_THRESHOLD) {
+  BehaviorIDebug(state.LeftLight);
+  BehaviorIDebug(state.RightLight);
+  if(!LEFT_LIGHT && !RIGHT_LIGHT) {
+    state.AverageBaseLight = (state.LeftLight + state.RightLight) / 2;
+  }
+  if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(20,0.5);
     BehaviorLog("Left light triggered");
   }
-  else if (state.LeftLight < LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
+  else if (!LEFT_LIGHT && RIGHT_LIGHT) {
     goTowards(160,0.5);
     BehaviorLog("Right light triggered");
   }
-  else if (state.LeftLight > LIGHT_THRESHOLD && state.RightLight > LIGHT_THRESHOLD) {
-    //BehaviorLog("Both lights triggered");
-    // orientStraightAndDrive();
-    // sleep(2);
-    //stop();
-    // sleep(2);
-    // driveBack();
-    // sleep(2);
-    // turnOnSpotLeft();
-    // sleep(2);
-    //stop();
-    //sleep(2);
+  else if (LEFT_LIGHT && RIGHT_LIGHT) {
     if(state.LeftWhisker && state.RightWhisker == 0)  {
       BehaviorLog("Both light and left whisker");
       goTowards(80,0.5);

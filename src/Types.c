@@ -4,8 +4,9 @@ struct stateT {
 	unsigned int LeftWhisker;
 	unsigned int RightWhisker;
 	int FrontFacingIR;
-  	int LeftLight;
-  	int RightLight;
+  int LeftLight;
+  int RightLight;
+  float AverageBaseLight;
 } state;
 
 struct timerT {
