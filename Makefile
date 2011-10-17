@@ -24,3 +24,5 @@ ifeq ($(UNAME),Darwin)
 	rm reports/tmp2.md
 endif
 
+copy_to_dodo:
+	scp -r . student@Dodo:/home/student/MyPrograms
