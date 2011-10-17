@@ -1,12 +1,13 @@
 #define TURNING_DURATION 4
 #define LIGHT_INCREASE_THRESHOLD 0.3
 
-#define LEFT_LIGHT (state.AverageBaseLight / state.LeftLight > LIGHT_INCREASE_THRESHOLD)
-#define RIGHT_LIGHT (state.AverageBaseLight / state.RightLight > LIGHT_INCREASE_THRESHOLD)
+#define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
+#define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > LIGHT_INCREASE_THRESHOLD)
 
 void behave() {
   BehaviorIDebug(state.LeftLight);
   BehaviorIDebug(state.RightLight);
+  BehaviorIDebug(state.AverageBaseLight);
   if(!LEFT_LIGHT && !RIGHT_LIGHT) {
     state.AverageBaseLight = (state.LeftLight + state.RightLight) / 2;
   }
