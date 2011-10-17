@@ -22,9 +22,9 @@
 1. Wheel-attached IR
 2. Front-facing IR
 3. Sonar
-4. Light sensor
-5. Light sensor
-6. Light sensor
+4. Right Light sensor
+5. Left Light sensor
+6. Top Light sensor
 7. Light sensor
 
 ## Motors ##
