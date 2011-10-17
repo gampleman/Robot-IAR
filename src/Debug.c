@@ -7,7 +7,7 @@
 char *previous_log;
 char *current_log;
 #define BehaviorLog(...) sprintf(current_log, __VA_ARGS__); \
-if(strcmp(current_log, previous_log)) {printf("%s\n", current_log); previous_log = current_log;}
+if(strcmp(current_log, previous_log) != 0) {printf("%s\n", current_log); previous_log = current_log;}
 #define BehaviorIDebug(arg) printf("arg = %d\n", arg);
 #else
 #define BehaviorLog(...) 
