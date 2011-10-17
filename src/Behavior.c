@@ -1,8 +1,3 @@
-
-
-#define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-
 void behave() {
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(20,0.5);
