@@ -8,8 +8,11 @@ void behave() {
     BehaviorLog("Right light triggered");
   }
   else if (LEFT_LIGHT && RIGHT_LIGHT) {
-    if(TOP_LIGHT)  {
-      BehaviorLog("Top Light. Frequency: %f", timer.frequency);
+    if(TOP_LEFT_LIGHT)  {
+      BehaviorLog("Top Left Light. Frequency: %f", timer.frequency);
+      stop();
+    } else if(TOP_RIGHT_LIGHT) {
+      BehaviorLog("Top Right Light. Frequency: %f", timer.frequency);
       stop();
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");

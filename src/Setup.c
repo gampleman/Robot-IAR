@@ -77,7 +77,8 @@ int IKOutputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT (state.TopLight > 200)
+#define TOP_RIGHT_LIGHT (state.TopRightLight > 200)
+#define TOP_LEFT_LIGHT (state.TopLeftLight > 200)
 
 /// state.AverageTopLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
@@ -109,11 +110,12 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			state.LeftLight = Value;
 			break;
 		case 6:
-			SensorLog("Top Light sensor: %d", Value);
-      state.TopLight = Value;
+			SensorLog("Top Right Light sensor: %d", Value);
+      			state.TopRightLight = Value;
 			break;
 		case 7:
-			SensorLog("Light sensor: %d", Value);
+			SensorLog("Top Left Light sensor: %d", Value);
+			state.TopLeftLight = Value;
 			break;
 	}
 	
@@ -122,13 +124,22 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     SensorLog("Assigned average: %f", state.AverageBaseLight);
   }
 	
-	if(!TOP_LIGHT) {
-    state.AverageTopLight = state.TopLight;
+	if(!TOP_LEFT_LIGHT) {
+    state.AverageTopLeftLight = state.TopLeftLight;
 	} else {
     time_t now;
     time(&now);
     timer.frequency = difftime(timer.lastTimeChange, now);
-    BehaviorLog("Sensed frequency %f", timer.frequency);
+    BehaviorLog("Sensed frequency in left top light %f", timer.frequency);
+    timer.lastTimeChange = now;
+	}
+	if(!TOP_RIGHT_LIGHT) {
+    state.AverageTopRightLight = state.TopRightLight;
+	} else {
+    time_t now;
+    time(&now);
+    timer.frequency = difftime(timer.lastTimeChange, now);
+    BehaviorLog("Sensed frequency in right top light %f", timer.frequency);
     timer.lastTimeChange = now;
 	}
 	return 0;
@@ -314,8 +325,10 @@ int setup()
   timer.threshold = 10;
   timer.iteration = 0;
   state.AverageBaseLight = 10000.0;
-  state.TopLight = 0;
-  state.AverageTopLight = 1000;
+  state.TopLeftLight = 0;
+  state.TopRightLight = 0;
+  state.AverageTopLeftLight = 1000;
+  state.AverageTopRightLight = 1000;
   time(&(timer.lastTimeChange));
 	#ifndef NO_POWERLIB
 	power_button_reset();

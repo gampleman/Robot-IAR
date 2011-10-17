@@ -7,9 +7,11 @@ struct stateT {
 	int FrontFacingIR;
   int LeftLight;
   int RightLight;
-  int TopLight;
+  int TopRightLight;
+  int TopLeftLight;
   float AverageBaseLight;
-  float AverageTopLight;
+  float AverageTopLeftLight;
+  float AverageTopRightLight;
 } state;
 
 struct timerT {

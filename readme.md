@@ -24,8 +24,8 @@
 3. Sonar
 4. Right Light sensor
 5. Left Light sensor
-6. Top Light sensor
-7. Light sensor
+6. Top Right Light sensor
+7. Top Left Light sensor
 
 ## Motors ##
 
