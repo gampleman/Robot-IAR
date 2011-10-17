@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <math.h>
 #include <string.h>
+#include <time.h>
 #ifndef NO_POWERLIB
 #include <libpowerbutton.h>
 #endif
