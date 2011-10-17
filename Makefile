@@ -26,3 +26,6 @@ endif
 
 copy_to_dodo:
 	scp -r . student@Dodo:/home/student/MyPrograms
+
+debug:
+	uniq | bin/main

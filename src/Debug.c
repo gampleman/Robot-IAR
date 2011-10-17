@@ -1,13 +1,8 @@
 #define Log(...) printf(__VA_ARGS__); printf("\n");
 #define IDebug(arg) printf("arg = %d\n", arg);
 
-
-
 #ifdef SHOULD_DEBUG_BEHAVIOR
-char *previous_log;
-char *current_log;
-#define BehaviorLog(...) sprintf(current_log, __VA_ARGS__); \
-if(strcmp(current_log, previous_log) != 0) {printf("%s\n", current_log); previous_log = current_log;}
+#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n")
 #define BehaviorIDebug(arg) printf("arg = %d\n", arg);
 #else
 #define BehaviorLog(...) 
