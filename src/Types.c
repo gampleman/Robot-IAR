@@ -18,6 +18,8 @@ struct timerT {
   int iteration;
   int threshold;
   time_t lastTimeChange;
-  double frequency;
+  float frequency;
+  bool whateverbool;
+  int timeSinceLastLight;
 } timer;
 

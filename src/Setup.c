@@ -77,8 +77,7 @@ int IKOutputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_RIGHT_LIGHT (state.TopRightLight > 200)
-#define TOP_LEFT_LIGHT (state.TopLeftLight > 200)
+#define TOP_LIGHT (state.TopRightLight > 200 || state.TopLeftLight > 200)
 
 /// state.AverageTopLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
@@ -103,7 +102,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 4:
 			SensorLog("Right Light sensor: %d", Value);
-      			state.RightLight = Value;
+      state.RightLight = Value;
 			break;
 		case 5:
 			SensorLog("Left Light sensor: %d", Value);
@@ -111,7 +110,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 6:
 			SensorLog("Top Right Light sensor: %d", Value);
-      			state.TopRightLight = Value;
+      state.TopRightLight = Value;
 			break;
 		case 7:
 			SensorLog("Top Left Light sensor: %d", Value);
@@ -124,23 +123,15 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     SensorLog("Assigned average: %f", state.AverageBaseLight);
   }
 	
-	if(!TOP_LEFT_LIGHT) {
-    state.AverageTopLeftLight = state.TopLeftLight;
-	} else {
-    time_t now;
-    time(&now);
-    timer.frequency = difftime(timer.lastTimeChange, now);
-    BehaviorLog("Sensed frequency in left top light %f", timer.frequency);
-    timer.lastTimeChange = now;
+	if(TOP_LIGHT && !timer.whateverbool) {
+
+    timer.frequency = timer.timeSinceLastLight;
+    BehaviorLog("Sensed frequency in left top light %f %d", 20/(float)timer.frequency, timer.frequency);
+    timer.whateverbool = 1;
+    timer.timeSinceLastLight = 0;
 	}
-	if(!TOP_RIGHT_LIGHT) {
-    state.AverageTopRightLight = state.TopRightLight;
-	} else {
-    time_t now;
-    time(&now);
-    timer.frequency = difftime(timer.lastTimeChange, now);
-    BehaviorLog("Sensed frequency in right top light %f", timer.frequency);
-    timer.lastTimeChange = now;
+	if(!TOP_LIGHT) {
+	  timer.whateverbool = 0;
 	}
 	return 0;
 }
@@ -329,7 +320,11 @@ int setup()
   state.TopRightLight = 0;
   state.AverageTopLeftLight = 1000;
   state.AverageTopRightLight = 1000;
-  time(&(timer.lastTimeChange));
+  timer.whateverbool = 0;
+  timer.timeSinceLastLight = 0;
+  #ifdef FREQUENCY
+  timer.frequency = FREQUENCY;
+  #endif
 	#ifndef NO_POWERLIB
 	power_button_reset();
 	

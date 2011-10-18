@@ -25,34 +25,34 @@ int goTowards(double angle, double percent)
 	return 0;
 }
 
-int turnOnSpotRight()
+int turnOnSpotLeft()
 {
-  MovementLog("turnOnSpotRight()");
+  MovementLog("turnOnSpotLeft()");
 	if(state.ServoPosition != 1) 
 	{
 		//stop();
-		SERVO(20);
+		SERVO(50);
 		//sleep(0.5);
 		state.ServoPosition = 1;
 	}
-	DRIVE_RIGHT(50);
-	DRIVE_LEFT(-40);
+	DRIVE_RIGHT(80);
+	DRIVE_LEFT(-55);
 	return 0;
 }
 
 
-int turnOnSpotLeft()
+int turnOnSpotRight()
 {
-  MovementLog("turnOnSpotLeft()");
+  MovementLog("turnOnSpotRight()");
 	if(state.ServoPosition != -1)
 	{
 		//stop();
-		SERVO(220);
+		SERVO(190);
 		//sleep(0.5);
 		state.ServoPosition = -1;
 	}
-	DRIVE_RIGHT(-40);
-	DRIVE_LEFT(50);
+	DRIVE_RIGHT(-55);
+	DRIVE_LEFT(80);
 }
 
 int orientStraightAndDrive(double percent)
