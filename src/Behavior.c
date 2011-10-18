@@ -1,34 +1,34 @@
-#define DELTA(a,b) (a - 0.1 < b && a + 0.1 > b)  
+#define DELTA(a,b,c,d) (a < b + c && a > b - d)  
 
 void dance() {
-  if(DELTA(timer.frequency, 0.5)) {
+  if(DELTA(timer.frequency, 0.5, 0.25, 0.5)) {
     driveBack();
     sleep(3);
     turnOnSpotLeft();
     sleep(10);
-  } else if(DELTA(timer.frequency, 1)) {
+  } else if(DELTA(timer.frequency, 1, 0.5, 0.25)) {
     BehaviorLog("Dancin' to the tune of a frequency 1");
     driveBack();
     sleep(2);
     turnOnSpotRight();
     sleep(10);
-  } else if(DELTA(timer.frequency, 2)) {
+  } else if(DELTA(timer.frequency, 2, 1, 0.5)) {
     driveBack();
     sleep(2);
     stop();
     sleep(3);
     driveBack();
-  } else if(DELTA(timer.frequency, 4)) {
+  } else if(DELTA(timer.frequency, 4, 1, 1)) {
     driveBack();
     sleep(2);
     turnOnSpotLeft();
     sleep(5);
-  } else if(DELTA(timer.frequency, 6)) {
+  } else if(DELTA(timer.frequency, 6, 1, 1)) {
     driveBack();
     sleep(2);
     turnOnSpotRight();
     sleep(5);
-  } else if(DELTA(timer.frequency, 8)) {
+  } else if(DELTA(timer.frequency, 8, 20, 1)) {
     driveBack();
     sleep(2);
     stop();
@@ -41,8 +41,6 @@ void dance() {
 
 
 void behave() {
-  dance();
-  return;
   
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(20,0.5);
@@ -59,9 +57,11 @@ void behave() {
       //stop();
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
+      retreat(0);
   	  goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
+      retreat(1);
   	  goTowards(60,0.5);
     } else {
       BehaviorLog("Both light and either no or both(!!!!) whiskers");

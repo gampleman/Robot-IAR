@@ -77,9 +77,8 @@ int IKOutputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT (state.TopRightLight > 200 || state.TopLeftLight > 200)
+#define TOP_LIGHT (state.TopRightLight / state.AverageTopLight > 1.8 || state.TopLeftLight / state.AverageTopLight > 1.8)
 
-/// state.AverageTopLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
 //Index - Index of the sensor that generated the event, Value - the sensor read value
@@ -126,12 +125,17 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	if(TOP_LIGHT && !timer.whateverbool) {
 
     timer.frequency = timer.timeSinceLastLight;
+    SensorLog("Top Left delta"); 
     BehaviorLog("Sensed frequency in left top light %f %d", 20/(float)timer.frequency, timer.frequency);
     timer.whateverbool = 1;
     timer.timeSinceLastLight = 0;
 	}
 	if(!TOP_LIGHT) {
 	  timer.whateverbool = 0;
+	  if(state.firstTopAverage) {
+	    state.AverageTopLight = (state.TopLeftLight + state.TopRightLight) / 2;
+	    state.firstTopAverage = 0;
+	  }  
 	}
 	return 0;
 }
@@ -318,13 +322,13 @@ int setup()
   state.AverageBaseLight = 10000.0;
   state.TopLeftLight = 0;
   state.TopRightLight = 0;
-  state.AverageTopLeftLight = 1000;
-  state.AverageTopRightLight = 1000;
+  state.AverageTopLight = 1000;
+  state.firstTopAverage = 1;
   timer.whateverbool = 0;
   timer.timeSinceLastLight = 0;
-  #ifdef FREQUENCY
-  timer.frequency = FREQUENCY;
-  #endif
+  //#ifdef FREQUENCY
+  //timer.frequency = FREQUENCY;
+  //#endif
 	#ifndef NO_POWERLIB
 	power_button_reset();
 	
