@@ -1,7 +1,7 @@
 #define DELTA(a,b,c,d) (a < b + c && a > b - d)  
 
 void dance() {
-  if(DELTA(timer.frequency, 0.5, 0.25, 0.5)) {
+  if(DELTA(timer.frequency, 0.5, 0.25, 0.25)) {
     driveBack();
     sleep(3);
     turnOnSpotLeft();
