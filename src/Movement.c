@@ -94,3 +94,15 @@ int driveBack()
 	sleep(1);
 	return 0;
 }
+
+
+int sweepWithSonar() {
+  SERVO(20);
+  msleep(500);
+  for(state.ServoAngle = 20; state.ServoAngle < 120; state.ServoAngle += 5)
+  {
+    SERVO(state.ServoAngle);
+    msleep(50);
+  }
+  SERVO(120);
+}

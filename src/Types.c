@@ -12,6 +12,7 @@ struct stateT {
   float AverageBaseLight;
   float AverageTopLight;
   bool firstTopAverage;
+  int ServoAngle;
 } state;
 
 struct timerT {
@@ -22,4 +23,7 @@ struct timerT {
   bool whateverbool; // a boolean to use for frequency calculation to indicate the start or end of a flash
   int timeSinceLastLight;
 } timer;
+
+
+
 

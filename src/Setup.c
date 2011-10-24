@@ -98,6 +98,11 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 3: 
 			SensorLog("Sonar: %d", Value);
+      BehaviorLog("Sensing sonar strength: %d @ angle %d", Value, state.ServoAngle);
+      Measurement sensor;
+      sensor.ServoAngle = state.ServoAngle;
+      sensor.SonarValue = Value;
+      AddMeasurement(sensor);
 			break;
 		case 4:
 			SensorLog("Right Light sensor: %d", Value);
@@ -348,7 +353,7 @@ int teardown()
   #ifndef NO_POWERLIB
 	power_button_reset();
 	#endif
-  
+  free(measurements);
 	
 	CPhidgetAdvancedServo_setPosition(servo, 0, 120);
 	sleep(2);
