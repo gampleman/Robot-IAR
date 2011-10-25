@@ -1,6 +1,6 @@
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT (state.TopRightLight / state.AverageTopLight > 1.8 || state.TopLeftLight / state.AverageTopLight > 1.8)
+#define TOP_LIGHT (state.TopRightLight / state.AverageTopLight > 1.5 || state.TopLeftLight / state.AverageTopLight > 1.5)
 
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
@@ -48,7 +48,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	
 	if(!LEFT_LIGHT && !RIGHT_LIGHT) {
     state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
-    SensorLog("Assigned average: %f", state.AverageBaseLight);
+    SensorLog("Assigned bottom average: %f", state.AverageBaseLight);
   }
 	
 	if(TOP_LIGHT && !timer.whateverbool) {
@@ -61,8 +61,9 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	}
 	if(!TOP_LIGHT) {
 	  timer.whateverbool = 0;
-	  if(state.firstTopAverage) {
-	    state.AverageTopLight = (state.TopLeftLight + state.TopRightLight) / 2;
+	  if(state.firstTopAverage == 1) {
+	    state.AverageTopLight = ((float)state.TopLeftLight + (float)state.TopRightLight) / 2;
+	    SensorLog("Assigned top average: %f", state.AverageTopLight);
 	    state.firstTopAverage = 0;
 	  }  
 	}

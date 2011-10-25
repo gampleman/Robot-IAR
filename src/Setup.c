@@ -223,10 +223,10 @@ int setup()
 	state.TopIR = 0;
   timer.threshold = 10;
   timer.iteration = 0;
-  state.AverageBaseLight = 10000.0;
+  state.AverageBaseLight = (float)10000;
   state.TopLeftLight = 0;
   state.TopRightLight = 0;
-  state.AverageTopLight = 1000;
+  state.AverageTopLight = (float)10000;
   state.firstTopAverage = 1;
   timer.whateverbool = 0;
   timer.timeSinceLastLight = 0;

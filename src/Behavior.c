@@ -67,9 +67,8 @@ void behave() {
   	  goTowards(60,0.5);
     } else if(rand() % 10 == 0) {
       sweepWithSonar();
-    } else { // No whisker's 
+    } else { // No whiskers 
       BehaviorLog("Both light and either no or both(!!!!) whiskers");
-      
       orientStraightAndDrive(0.5);
     }
   }
