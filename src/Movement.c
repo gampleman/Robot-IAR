@@ -98,6 +98,7 @@ int driveBack()
 
 int sweepWithSonar() {
   SERVO(20);
+  ResetMeasurements();
   msleep(500);
   for(state.ServoAngle = 20; state.ServoAngle < 120; state.ServoAngle += 5)
   {
