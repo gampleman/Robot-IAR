@@ -5,6 +5,7 @@ struct stateT {
 	unsigned int LeftWhisker;
 	unsigned int RightWhisker;
 	int FrontFacingIR;
+  int TopIR;
   int LeftLight;
   int RightLight;
   int TopRightLight;

@@ -11,6 +11,7 @@
 #include "Debug.c"
 #include "Utils.c"
 #include "Types.c"
+#include "Sensors.c"
 #include "Setup.c"
 #include "Movement.c"
 #include "Behavior.c"
