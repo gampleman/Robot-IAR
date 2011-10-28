@@ -61,11 +61,11 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	}
 	if(!TOP_LIGHT) {
 	  timer.whateverbool = 0;
-	  if(state.firstTopAverage == 1) {
+	  //if(state.firstTopAverage == 1) {
 	    state.AverageTopLight = ((float)state.TopLeftLight + (float)state.TopRightLight) / 2;
 	    SensorLog("Assigned top average: %f", state.AverageTopLight);
 	    state.firstTopAverage = 0;
-	  }  
+	  //}  
 	}
 	return 0;
 }
