@@ -1,6 +1,6 @@
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT (state.TopRightLight / state.AverageTopLight > 1.5 || state.TopLeftLight / state.AverageTopLight > 1.5)
+#define TOP_LIGHT (state.TopRightLight / state.AverageTopLight > 1.9 || state.TopLeftLight / state.AverageTopLight > 1.9)
 
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
