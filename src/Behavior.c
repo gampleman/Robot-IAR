@@ -63,6 +63,7 @@ void behave() {
       } else {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
         orientStraightAndDrive(0.5);
+        sleep(2);
       }
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
