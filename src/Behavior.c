@@ -56,14 +56,15 @@ void behave() {
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
-    Enter(Right)
+    //Enter(Right)
   }
   else if (!LEFT_LIGHT && RIGHT_LIGHT) {
     goTowards(130,0.5);
     BehaviorLog("Right light triggered");
-    Enter(Left)
+    //Enter(Left)
   }
   else if (LEFT_LIGHT && RIGHT_LIGHT) {
+   // if(state.SonarValue > )
     /*if(TOP_LIGHT)  {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
       dance();

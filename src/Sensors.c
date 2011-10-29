@@ -27,7 +27,9 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 3: 
 			SensorLog("Sonar: %d", Value);
-      BehaviorLog("Sensing sonar strength: %d @ angle %d", Value, state.ServoAngle);
+      BehaviorLog("Sensing sonar strength: %d ", Value);
+      if(Value < 40)
+        BehaviorLog("Sensor is close");
       Measurement sensor;
       sensor.ServoAngle = state.ServoAngle;
       sensor.SonarValue = Value;
