@@ -7,7 +7,7 @@ Implements connection specs described in readme.md.
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 //define TOP_LIGHT ((float)state.TopRightLight / state.AverageTopLight > 1.9 || (float)state.TopLeftLight / state.AverageTopLight > 1.9)
 
-#define TOP_LIGHT (state.TopRightLight > 300 || state.TopLeftLight  > 300)
+#define TOP_LIGHT (state.TopRightLight > 100 || state.TopLeftLight  > 100)
 
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
@@ -72,7 +72,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     // convert time to frequency
     double f = 1.0 / (t2 - t1);
     // sanity check
-    if(f < 10 && f > 0.001)
+    if(f < 10 && f > 0.1)
       timer.frequency = f;
     SensorLog("Top Left delta"); 
     BehaviorLog("Sensed frequency in left top light %f (t = %f, t1 = %f, t2 = %f)", timer.frequency, t2 - t1, t1, t2);
