@@ -1,3 +1,8 @@
+/*
+This file containes the main sensor callbacks, that mainly just assign some variable to `state`.
+Implements connection specs described in readme.md.
+*/
+
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define TOP_LIGHT ((float)state.TopRightLight / state.AverageTopLight > 1.9 || (float)state.TopLeftLight / state.AverageTopLight > 1.9)

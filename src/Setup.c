@@ -1,3 +1,8 @@
+/*
+The least interesting file. Contains all the boilerplate code like 
+initialization, memory allocation, freeing, attaching callbacks etc.
+*/
+
 int AttachHandler(CPhidgetHandle IFK, void *userptr)
 {
 	int serialNo;

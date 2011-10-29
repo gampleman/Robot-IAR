@@ -1,5 +1,11 @@
+// Macro to match imprecise measurements to a range of possible values
 #define DELTA(a,b,c,d) (a < b + c && a > b - d)  
 
+/*
+Attempts to match frequency to one of the known frequencies of stations. 
+If a frequency is matched it executes a 'dance' and returns 1 (may not return immediately).
+Otherwise returns 0.
+*/
 int dance() {
   if(DELTA(timer.frequency, 0.5, 0.25, 0.25)) {
     driveBack();
@@ -41,7 +47,10 @@ int dance() {
   return 1;
 }
 
-
+/*
+Main behavior function.
+Called every 50ms unless something happens.
+*/
 void behave() {
   
   if(LEFT_LIGHT && !RIGHT_LIGHT) {

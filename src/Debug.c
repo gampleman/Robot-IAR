@@ -1,3 +1,7 @@
+/*
+Debugging utilities. Enable debugging in one area by compling with `make DEBUG=flag` where flag is one of BEHAVIOR, MOVEMENT, SETUP or SENSOR.
+*/
+
 #define Log(...) printf(__VA_ARGS__); printf("\n");
 #define IDebug(arg) printf("arg = %d\n", arg);
 

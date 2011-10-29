@@ -10,7 +10,7 @@
 #endif
 #include "Debug.c"
 #include "Utils.c"
-#include "Types.c"
+#include "State.c"
 #include "Sensors.c"
 #include "Setup.c"
 #include "Movement.c"
@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 {
 	setup();
 	orientStraightAndDrive(1);
+	// Makes it compile on OSX for faster development
 	#ifdef NO_POWERLIB
 	while(1)
 	#else
