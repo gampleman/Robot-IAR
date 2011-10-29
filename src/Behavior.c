@@ -51,11 +51,11 @@ void behave() {
     BehaviorLog("Right light triggered");
   }
   else if (LEFT_LIGHT && RIGHT_LIGHT) {
-    if(TOP_LIGHT)  {
+    /*if(TOP_LIGHT)  {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
       dance();
       //stop();
-    } else if(state.FrontFacingIR > 420 && state.TopIR < 420) { // We see the gap
+    } else*/ if(state.FrontFacingIR > 420 && state.TopIR < 420) { // We see the gap
       BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
       orientStraightAndDrive(0.5);
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
