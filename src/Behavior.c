@@ -57,6 +57,7 @@ void behave() {
       //stop();
     } else*/ if(state.FrontFacingIR > 420 && state.TopIR < 200) { // We see the gap
       if(TOP_LIGHT)  {
+        BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
         BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
         dance();
         //stop();
