@@ -78,6 +78,8 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     BehaviorLog("Sensed frequency in left top light %f (t = %f, t1 = %f, t2 = %f)", timer.frequency, t2 - t1, t1, t2);
     // a blink was detected, don't execute this until the light is off
     timer.whateverbool = 1;
+    // store measured value for next iteration
+    timer.lastFlashSighted = tim;
     //timer.timeSinceLastLight = 0;
 	}
 	// light is off
