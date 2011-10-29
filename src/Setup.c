@@ -236,6 +236,7 @@ int setup()
   timer.whateverbool = 0;
   timer.timeSinceLastLight = 0;
   timer.enteredFrom = Unknown;
+  gettimeofday(&timer.lastFlashSighted, NULL);
   //#ifdef FREQUENCY
   //timer.frequency = FREQUENCY;
   //#endif

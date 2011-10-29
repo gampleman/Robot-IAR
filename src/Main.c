@@ -5,6 +5,7 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
+#include <sys/time.h>
 #ifndef NO_POWERLIB
 #include <libpowerbutton.h>
 #endif

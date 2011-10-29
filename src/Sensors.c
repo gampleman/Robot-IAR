@@ -28,8 +28,8 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 		case 3: 
 			SensorLog("Sonar: %d", Value);
       BehaviorLog("Sensing sonar strength: %d ", Value);
-      if(Value < 40)
-        BehaviorLog("Sensor is close");
+      //if(Value < 40)
+      //  BehaviorLog("Sensor is close");
       Measurement sensor;
       sensor.ServoAngle = state.ServoAngle;
       sensor.SonarValue = Value;
@@ -59,12 +59,19 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
   }
 	
 	if(TOP_LIGHT && !timer.whateverbool) {
-
-    timer.frequency = timer.timeSinceLastLight;
+    
+    timeval tim;
+    gettimeofday(&tim, NULL);
+    double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
+    float f = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
+    if(f < 10)
+      timer.frequency = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
     SensorLog("Top Left delta"); 
-    BehaviorLog("Sensed frequency in left top light %f %d", 20/(float)timer.frequency, timer.frequency);
+    BehaviorLog("Sensed frequency in left top light %f", timer.frequency, timer.frequency);
     timer.whateverbool = 1;
     timer.timeSinceLastLight = 0;
+    gettimeofday(&timer.lastFlashSighted, NULL);
+
 	}
 	if(!TOP_LIGHT) {
 	  timer.whateverbool = 0;

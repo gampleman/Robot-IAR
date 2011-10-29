@@ -35,6 +35,7 @@ struct timerT {
   bool whateverbool; // a boolean to use for frequency calculation to indicate the start or end of a flash
   int timeSinceLastLight;
   ENTRANCE enteredFrom;
+  timeval lastFlashSighted;
 } timer;
 
 
