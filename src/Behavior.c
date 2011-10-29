@@ -1,6 +1,6 @@
 #define DELTA(a,b,c,d) (a < b + c && a > b - d)  
 
-void dance() {
+int dance() {
   if(DELTA(timer.frequency, 0.5, 0.25, 0.25)) {
     driveBack();
     sleep(3);
@@ -35,8 +35,10 @@ void dance() {
     sleep(3);
     orientStraightAndDrive(1);
     sleep(1);
-  } 
-  
+  } else {
+    return 0;
+  }
+  return 1;
 }
 
 
@@ -59,7 +61,10 @@ void behave() {
       if(TOP_LIGHT)  {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
         BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
-        dance();
+        if(!dance()) {
+          orientStraightAndDrive(0.5);
+          sleep(2);
+        }
         //stop();
       } else {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
