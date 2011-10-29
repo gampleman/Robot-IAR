@@ -66,10 +66,13 @@ void behave() {
       BehaviorLog("Both light and left whisker");
       retreat(1);
   	  goTowards(60,0.5);
-    } else if(rand() % 10 == 0) {
+    } else if(state.RightWhisker == 0 && state.LeftWhisker) {
+      retreat(0);
+      
+    } /*else if(rand() % 10 == 0) {
       sweepWithSonar();
-    } else { // No whiskers 
-      BehaviorLog("Both light and either no or both(!!!!) whiskers");
+    }*/ else { // No whiskers 
+      BehaviorLog("Both light and either no whiskers");
       //orientStraightAndDrive(0.5);
       goTowards(130,0.5);
     }
