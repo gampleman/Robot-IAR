@@ -5,7 +5,9 @@ Implements connection specs described in readme.md.
 
 #define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
 #define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define TOP_LIGHT ((float)state.TopRightLight / state.AverageTopLight > 1.9 || (float)state.TopLeftLight / state.AverageTopLight > 1.9)
+//define TOP_LIGHT ((float)state.TopRightLight / state.AverageTopLight > 1.9 || (float)state.TopLeftLight / state.AverageTopLight > 1.9)
+
+#define TOP_LIGHT (state.TopRightLight > 300 || state.TopLeftLight  > 300)
 
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
@@ -58,21 +60,25 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     SensorLog("Assigned bottom average: %f", state.AverageBaseLight);
   }
 	
+	// light is on and we haven't executed this block for this flash yet
 	if(TOP_LIGHT && !timer.whateverbool) {
-    
+    // Get precise current time
     timeval tim;
     gettimeofday(&tim, NULL);
+    // convert to double in microseconds
     double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
+    // convert time to frequency
     float f = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
-    if(f < 10)
+    // sanity check
+    if(f < 10 && f > 0.001)
       timer.frequency = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
     SensorLog("Top Left delta"); 
     BehaviorLog("Sensed frequency in left top light %f", timer.frequency, timer.frequency);
+    // a blink was detected, don't execute this until the light is off
     timer.whateverbool = 1;
-    timer.timeSinceLastLight = 0;
-    gettimeofday(&timer.lastFlashSighted, NULL);
-
+    //timer.timeSinceLastLight = 0;
 	}
+	// light is off
 	if(!TOP_LIGHT) {
 	  timer.whateverbool = 0;
 	  //if(state.firstTopAverage == 1) {
