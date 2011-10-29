@@ -235,6 +235,7 @@ int setup()
   state.firstTopAverage = 1;
   timer.whateverbool = 0;
   timer.timeSinceLastLight = 0;
+  timer.enteredFrom = Unknown;
   //#ifdef FREQUENCY
   //timer.frequency = FREQUENCY;
   //#endif

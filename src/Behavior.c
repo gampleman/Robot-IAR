@@ -56,10 +56,12 @@ void behave() {
   if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
+    Enter(Right)
   }
   else if (!LEFT_LIGHT && RIGHT_LIGHT) {
     goTowards(130,0.5);
     BehaviorLog("Right light triggered");
+    Enter(Left)
   }
   else if (LEFT_LIGHT && RIGHT_LIGHT) {
     /*if(TOP_LIGHT)  {
@@ -82,15 +84,24 @@ void behave() {
       }
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
-      retreat(0);
+      if(timer.enteredFrom = Left) {
+        retreat(1);
+      } else {
+        retreat(0);
+      }
       sleep(1);
   	  goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
-      retreat(1);
+      if(timer.enteredFrom = Right) {
+        retreat(0);
+      } else {
+        retreat(1);
+      }
       sleep(1);
   	  goTowards(60,0.5);
-    } else if(state.RightWhisker == 0 && state.LeftWhisker) {
+    } else if(state.RightWhisker && state.LeftWhisker) {
+      BehaviorLog("Both whiskers");
       retreat(0);
       sleep(1);
     } /*else if(rand() % 10 == 0) {
@@ -106,12 +117,14 @@ void behave() {
     retreat(0);
     sleep(1);
     driveBack();
+    timer.enteredFrom = Unknown;
   }
   else if(state.RightWhisker) {
     BehaviorLog("Right whisker triggered");  
     retreat(1);
     sleep(1); 
     driveBack();
+    timer.enteredFrom = Unknown;
   }
   else if(state.FrontFacingIR > 420) {
     BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
@@ -119,12 +132,15 @@ void behave() {
     retreat(1);
     sleep(1);
     driveBack();
+    timer.enteredFrom = Unknown;
   }
 	else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
     BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
     goTowards(30,1);
+    timer.enteredFrom = Unknown;
 	}
 	else {
+    timer.enteredFrom = Unknown;
 		orientStraightAndDrive(1);
 	}
 }
