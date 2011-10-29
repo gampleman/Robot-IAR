@@ -56,8 +56,14 @@ void behave() {
       dance();
       //stop();
     } else*/ if(state.FrontFacingIR > 420 && state.TopIR < 200) { // We see the gap
-      BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
-      orientStraightAndDrive(0.5);
+      if(TOP_LIGHT)  {
+        BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
+        dance();
+        //stop();
+      } else {
+        BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
+        orientStraightAndDrive(0.5);
+      }
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
       retreat(0);
@@ -75,8 +81,8 @@ void behave() {
       sweepWithSonar();
     }*/ else { // No whiskers 
       BehaviorLog("Both light and either no whiskers");
-      //orientStraightAndDrive(0.5);
-      goTowards(130,0.5);
+      orientStraightAndDrive(0.5);
+      //goTowards(130,0.5);
     }
   }
   else if(state.LeftWhisker)  {
