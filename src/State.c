@@ -36,6 +36,8 @@ struct timerT {
   int timeSinceLastLight;
   ENTRANCE enteredFrom;
   timeval lastFlashSighted;
+  
+
 } timer;
 
 
