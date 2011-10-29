@@ -65,15 +65,17 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
     // Get precise current time
     timeval tim;
     gettimeofday(&tim, NULL);
-    // convert to double in microseconds
+    // convert to double in seconds
     double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
+    // convert last measuerd time to seconds
+    double t1 = timer.lastFlashSighted.tv_sec + (timer.lastFlashSighted.tv_usec/1000000.0);
     // convert time to frequency
-    float f = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
+    double f = 1.0 / (t2 - t1);
     // sanity check
     if(f < 10 && f > 0.001)
-      timer.frequency = 1.0 / (t2 - (timer.lastFlashSighted.tv_sec+(timer.lastFlashSighted.tv_usec/1000000.0)));
+      timer.frequency = f;
     SensorLog("Top Left delta"); 
-    BehaviorLog("Sensed frequency in left top light %f", timer.frequency, timer.frequency);
+    BehaviorLog("Sensed frequency in left top light %f (t = %f, t1 = %f, t2 = %f)", timer.frequency, t2 - t1, t1, t2);
     // a blink was detected, don't execute this until the light is off
     timer.whateverbool = 1;
     //timer.timeSinceLastLight = 0;
