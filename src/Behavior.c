@@ -1,5 +1,5 @@
 // Macro to match imprecise measurements to a range of possible values
-#define DELTA(a,b,c,d) (a < b + c && a > b - d)  
+#define DELTA(a,b,c) (a < b + c && a > b - c)  
 
 /*
 Attempts to match frequency to one of the known frequencies of stations. 
@@ -7,40 +7,46 @@ If a frequency is matched it executes a 'dance' and returns 1 (may not return im
 Otherwise returns 0.
 */
 int dance() {
-  if(DELTA(timer.frequency, 0.5, 0.25, 0.25)) {
+  if(DELTA(timer.frequency, 0.5, 0.25)) {
     driveBack();
     sleep(3);
     turnOnSpotLeft();
     sleep(10);
-  } else if(DELTA(timer.frequency, 1, 0.5, 0.25)) {
+  } else if(DELTA(timer.frequency, 1, 0.3)) {
     BehaviorLog("Dancin' to the tune of a frequency 1");
     driveBack();
     sleep(2);
     turnOnSpotRight();
     sleep(10);
-  } else if(DELTA(timer.frequency, 2, 1, 0.5)) {
+  } else if(DELTA(timer.frequency, 2, 0.5)) {
     driveBack();
     sleep(2);
     stop();
     sleep(3);
     driveBack();
-  } else if(DELTA(timer.frequency, 4, 1, 1)) {
+  } else if(DELTA(timer.frequency, 4, 1)) {
     driveBack();
     sleep(2);
     turnOnSpotLeft();
     sleep(5);
-  } else if(DELTA(timer.frequency, 6, 1, 1)) {
+  } else if(DELTA(timer.frequency, 6, 1)) {
     driveBack();
     sleep(2);
     turnOnSpotRight();
     sleep(5);
-  } else if(DELTA(timer.frequency, 8, 20, 1)) {
+  } else if(DELTA(timer.frequency, 8, 1)) {
+    // dance
     driveBack();
     sleep(2);
     stop();
     sleep(3);
     orientStraightAndDrive(1);
     sleep(1);
+    //  get to new base
+    turnOnSpotLeft();
+    sleep(6);
+    orientStraightAndDrive(1);
+    sleep(2);
   } else {
     return 0;
   }
