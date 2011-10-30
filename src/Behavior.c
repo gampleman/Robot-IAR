@@ -85,8 +85,16 @@ Main behavior function.
 Called every 50ms unless something happens.
 */
 void behave() {
-  
-  if(LEFT_LIGHT && !RIGHT_LIGHT) {
+  // Stuck detection
+  if(state.expectedMovement != None && state.SpinSensor < 20) { // stuck
+    if(state.expectedMovement == Forwards) {
+      CPhidgetMotorControl_setVelocity (motoControl, 0, -75);
+      msleep(400L);
+    } else {
+      CPhidgetMotorControl_setVelocity (motoControl, 0, 75);
+      msleep(400L);
+    }
+  } else if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
     //Enter(Right)

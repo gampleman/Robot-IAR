@@ -1,4 +1,7 @@
-#define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value))
+#define DRIVE_LEFT(Value) if(Value > 0) { state.expectedMovement = Forwards; } \
+else if(Value == 0) { state.expectedMovement = None;} \
+else { state.expectedMovement = Backwards;} \
+CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value))
 #define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, round(0.75 * Value))
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
 

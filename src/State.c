@@ -3,6 +3,9 @@
 
 #define Enter(what) if(timer.enteredFrom == Unknown) { BehaviorLog("Entered from what"); timer.enteredFrom = what;} else {timer.enteredFrom = Unknown;} 
 
+
+enum Movement {Backwards, None, Forwards};
+
 /*
 Describes state of the robots sensory inputs.
 */
@@ -16,10 +19,12 @@ struct stateT {
   int RightLight;
   int TopRightLight;
   int TopLeftLight;
+  int SpinSensor;
   float AverageBaseLight;
   float AverageTopLight;
   bool firstTopAverage;
   int ServoAngle;
+  Movement expectedMovement;
 } state;
 
 
