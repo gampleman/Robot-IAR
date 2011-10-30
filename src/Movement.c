@@ -89,8 +89,8 @@ int driveBack()
 {
   MovementLog("driveBack()");
 	SERVO(120);
-	DRIVE_RIGHT(-40);
-	DRIVE_LEFT(-40);
+	DRIVE_RIGHT(-75);
+	DRIVE_LEFT(-75);
 	sleep(1);
 	return 0;
 }

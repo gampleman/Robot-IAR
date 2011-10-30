@@ -27,12 +27,18 @@ int dance() {
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(2)) {
+    // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
     driveBack();
     sleep(2);
     stop();
     sleep(3);
     driveBack();
+    // get to new base
+    turnOnSpotRight();
+    sleep(5);
+    orientStraightAndDrive(1);
+    sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
