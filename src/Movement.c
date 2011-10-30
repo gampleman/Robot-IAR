@@ -1,5 +1,5 @@
-#define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, -1 *Value)
-#define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, Value)
+#define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, -0.75 *Value)
+#define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, 0.75 * Value)
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
 
 //int firstRetreat = 1;
