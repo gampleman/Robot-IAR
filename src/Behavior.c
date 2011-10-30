@@ -8,6 +8,7 @@ Otherwise returns 0.
 */
 int dance() {
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
+    BehaviorLog("Dancin' to the tune of a frequency 0.5");
     driveBack();
     sleep(3);
     turnOnSpotLeft();
@@ -25,6 +26,7 @@ int dance() {
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(2)) {
+    BehaviorLog("Dancin' to the tune of a frequency 2");
     driveBack();
     sleep(2);
     stop();
@@ -32,6 +34,7 @@ int dance() {
     driveBack();
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
     // dance
+    BehaviorLog("Dancin' to the tune of a frequency 4");
     driveBack();
     sleep(2);
     turnOnSpotRight();
@@ -42,11 +45,13 @@ int dance() {
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
+    BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
     sleep(2);
     turnOnSpotRight();
     sleep(5);
   } else if(AT_BASE_WITH_FREQUENCY(8)) {
+    BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
     sleep(2);
