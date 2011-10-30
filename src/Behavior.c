@@ -133,7 +133,7 @@ void behave() {
       } else {
         retreat(0);
       }
-      msleep(900L);
+      msleep(1500L);
   	  //goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
@@ -142,12 +142,12 @@ void behave() {
       } else {
         retreat(1);
       }
-      msleep(900L);
+      msleep(1500L);
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
       retreat(0);
-      msleep(800L);
+      msleep(1500L);
     } /*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
