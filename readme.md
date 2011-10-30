@@ -1,9 +1,6 @@
 # Dodo #
 
-![Blueprint](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/Blueprint.png)
-
 # Connection specs #
-
 
 ## Sensors ##
 
@@ -39,5 +36,7 @@ Regenerate with `make report`.
 
 1. [Report](reports/1.md)
 
+# IDEAS #
 
+1) measure the greatest distance we can get within the arena then set that as a threshold so if we get anything that indicates bigger distance than that, we don't go that way but rather try to approach objects.
 
