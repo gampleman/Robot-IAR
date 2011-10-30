@@ -133,8 +133,8 @@ void behave() {
       } else {
         retreat(0);
       }
-      msleep(800L);
-  	  goTowards(120,0.5);
+      msleep(900L);
+  	  //goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
       if(timer.enteredFrom = Right) {
@@ -142,8 +142,8 @@ void behave() {
       } else {
         retreat(1);
       }
-      msleep(800L);
-  	  goTowards(60,0.5);
+      msleep(900L);
+  	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
       retreat(0);
