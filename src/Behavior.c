@@ -130,29 +130,27 @@ void behave() {
       BehaviorLog("Both light and right whisker");
       if(timer.enteredFrom = Left) {
         retreat(1);
-        driveBack();
       } else {
         retreat(0);
-        driveBack();
       }
-      msleep(1500L);
+      sleep(1);
+      driveBack();
   	  //goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
       if(timer.enteredFrom = Right) {
         retreat(0);
-        driveBack();
       } else {
         retreat(1);
-        driveBack();
       }
-      msleep(1500L);
+      sleep(1);
+      driveBack();
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
       retreat(0);
+      sleep(1);
       driveBack();
-      msleep(1500L);
     } /*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
@@ -165,7 +163,6 @@ void behave() {
     BehaviorLog("Left whisker triggered");  
     retreat(0);
     sleep(1);
-    driveBack();
     timer.enteredFrom = Unknown;
   }
   else if(state.RightWhisker) {
