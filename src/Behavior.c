@@ -60,8 +60,10 @@ int dance() {
     orientStraightAndDrive(1);
     sleep(2);
   } else { // no reasonable frequency detected
+    timer.frequency = 0;
     return 0;
   }
+  timer.frequency = 0;
   return 1;
 }
 
@@ -87,8 +89,9 @@ void behave() {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
       dance();
       //stop();
-    } else*/ if(state.FrontFacingIR > 420 && state.TopIR < 200) { // We see the gap
-      if(TOP_LIGHT)  {
+    } else*/ 
+    if(state.FrontFacingIR > 420 && state.TopIR < 200) { // We see the gap
+      if(timer.frequency != 0)  {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
         BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
         if(!dance()) {
