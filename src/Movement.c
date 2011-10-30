@@ -12,19 +12,7 @@ int stop()
 	return 0;
 }
 
-int goTowards(double angle, double percent)
-{
-  MovementLog("goTowards(%f)", angle);
-  orientStraightAndDrive(1);
-	// angle must be within 0 and 180 degrees
-	// 0 is the servo motor turned fully to the right
-	// 180 is the servo motor turned fully to the left
-	//SERVO(20+(angle*(10/9)));
 
-	//DRIVE_RIGHT(80*(angle/180));
-	//DRIVE_LEFT(80*(1-(angle/180)));
-	return 0;
-}
 
 int turnOnSpotLeft()
 {
@@ -107,4 +95,18 @@ int sweepWithSonar() {
     msleep(50);
   }
   SERVO(120);
+}
+
+int goTowards(double angle, double percent)
+{
+  MovementLog("goTowards(%f)", angle);
+  orientStraightAndDrive(1);
+	// angle must be within 0 and 180 degrees
+	// 0 is the servo motor turned fully to the right
+	// 180 is the servo motor turned fully to the left
+	//SERVO(20+(angle*(10/9)));
+
+	//DRIVE_RIGHT(80*(angle/180));
+	//DRIVE_LEFT(80*(1-(angle/180)));
+	return 0;
 }
