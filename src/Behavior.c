@@ -36,7 +36,7 @@ int dance() {
     driveBack();
     // get to new base
     turnOnSpotRight();
-    sleep(4);
+    sleep(3);
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
@@ -76,6 +76,7 @@ int dance() {
     return 0;
   }
   BehaviorLog("Danced");
+  state.AverageBaseLight = (float)10000;
   timer.frequency = 0;
   return 1;
 }
