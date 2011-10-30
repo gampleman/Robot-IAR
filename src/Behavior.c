@@ -103,7 +103,6 @@ void behave() {
           orientStraightAndDrive(0.5);
           sleep(2);
         }
-        //stop();
       } else {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", state.FrontFacingIR, state.TopIR);
         orientStraightAndDrive(0.5);

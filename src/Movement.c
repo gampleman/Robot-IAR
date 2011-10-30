@@ -1,5 +1,5 @@
-#define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, -0.75 *Value)
-#define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, 0.75 * Value)
+#define DRIVE_LEFT(Value) CPhidgetMotorControl_setVelocity (motoControl, 0, -1 *Value)
+#define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, Value)
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
 
 //int firstRetreat = 1;
@@ -60,8 +60,8 @@ int orientStraightAndDrive(double percent)
   MovementLog("orientStraightAndDrive()");
 	SERVO(120);
 	//sleep(0.8);
-	DRIVE_RIGHT(60);
-	DRIVE_LEFT(60);
+	DRIVE_RIGHT(100);
+	DRIVE_LEFT(100);
 	//goTowards(90);
 	state.ServoPosition = 0;
 	return 0;
