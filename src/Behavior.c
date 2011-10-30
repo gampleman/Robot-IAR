@@ -130,8 +130,10 @@ void behave() {
       BehaviorLog("Both light and right whisker");
       if(timer.enteredFrom = Left) {
         retreat(1);
+        driveBack();
       } else {
         retreat(0);
+        driveBack();
       }
       msleep(1500L);
   	  //goTowards(120,0.5);
@@ -139,14 +141,17 @@ void behave() {
       BehaviorLog("Both light and left whisker");
       if(timer.enteredFrom = Right) {
         retreat(0);
+        driveBack();
       } else {
         retreat(1);
+        driveBack();
       }
       msleep(1500L);
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
       retreat(0);
+      driveBack();
       msleep(1500L);
     } /*else if(rand() % 10 == 0) {
       sweepWithSonar();
