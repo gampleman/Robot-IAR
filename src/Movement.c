@@ -60,8 +60,8 @@ int orientStraightAndDrive(double percent)
   MovementLog("orientStraightAndDrive()");
 	SERVO(120);
 	//sleep(0.8);
-	DRIVE_RIGHT(100);
-	DRIVE_LEFT(100);
+	DRIVE_RIGHT(70);
+	DRIVE_LEFT(70);
 	//goTowards(90);
 	state.ServoPosition = 0;
 	return 0;
