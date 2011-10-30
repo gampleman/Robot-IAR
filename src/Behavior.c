@@ -30,13 +30,13 @@ int dance() {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
     driveBack();
-    sleep(2);
+    sleep(1);
     stop();
-    sleep(3);
+    sleep(1);
     driveBack();
     // get to new base
     turnOnSpotRight();
-    sleep(5);
+    sleep(4);
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
@@ -124,7 +124,7 @@ void behave() {
       } else {
         retreat(0);
       }
-      msleep(500L);
+      msleep(800L);
   	  goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
@@ -133,12 +133,12 @@ void behave() {
       } else {
         retreat(1);
       }
-      msleep(500L);
+      msleep(800L);
   	  goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
       retreat(0);
-      msleep(500L);
+      msleep(800L);
     } /*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
