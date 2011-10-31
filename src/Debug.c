@@ -29,6 +29,13 @@ int init_debugging() {
   return 0;
 }
 
+int close_debugging() {
+  fclose(logbehavior);
+  fclose(logmovement);
+  fclose(logsetup);
+  fclose(logsensor);
+}
+
 #define Log(...) printf(__VA_ARGS__); printf("\n");
 #define IDebug(arg) printf("arg = %d\n", arg);
 
