@@ -5,6 +5,7 @@
 
 
 enum Movement {Backwards, None, Forwards};
+enum Whisker {Left, Right};
 
 /*
 Describes state of the robots sensory inputs.
@@ -25,10 +26,11 @@ struct stateT {
   bool firstTopAverage;
   int ServoAngle;
   Movement expectedMovement;
+  Whisker lastWhiskerTriggered;
 } state;
 
 
-typedef enum ENTRANCE { Left, Unknown, Right};
+typedef enum ENTRANCE { ELeft, Unknown, ERight};
 /*
 Contains state that is not reactive, one could say knowledge about the world.
 */
