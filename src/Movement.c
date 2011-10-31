@@ -11,7 +11,8 @@ void DRIVE_LEFT(double Value) {
     move = Backwards;
   }
   if(state.expectedMovement == move) {
-    state.expectedFor++;
+    if(state.SpinSensor < 1)
+      state.expectedFor++;
   } else {
     state.expectedMovement = move;
     state.expectedFor = 0;
