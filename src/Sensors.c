@@ -109,6 +109,19 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 			state.RightWhisker = State;
       SensorLog("RightWhisker = %d", state.RightWhisker);
 			break;
+		case 7:
+      timeval tim;
+      gettimeofday(&tim, NULL);
+      // convert to double in seconds
+      double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
+      // convert last measuerd time to seconds
+      double t1 = timer.lastSpinChange.tv_sec + (timer.lastSpinChange.tv_usec/1000000.0);
+      // convert time to speed
+      double v = 1.0 / (t2 - t1);
+      state.SpinSensor = v;
+      SensorLog("SpinSensor = %f", state.SpinSensor);
+      timer.lastSpinChange = tim;
+      break;
 		//case 3:
 		//	state.BlackBumper = State;
 		//	printf("Black Bumper: %d", State);

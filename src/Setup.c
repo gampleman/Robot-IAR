@@ -239,10 +239,10 @@ int setup()
   timer.enteredFrom = Unknown;
   timer.foundStation = 0;
   state.wasOnBlackInLastIteration = 0;
-  // Change it to `= 0` after Hall sensor is attached and working
-  state.SpinSensor = 50;
+  state.SpinSensor = 0;
   
   gettimeofday(&timer.lastFlashSighted, NULL);
+  gettimeofday(&timer.lastSpinChange, NULL);
   //#ifdef FREQUENCY
   //timer.frequency = FREQUENCY;
   //#endif

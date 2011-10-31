@@ -20,7 +20,7 @@ struct stateT {
   int RightLight;
   int TopRightLight;
   int TopLeftLight;
-  int SpinSensor;
+  double SpinSensor;
   float AverageBaseLight;
   float AverageTopLight;
   bool firstTopAverage;
@@ -45,7 +45,7 @@ struct timerT {
   ENTRANCE enteredFrom;
   timeval lastFlashSighted;
   bool foundStation;
-
+  timeval lastSpinChange;
 } timer;
 
 
