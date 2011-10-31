@@ -240,6 +240,7 @@ int setup()
   timer.foundStation = 0;
   state.wasOnBlackInLastIteration = 0;
   state.SpinSensor = 10;
+  state.expectedMovement = None;
   
   gettimeofday(&timer.lastFlashSighted, NULL);
   gettimeofday(&timer.lastSpinChange, NULL);
