@@ -47,7 +47,7 @@ double t() {
 #define IDebug(arg) printf("arg = %d\n", arg);
 
 #ifdef SHOULD_DEBUG_BEHAVIOR
-#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logbehavior, "[%ds]  %s\n" __VA_ARGS__)
+#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logbehavior, "[%ds]  %s\n", t(), __VA_ARGS__)
 #define BehaviorIDebug(arg) printf("arg = %d\n", arg);
 #else
 #define BehaviorLog(...) fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n")
