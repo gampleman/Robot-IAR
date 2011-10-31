@@ -71,6 +71,7 @@ int orientStraightAndDrive(double percent)
 	DRIVE_LEFT(70);
 	//goTowards(90);
 	state.ServoPosition = 0;
+	state.expectedMovement = Forwards;
 	return 0;
 }
 
@@ -91,6 +92,7 @@ int retreat(Direction direction)
 		DRIVE_RIGHT(-10);
 	}
 	//sleep(0.8);
+	state.expectedMovement = Backwards;
 	return 0;
 }
 
@@ -101,6 +103,7 @@ int driveBack()
 	DRIVE_RIGHT(-75);
 	DRIVE_LEFT(-75);
 	sleep(1);
+	state.expectedMovement = Backwards;
 	return 0;
 }
 

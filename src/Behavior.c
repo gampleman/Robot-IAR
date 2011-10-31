@@ -81,14 +81,16 @@ Called every 50ms unless something happens.
 void behave() {
   // Stuck detection
   if(state.expectedMovement != None && state.SpinSensor < 1 && state.expectedFor > 3) { // stuck
-    BehaviorLog("Stuck");
-   /* if(state.expectedMovement == Forwards) {
+    
+    if(state.expectedMovement == Forwards) {
+      BehaviorLog("Stuck and was moving forward");
       CPhidgetMotorControl_setVelocity (motoControl, 0, -75);
-      msleep(400L);
+      msleep(800L);
     } else {
+      BehaviorLog("Stuck and was moving backwards");
       CPhidgetMotorControl_setVelocity (motoControl, 0, 75);
-      msleep(400L);
-    }*/
+      msleep(800L);
+    }
   } /*else if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
@@ -165,7 +167,7 @@ void behave() {
   }/*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
-      BehaviorLog("Both light and either no whiskers");
+      BehaviorLog("Both light and no whiskers");
       orientStraightAndDrive(0.5);
       //goTowards(130,0.5);
     }
@@ -194,7 +196,8 @@ void behave() {
         }
         state.exitTrialCounter = state.exitTrialCounter + 1;
       } else {
-        state.exitCounter = 0;
+        state.exitTrialCounter = 0;
+        BehaviorLog("I'm fed up with this station... :( I'm moving on");
         if (state.sawFrequency && state.movedOntoTheNextOne) {
           if (AT_BASE_WITH_FREQUENCY((int)timer.frequency)) {
             ontoTheNextOne((int)timer.frequency);
