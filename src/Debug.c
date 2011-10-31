@@ -44,31 +44,33 @@ int t() {
 }
 
 #define Log(...) printf(__VA_ARGS__); printf("\n");
-#define IDebug(arg) printf("arg = %d\n", arg);
+#define IDebug(arg) printf(#arg "= %d\n", arg);
 
+#define AFLog(where, ...) printf(__VA_ARGS__); printf( "\n"); fprintf(where, "[%ds] ", t()); fprintf(where, __VA_ARGS__); fprintf(where, "\n"); 
 
-#define BehaviorLog(...) printf(__VA_ARGS__); printf( "\n"); fprintf(logbehavior, "[%ds] ", t()); fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n"); 
+#define FLog(where, ...) fprintf(where, "[%ds] ", t()); fprintf(where, __VA_ARGS__); fprintf(where, "\n"); 
+
+#ifdef SHOULD_DEBUG_BEHAVIOR
+#define BehaviorLog(...) AFLog(logbehavior, __VA_ARGS__)
+#else
+#define BehaviorLog(...) FLog(logbehavior, __VA_ARGS__)
+#endif
+
 
 #ifdef SHOULD_DEBUG_MOVEMENT
-#define MovementLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logmovement, __VA_ARGS__); fprintf(logmovement, "\n")
-#define MovementIDebug(arg) printf("arg = %d\n", arg)
+#define MovementLog(...) AFLog(logmovement, __VA_ARGS__)
 #else
-#define MovementLog(...) fprintf(logmovement, __VA_ARGS__); fprintf(logmovement, "\n")
-#define MovementIDebug(arg)
+#define MovementLog(...) FLog(logmovement, __VA_ARGS__)
 #endif
 
 #ifdef SHOULD_DEBUG_SETUP
-#define SetupLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logsetup, __VA_ARGS__); fprintf(logsetup, "\n")
-#define SetupIDebug(arg) printf("arg = %d\n", arg);
+#define SetupLog(...) AFLog(logsetup, __VA_ARGS__)
 #else
-#define SetupLog(...) fprintf(logsetup, __VA_ARGS__); fprintf(logsetup, "\n")
-#define SetupIDebug(arg)
+#define SetupLog(...) FLog(logsetup, __VA_ARGS__)
 #endif
 
 #ifndef SHOULD_DEBUG_SENSOR
-#define SensorLog(...) fprintf(logsensor, __VA_ARGS__); fprintf(logsensor, "\n")
-#define SensorIDebug(arg)
+#define SensorLog(...) FLog(logsensor, __VA_ARGS__)
 #else
-#define SensorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logsensor, __VA_ARGS__); fprintf(logsensor, "\n")
-#define SensorIDebug(arg) printf("arg = %d\n", arg);
+#define SensorLog(...) AFLog(logsensor, __VA_ARGS__)
 #endif

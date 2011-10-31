@@ -103,11 +103,11 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 	{
 		case 1: 
 			state.LeftWhisker = State;
-      SensorIDebug(state.LeftWhisker);
+      SensorLog("LeftWhisker = %d", state.LeftWhisker);
 			break;
 		case 2: 
 			state.RightWhisker = State;
-      SensorIDebug(state.RightWhisker);
+      SensorLog("RightWhisker = %d", state.RightWhisker);
 			break;
 		//case 3:
 		//	state.BlackBumper = State;
