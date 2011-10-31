@@ -88,6 +88,7 @@ Called every 50ms unless something happens.
 void behave() {
   // Stuck detection
   if(state.expectedMovement != None && state.SpinSensor < 1 && state.expectedFor > 3) { // stuck
+    BehaviorLog("Stuck");
     if(state.expectedMovement == Forwards) {
       CPhidgetMotorControl_setVelocity (motoControl, 0, -75);
       msleep(400L);
