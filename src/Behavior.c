@@ -177,15 +177,23 @@ void behave() {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
       if(state.lastWhiskerTriggered == Right) {
-        retreat(Left);
+        driveBack();
         sleep(1);
         turnOnSpotRight();
         sleep(2);
-      } else {
         retreat(Right);
+        sleep(3);
+        turnOnSpotRight();
+        sleep(1);
+      } else {
+        driveBack();
         sleep(1);
         turnOnSpotLeft();
         sleep(2);
+        retreat(Left);
+        sleep(3);
+        turnOnSpotLeft();
+        sleep(1);
       }
     }
     else if(state.LeftWhisker)  {

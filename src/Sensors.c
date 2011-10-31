@@ -55,10 +55,9 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 	}
 	
-	if(!LEFT_LIGHT && !RIGHT_LIGHT) {
+	if(!LEFT_LIGHT && !RIGHT_LIGHT && state.AverageBaseLight > 200) {
     state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
-    BehaviorLog("Current base average: %f and current threshold: %f", state.AverageBaseLight, state.AverageBaseLight*(1+LIGHT_INCREASE_THRESHOLD));
-    SensorLog("Assigned bottom average: %f", state.AverageBaseLight);
+    SensorLog("Current base average: %f and current threshold: %f", state.AverageBaseLight, state.AverageBaseLight*(1+LIGHT_INCREASE_THRESHOLD));
   }
 	
 	// light is on and we haven't executed this block for this flash yet
