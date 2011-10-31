@@ -89,13 +89,13 @@ void behave() {
   // Stuck detection
   if(state.expectedMovement != None && state.SpinSensor < 1 && state.expectedFor > 3) { // stuck
     BehaviorLog("Stuck");
-    if(state.expectedMovement == Forwards) {
+   /* if(state.expectedMovement == Forwards) {
       CPhidgetMotorControl_setVelocity (motoControl, 0, -75);
       msleep(400L);
     } else {
       CPhidgetMotorControl_setVelocity (motoControl, 0, 75);
       msleep(400L);
-    }
+    }*/
   } /*else if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
