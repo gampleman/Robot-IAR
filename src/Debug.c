@@ -37,22 +37,17 @@ int close_debugging() {
   fclose(logsensor);
 }
 
-double t() {
+int t() {
   time_t t;
   time(&t);
-  return difftime(t, logtime);
+  return round(difftime(t, logtime));
 }
 
 #define Log(...) printf(__VA_ARGS__); printf("\n");
 #define IDebug(arg) printf("arg = %d\n", arg);
 
-#ifdef SHOULD_DEBUG_BEHAVIOR
-#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logbehavior, "[%ds]  %s\n", t(), __VA_ARGS__)
-#define BehaviorIDebug(arg) printf("arg = %d\n", arg);
-#else
-#define BehaviorLog(...) fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n")
-#define BehaviorIDebug(arg)
-#endif
+
+#define BehaviorLog(...) printf(__VA_ARGS__); printf( "\n"); fprintf(logbehavior, "[%ds] ", t()); fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n"); 
 
 #ifdef SHOULD_DEBUG_MOVEMENT
 #define MovementLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logmovement, __VA_ARGS__); fprintf(logmovement, "\n")
