@@ -155,6 +155,7 @@ CPhidgetAdvancedServoHandle servo = 0;
 
 int setup()
 {
+  init_debugging();
 	int result, numSensors, i;
 	const char *err;
   //handles *Handles;
