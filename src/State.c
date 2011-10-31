@@ -29,6 +29,9 @@ struct stateT {
   int expectedFor;
   Direction lastWhiskerTriggered;
   bool wasOnBlackInLastIteration;
+  int exitTrialCounter;
+  bool sawFrequency;
+  bool movedOntoTheNextOne;
 } state;
 
 

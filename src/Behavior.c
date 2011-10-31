@@ -14,6 +14,8 @@ int dance() {
     sleep(1);
     turnOnSpotLeft();
     sleep(6);
+    // get to a new base
+    ontoTheNextOne(0);
   } else if(AT_BASE_WITH_FREQUENCY(1)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 1");
@@ -22,10 +24,7 @@ int dance() {
     turnOnSpotRight();
     sleep(6);
     //  get to new base
-    turnOnSpotLeft();
-    sleep(5);
-    orientStraightAndDrive(1);
-    sleep(2);
+    ontoTheNextOne(1);
   } else if(AT_BASE_WITH_FREQUENCY(2)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
@@ -35,10 +34,7 @@ int dance() {
     sleep(1);
     driveBack();
     // get to new base
-    turnOnSpotRight();
-    msleep(2600L);
-    orientStraightAndDrive(1);
-    sleep(2);
+    ontoTheNextOne(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
@@ -47,16 +43,15 @@ int dance() {
     turnOnSpotRight();
     sleep(3); // 180deg turn
     // get to next base
-    turnOnSpotRight();
-    sleep(7);
-    orientStraightAndDrive(1);
-    sleep(2);
+    ontoTheNextOne(4);
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
     BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
     sleep(1);
     turnOnSpotRight();
     sleep(3); // 180deg turn
+    //get to next base
+    ontoTheNextOne(6);
   } else if(AT_BASE_WITH_FREQUENCY(8)) {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
@@ -67,10 +62,7 @@ int dance() {
     orientStraightAndDrive(1);
     sleep(1);
     //  get to new base
-    turnOnSpotLeft();
-    sleep(8);
-    orientStraightAndDrive(1);
-    sleep(2);
+    ontoTheNextOne(8);
   } else { // no reasonable frequency detected
     timer.frequency = 0;
     return 0;
@@ -79,6 +71,7 @@ int dance() {
   state.AverageBaseLight = (float)10000;
   timer.frequency = 0;
   return 1;
+  state.movedOntoTheNextOne = 0;
 }
 
 /*
@@ -122,6 +115,8 @@ void behave() {
           BehaviorLog("Didn't dance");
           orientStraightAndDrive(0.5);
           sleep(2);
+        } else {
+          state.sawFrequency = 0;
         }
       } else {
         BehaviorLog("Seeing the gap (F: %d, T: %d), but don't have frequency", state.FrontFacingIR, state.TopIR);
@@ -177,24 +172,38 @@ void behave() {
   } else {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
-      if(state.lastWhiskerTriggered == Right) {
-        driveBack();
-        sleep(1);
-        turnOnSpotRight();
-        sleep(2);
-        retreat(Right);
-        sleep(3);
-        turnOnSpotRight();
-        sleep(1);
+      if(state.exitTrialCounter < 5) {
+        if(state.lastWhiskerTriggered == Right) {
+          driveBack();
+          sleep(1);
+          turnOnSpotRight();
+          sleep(2);
+          retreat(Right);
+          sleep(3);
+          turnOnSpotRight();
+          sleep(1);
+        } else {
+          driveBack();
+          sleep(1);
+          turnOnSpotLeft();
+          sleep(2);
+          retreat(Left);
+          sleep(3);
+          turnOnSpotLeft();
+          sleep(1);
+        }
+        state.exitTrialCounter = state.exitTrialCounter + 1;
       } else {
-        driveBack();
-        sleep(1);
-        turnOnSpotLeft();
-        sleep(2);
-        retreat(Left);
-        sleep(3);
-        turnOnSpotLeft();
-        sleep(1);
+        state.exitCounter = 0;
+        if (state.sawFrequency && state.movedOntoTheNextOne) {
+          if (AT_BASE_WITH_FREQUENCY((int)timer.frequency)) {
+            ontoTheNextOne((int)timer.frequency);
+          } else {
+            ontoTheNextOne((int)timer.frequency + 1);
+          }
+        } else {
+          ontoTheNextOne(100);
+        }
       }
     }
     else if(state.LeftWhisker)  {

@@ -130,3 +130,38 @@ int goTowards(double angle, double percent)
 	//DRIVE_LEFT(80*(1-(angle/180)));
 	return 0;
 }
+
+int randomMovement()
+{//TODO define this. it can also be the spiral movement that we want our robot to make or just something random.
+}
+
+int ontoTheNextOne(int frequency)
+{
+  MovementLog("ontoTheNextOne(%f)", frequency);
+  if (frequency == 1)
+  {
+    turnOnSpotLeft();
+    sleep(5);
+    orientStraightAndDrive(1);
+    sleep(2);
+  } else if (frequency == 2) {
+    turnOnSpotRight();
+    msleep(2600L);
+    orientStraightAndDrive(1);
+    sleep(2);
+  } else if (frequency == 4) {
+    turnOnSpotRight();
+    sleep(7);
+    orientStraightAndDrive(1);
+    sleep(2);
+  } else if (frequency == 8) {
+    turnOnSpotLeft();
+    sleep(8);
+    orientStraightAndDrive(1);
+    sleep(2);
+  } else {
+    // do some random movement to explore the area
+    randomMovement();
+  }
+  return 0;
+}

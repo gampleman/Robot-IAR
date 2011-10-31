@@ -242,6 +242,9 @@ int setup()
   state.SpinSensor = 10.0;
   state.expectedMovement = None;
   state.expectedFor = 0;
+  state.exitTrialCounter = 0;
+  state.sawFrequency = 1;
+  state.movedOntoTheNextOne = 1;
   gettimeofday(&timer.lastFlashSighted, NULL);
   gettimeofday(&timer.lastSpinChange, NULL);
   //#ifdef FREQUENCY
