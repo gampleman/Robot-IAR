@@ -99,6 +99,9 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 //Index - Index of the input that generated the event, State - boolean (0 or 1) representing the input state (on or off)
 int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index, int State)
 {	
+  double t1, t2, v;
+  timeval tim;
+  
 	switch(Index)
 	{
 		case 1: 
@@ -110,14 +113,14 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
       SensorLog("RightWhisker = %d", state.RightWhisker);
 			break;
 		case 7:
-      timeval tim;
+      tim;
       gettimeofday(&tim, NULL);
       // convert to double in seconds
-      double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
+      t2=tim.tv_sec+(tim.tv_usec/1000000.0);
       // convert last measuerd time to seconds
-      double t1 = timer.lastSpinChange.tv_sec + (timer.lastSpinChange.tv_usec/1000000.0);
+      t1 = timer.lastSpinChange.tv_sec + (timer.lastSpinChange.tv_usec/1000000.0);
       // convert time to speed
-      double v = 1.0 / (t2 - t1);
+      v = 1.0 / (t2 - t1);
       state.SpinSensor = v;
       SensorLog("SpinSensor = %f", state.SpinSensor);
       timer.lastSpinChange = tim;
