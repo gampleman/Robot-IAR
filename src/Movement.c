@@ -1,7 +1,7 @@
 #define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, round(0.75 * Value))
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
 
-void DRIVE_LEFT(Value) {
+void DRIVE_LEFT(double Value) {
   Movement move;
   if(Value > 0) { 
     move = Forwards; 
@@ -16,7 +16,7 @@ void DRIVE_LEFT(Value) {
     state.expectedMovement = move;
     state.expectedFor = 0;
   }
-  CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value))
+  CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value));
 }
 
 //int firstRetreat = 1;
