@@ -122,7 +122,7 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
       // convert time to speed
       v = 1.0 / (t2 - t1);
       state.SpinSensor = v;
-      SensorLog("SpinSensor = %f", state.SpinSensor);
+      SensorLog("SpinSensor = %f, delta t = %f", state.SpinSensor, t2 - t1);
       timer.lastSpinChange = tim;
       break;
 		//case 3:

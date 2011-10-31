@@ -1,9 +1,23 @@
-#define DRIVE_LEFT(Value) if(Value > 0) { state.expectedMovement = Forwards; } \
-else if(Value == 0) { state.expectedMovement = None;} \
-else { state.expectedMovement = Backwards;} \
-CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value))
 #define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, round(0.75 * Value))
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
+
+void DRIVE_LEFT(Value) {
+  Movement move;
+  if(Value > 0) { 
+    move = Forwards; 
+  } else if(Value == 0) {
+    move = None;
+  } else { 
+    move = Backwards;
+  }
+  if(state.expectedMovement == move) {
+    state.expectedFor++;
+  } else {
+    state.expectedMovement = move;
+    state.expectedFor = 0;
+  }
+  CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value))
+}
 
 //int firstRetreat = 1;
 

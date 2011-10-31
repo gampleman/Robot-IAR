@@ -239,9 +239,9 @@ int setup()
   timer.enteredFrom = Unknown;
   timer.foundStation = 0;
   state.wasOnBlackInLastIteration = 0;
-  state.SpinSensor = 10;
+  state.SpinSensor = 10.0;
   state.expectedMovement = None;
-  
+  state.expectedFor = 0;
   gettimeofday(&timer.lastFlashSighted, NULL);
   gettimeofday(&timer.lastSpinChange, NULL);
   //#ifdef FREQUENCY

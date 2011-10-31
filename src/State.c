@@ -26,6 +26,7 @@ struct stateT {
   bool firstTopAverage;
   int ServoAngle;
   Movement expectedMovement;
+  int expectedFor;
   Direction lastWhiskerTriggered;
   bool wasOnBlackInLastIteration;
 } state;
