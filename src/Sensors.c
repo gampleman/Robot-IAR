@@ -57,6 +57,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 	
 	if(!LEFT_LIGHT && !RIGHT_LIGHT) {
     state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
+    BehaviorLog("Current base average: %f and current threshold: %f", state.AverageBaseLight, state.AverageBaseLight*(1+LIGHT_INCREASE_THRESHOLD));
     SensorLog("Assigned bottom average: %f", state.AverageBaseLight);
   }
 	

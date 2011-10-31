@@ -237,7 +237,8 @@ int setup()
   timer.whateverbool = 0;
   timer.timeSinceLastLight = 0;
   timer.enteredFrom = Unknown;
-  
+  timer.foundStation = 0;
+  state.wasOnBlackInLastIteration = 0;
   // Change it to `= 0` after Hall sensor is attached and working
   state.SpinSensor = 50;
   

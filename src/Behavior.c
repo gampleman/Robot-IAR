@@ -11,16 +11,16 @@ int dance() {
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
     BehaviorLog("Dancin' to the tune of a frequency 0.5");
     driveBack();
-    sleep(3);
+    sleep(1);
     turnOnSpotLeft();
-    sleep(10);
+    sleep(6);
   } else if(AT_BASE_WITH_FREQUENCY(1)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 1");
     driveBack();
-    sleep(2);
+    sleep(1);
     turnOnSpotRight();
-    sleep(10);
+    sleep(6);
     //  get to new base
     turnOnSpotLeft();
     sleep(5);
@@ -36,16 +36,16 @@ int dance() {
     driveBack();
     // get to new base
     turnOnSpotRight();
-    sleep(3);
+    msleep(2600L);
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
     driveBack();
-    sleep(2);
+    sleep(1);
     turnOnSpotRight();
-    sleep(5);
+    sleep(3); // 180deg turn
     // get to next base
     turnOnSpotRight();
     sleep(7);
@@ -54,16 +54,16 @@ int dance() {
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
     BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
-    sleep(2);
+    sleep(1);
     turnOnSpotRight();
-    sleep(5);
+    sleep(3); // 180deg turn
   } else if(AT_BASE_WITH_FREQUENCY(8)) {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    sleep(2);
+    sleep(1);
     stop();
-    sleep(3);
+    sleep(1);
     orientStraightAndDrive(1);
     sleep(1);
     //  get to new base
@@ -95,7 +95,7 @@ void behave() {
       CPhidgetMotorControl_setVelocity (motoControl, 0, 75);
       msleep(400L);
     }
-  } else if(LEFT_LIGHT && !RIGHT_LIGHT) {
+  } /*else if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
     BehaviorLog("Left light triggered");
     //Enter(Right)
@@ -104,8 +104,9 @@ void behave() {
     goTowards(130,0.5);
     BehaviorLog("Right light triggered");
     //Enter(Left)
-  }
-  else if (LEFT_LIGHT && RIGHT_LIGHT) {
+  }*/
+  else if (LEFT_LIGHT || RIGHT_LIGHT) {
+   state.wasOnBlackInLastIteration = 1;
    // if(state.SonarValue > )
     /*if(TOP_LIGHT)  {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
@@ -128,63 +129,102 @@ void behave() {
       }
     } else if(state.RightWhisker && state.LeftWhisker == 0)  {
       BehaviorLog("Both light and right whisker");
-      if(timer.enteredFrom = Left) {
-        retreat(1);
-      } else {
-        retreat(0);
-      }
-      msleep(900L);
+      //if(timer.enteredFrom = Left) {
+      //  retreat(1);
+      //} else {
+        retreat(Left);
+      //}
+      sleep(1);
+      driveBack();
+      state.lastWhiskerTriggered = Right;
   	  //goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
       BehaviorLog("Both light and left whisker");
-      if(timer.enteredFrom = Right) {
-        retreat(0);
-      } else {
-        retreat(1);
-      }
-      msleep(900L);
+      //if(timer.enteredFrom = Right) {
+      //  retreat(0);
+      //} else {
+        retreat(Right);
+      //}
+      sleep(1);
+      driveBack();
+      state.lastWhiskerTriggered = Left;
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
-      retreat(0);
-      msleep(800L);
-    } /*else if(rand() % 10 == 0) {
+      retreat(Left);
+      sleep(1);
+      driveBack();
+    }  else if(state.FrontFacingIR > 470) {
+      BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
+      driveBack();
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Right);
+        state.lastWhiskerTriggered = Left;
+      } else {
+        retreat(Left);
+        state.lastWhiskerTriggered = Right;
+      }
+      sleep(1);
+      driveBack();
+  }/*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
       BehaviorLog("Both light and either no whiskers");
       orientStraightAndDrive(0.5);
       //goTowards(130,0.5);
     }
-  }
-  else if(state.LeftWhisker)  {
-    BehaviorLog("Left whisker triggered");  
-    retreat(0);
-    sleep(1);
-    driveBack();
-    timer.enteredFrom = Unknown;
-  }
-  else if(state.RightWhisker) {
-    BehaviorLog("Right whisker triggered");  
-    retreat(1);
-    sleep(1); 
-    driveBack();
-    timer.enteredFrom = Unknown;
-  }
-  else if(state.FrontFacingIR > 420) {
-    BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
-    driveBack();
-    retreat(1);
-    sleep(1);
-    driveBack();
-    timer.enteredFrom = Unknown;
-  }
-	else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
-    BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
-    goTowards(30,1);
-    timer.enteredFrom = Unknown;
-	}
-	else {
-    timer.enteredFrom = Unknown;
-		orientStraightAndDrive(1);
-	}
+  } else {
+    if(state.wasOnBlackInLastIteration) {
+      BehaviorLog("Exited black area and trying to return.");
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Left);
+        sleep(1);
+        turnOnSpotRight();
+        sleep(2);
+      } else {
+        retreat(Right);
+        sleep(1);
+        turnOnSpotLeft();
+        sleep(2);
+      }
+    }
+    else if(state.LeftWhisker)  {
+      BehaviorLog("Left whisker triggered");  
+      retreat(Right);
+      sleep(1);
+      timer.enteredFrom = Unknown;
+      state.lastWhiskerTriggered = Left;
+    }
+    else if(state.RightWhisker) {
+      BehaviorLog("Right whisker triggered");  
+      retreat(Left);
+      sleep(1); 
+      driveBack();
+      timer.enteredFrom = Unknown;
+      state.lastWhiskerTriggered = Right;
+    }
+    else if(state.FrontFacingIR > 450) {
+      BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
+      driveBack();
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Right);
+      } else {
+        retreat(Left);
+      }
+      sleep(1);
+      driveBack();
+      timer.enteredFrom = Unknown;
+    }
+	  else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
+      BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
+      goTowards(30,1);
+      timer.enteredFrom = Unknown;
+	  }
+	  else {
+	    BehaviorLog("Driving straight out of black area.");
+      timer.enteredFrom = Unknown;
+		  orientStraightAndDrive(1);
+	  }
+	  state.wasOnBlackInLastIteration = 0;
+	 }
 }
