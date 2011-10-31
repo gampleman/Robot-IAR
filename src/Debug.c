@@ -6,13 +6,14 @@ FILE *logbehavior;
 FILE *logmovement;
 FILE *logsensor;
 FILE *logsetup;
-
+time_t logtime;
 
 
 int init_debugging() {
+  time(&logtime);
   if((logbehavior = fopen("behavior.log", "w")) == NULL) {
     printf("Cannot open file.\n");
-    return 1;
+    return 1; 
   }
   if((logmovement=fopen("movement.log", "w")) == NULL) {
     printf("Cannot open file.\n");
@@ -36,11 +37,17 @@ int close_debugging() {
   fclose(logsensor);
 }
 
+double t() {
+  time_t t;
+  time(&t);
+  return difftime(t, logtime);
+}
+
 #define Log(...) printf(__VA_ARGS__); printf("\n");
 #define IDebug(arg) printf("arg = %d\n", arg);
 
 #ifdef SHOULD_DEBUG_BEHAVIOR
-#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n")
+#define BehaviorLog(...) printf(__VA_ARGS__); printf("\n"); fprintf(logbehavior, "[%ds]  %s\n" __VA_ARGS__)
 #define BehaviorIDebug(arg) printf("arg = %d\n", arg);
 #else
 #define BehaviorLog(...) fprintf(logbehavior, __VA_ARGS__); fprintf(logbehavior, "\n")
