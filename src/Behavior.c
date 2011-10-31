@@ -36,7 +36,7 @@ int dance() {
     driveBack();
     // get to new base
     turnOnSpotRight();
-    sleep(3);
+    msleep(2600L);
     orientStraightAndDrive(1);
     sleep(2);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
@@ -106,6 +106,7 @@ void behave() {
     //Enter(Left)
   }*/
   else if (LEFT_LIGHT || RIGHT_LIGHT) {
+   state.wasOnBlackInLastIteration = 1;
    // if(state.SonarValue > )
     /*if(TOP_LIGHT)  {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
@@ -131,7 +132,7 @@ void behave() {
       //if(timer.enteredFrom = Left) {
       //  retreat(1);
       //} else {
-        retreat(0);
+        retreat(Left);
       //}
       sleep(1);
       driveBack();
@@ -142,7 +143,7 @@ void behave() {
       //if(timer.enteredFrom = Right) {
       //  retreat(0);
       //} else {
-        retreat(1);
+        retreat(Right);
       //}
       sleep(1);
       driveBack();
@@ -150,19 +151,21 @@ void behave() {
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
       BehaviorLog("Both whiskers");
-      retreat(0);
+      retreat(Left);
       sleep(1);
       driveBack();
-    }  else if(state.FrontFacingIR > 420) {
-    BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
-    driveBack();
-    if(state.lastWhiskerTriggered == Right) {
-      retreat(1);
-    } else {
-      retreat(0);
-    }
-    sleep(1);
-    driveBack();
+    }  else if(state.FrontFacingIR > 470) {
+      BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
+      driveBack();
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Right);
+        state.lastWhiskerTriggered = Left;
+      } else {
+        retreat(Left);
+        state.lastWhiskerTriggered = Right;
+      }
+      sleep(1);
+      driveBack();
   }/*else if(rand() % 10 == 0) {
       sweepWithSonar();
     }*/ else { // No whiskers 
@@ -170,41 +173,58 @@ void behave() {
       orientStraightAndDrive(0.5);
       //goTowards(130,0.5);
     }
-  }
-  else if(state.LeftWhisker)  {
-    BehaviorLog("Left whisker triggered");  
-    retreat(0);
-    sleep(1);
-    timer.enteredFrom = Unknown;
-    state.lastWhiskerTriggered = Left;
-  }
-  else if(state.RightWhisker) {
-    BehaviorLog("Right whisker triggered");  
-    retreat(1);
-    sleep(1); 
-    driveBack();
-    timer.enteredFrom = Unknown;
-    state.lastWhiskerTriggered = Right;
-  }
-  else if(state.FrontFacingIR > 420) {
-    BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
-    driveBack();
-    if(state.lastWhiskerTriggered == Right) {
-      retreat(1);
-    } else {
-      retreat(0);
+  } else {
+    if(state.wasOnBlackInLastIteration) {
+      BehaviorLog("Exited black area and trying to return.");
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Left);
+        sleep(1);
+        turnOnSpotRight();
+        sleep(2);
+      } else {
+        retreat(Right);
+        sleep(1);
+        turnOnSpotLeft();
+        sleep(2);
+      }
     }
-    sleep(1);
-    driveBack();
-    timer.enteredFrom = Unknown;
-  }
-	else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
-    BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
-    goTowards(30,1);
-    timer.enteredFrom = Unknown;
-	}
-	else {
-    timer.enteredFrom = Unknown;
-		orientStraightAndDrive(1);
-	}
+    else if(state.LeftWhisker)  {
+      BehaviorLog("Left whisker triggered");  
+      retreat(Right);
+      sleep(1);
+      timer.enteredFrom = Unknown;
+      state.lastWhiskerTriggered = Left;
+    }
+    else if(state.RightWhisker) {
+      BehaviorLog("Right whisker triggered");  
+      retreat(Left);
+      sleep(1); 
+      driveBack();
+      timer.enteredFrom = Unknown;
+      state.lastWhiskerTriggered = Right;
+    }
+    else if(state.FrontFacingIR > 450) {
+      BehaviorLog("IR triggered (%d)", state.FrontFacingIR);
+      driveBack();
+      if(state.lastWhiskerTriggered == Right) {
+        retreat(Right);
+      } else {
+        retreat(Left);
+      }
+      sleep(1);
+      driveBack();
+      timer.enteredFrom = Unknown;
+    }
+	  else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
+      BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
+      goTowards(30,1);
+      timer.enteredFrom = Unknown;
+	  }
+	  else {
+	    BehaviorLog("Driving straight out of black area.");
+      timer.enteredFrom = Unknown;
+		  orientStraightAndDrive(1);
+	  }
+	  state.wasOnBlackInLastIteration = 0;
+	 }
 }

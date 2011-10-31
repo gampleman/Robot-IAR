@@ -59,16 +59,18 @@ int orientStraightAndDrive(double percent)
 	return 0;
 }
 
-int retreat(int right)
+int retreat(Direction direction)
 {
-  MovementLog("retreat(%d)", right);
-	if(right==1)
+  
+	if(direction == Right)
 	{
+	  MovementLog("retreat(Right)");
 		SERVO(190);
 		DRIVE_LEFT(-10);
 		DRIVE_RIGHT(-60);
 	} else
 	{
+	  MovementLog("retreat(Left)");
 		SERVO(50);
 		DRIVE_LEFT(-60);
 		DRIVE_RIGHT(-10);
