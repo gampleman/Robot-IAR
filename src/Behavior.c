@@ -74,25 +74,31 @@ int dance() {
   state.movedOntoTheNextOne = 0;
 }
 
+
+
 /*
 Main behavior function.
 Called every 50ms unless something happens.
 */
 void behave() {
   // Stuck detection
+  BehaviorLog("current spin input: %d, previous spin input %d", state.SpinSensor, state.previousState);
   if(state.SpinSensor == state.previousState) {
     state.stuckCounter++;
-    state.previousState = state.SpinSensor;
   } else {
-    if (state.stuckCounter > 9) {
-      state.expectedFor++;
-    } else {
-      state.stuckCounter = 0;
-    }
+    state.stuckCounter = 0;
+    state.expectedFor = 0;
   }
-  // i know this printout shouldn't belong to behavior but i want to see them for testing
-  BehaviorLog("expectedfor weirdo value %f", state.expectedFor);
-  if(state.expectedMovement != None && /*state.SpinSensor < 1 &&*/ state.expectedFor > 5) { // stuck
+  if (state.stuckCounter > 9) {
+      state.expectedFor = state.expectedFor + 1;
+      state.stuckCounter = 0;
+      BehaviorLog("stuck cycle %d", state.expectedFor);
+  }
+  state.previousState = state.SpinSensor;
+  BehaviorLog("expectedfor weirdo value %d and stuckcounter %d", state.expectedFor, state.stuckCounter);
+  if(state.expectedMovement != None && state.expectedFor > 4) { // stuck
+    // i know this printout shouldn't belong to behavior but i want to see them for testing
+    BehaviorLog("expectedfor weirdo value %f", state.expectedFor);
     state.expectedFor = 0;
     if(state.expectedMovement == Forwards) {
       BehaviorLog("Stuck and was moving forward");
