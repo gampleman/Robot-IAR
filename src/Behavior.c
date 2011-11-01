@@ -207,8 +207,10 @@ void behave() {
       //goTowards(130,0.5);
   
     }
+  
+  } 
   #if 0
-  } else {
+  else {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
       if(state.exitTrialCounter < 5) {
