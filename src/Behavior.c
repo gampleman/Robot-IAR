@@ -6,7 +6,6 @@ Attempts to match frequency to one of the known frequencies of stations.
 If a frequency is matched it executes a 'dance' and returns 1 (may not return immediately).
 Otherwise returns 0.
 */
-/* is my picture showing now?*/
 int dance() {
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
     BehaviorLog("Dancin' to the tune of a frequency 0.5");
@@ -155,7 +154,7 @@ void behave() {
       //} else {
         retreat(Left);
       //}
-      sleep(1);
+      msleep(700);
       driveBack();
       state.lastWhiskerTriggered = Right;
   	  //goTowards(120,0.5);
@@ -166,7 +165,7 @@ void behave() {
       //} else {
         retreat(Right);
       //}
-      sleep(1);
+      msleep(700);
       driveBack();
       state.lastWhiskerTriggered = Left;
   	  //goTowards(60,0.5);
