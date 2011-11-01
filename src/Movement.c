@@ -166,7 +166,7 @@ int ontoTheNextOne(int frequency, Heading h)
     orientStraightAndDrive(1);
     pause(3);
     turnOnSpotLeft();
-    pause(0.8);
+    pause(1.2);
     orientStraightAndDrive(3);
     pause(0.9);
     turnOnSpotRight();
