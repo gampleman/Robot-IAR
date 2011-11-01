@@ -66,11 +66,11 @@ int dance() {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    pause(0.5);
+    pause(1);
     stop();
     pause(1);
     orientStraightAndDrive(1);
-    pause(1);
+    pause(0.5);
     //  get to new base
     ontoTheNextOne(8, heading);
   } else { // no reasonable frequency detected
