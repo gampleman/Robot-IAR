@@ -164,11 +164,11 @@ int ontoTheNextOne(int frequency, Heading h)
     turnOnSpotRight();
     pause(2.6*mod);
     orientStraightAndDrive(1);
-    pause(2);
+    pause(3);
     turnOnSpotLeft();
     pause(0.8);
-    orientStraightAndDrive(1);
-    pause(1);
+    orientStraightAndDrive(3);
+    pause(0.9);
     turnOnSpotRight();
     pause(1);
   } else if (frequency == 4) {
