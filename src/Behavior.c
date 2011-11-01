@@ -71,6 +71,10 @@ int dance() {
     pause(1);
     orientStraightAndDrive(1);
     pause(0.5);
+    stop();
+    pause(0.8);
+    turnOnSpotRight();
+    pause(1);
     //  get to new base
     ontoTheNextOne(8, heading);
   } else { // no reasonable frequency detected
