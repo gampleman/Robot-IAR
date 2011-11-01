@@ -10,6 +10,14 @@ If a frequency is matched it executes a 'dance' and returns 1 (may not return im
 Otherwise returns 0.
 */
 int dance() {
+  Heading heading;
+  if(state.LeftWhisker && state.RightWhisker) {
+    heading = Straight;
+  } else if(state.LeftWhisker) {
+    heading = Rightish;
+  } else if(state.RightWhisker) {
+    heading = Leftish;
+  }
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
     BehaviorLog("Dancin' to the tune of a frequency 0.5");
     driveBack();
@@ -17,7 +25,7 @@ int dance() {
     turnOnSpotLeft();
     pause(6);
     // get to a new base
-    ontoTheNextOne(0);
+    ontoTheNextOne(0, heading);
   } else if(AT_BASE_WITH_FREQUENCY(1)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 1");
@@ -26,7 +34,7 @@ int dance() {
     turnOnSpotRight();
     pause(6);
     //  get to new base
-    ontoTheNextOne(1);
+    ontoTheNextOne(1, heading);
   } else if(AT_BASE_WITH_FREQUENCY(2)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
@@ -36,7 +44,7 @@ int dance() {
     pause(1);
     driveBack();
     // get to new base
-    ontoTheNextOne(2);
+    ontoTheNextOne(2, heading);
   } else if(AT_BASE_WITH_FREQUENCY(4)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
@@ -45,7 +53,7 @@ int dance() {
     turnOnSpotRight();
     pause(3); // 180deg turn
     // get to next base
-    ontoTheNextOne(4);
+    ontoTheNextOne(4, heading);
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
     BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
@@ -53,7 +61,7 @@ int dance() {
     turnOnSpotRight();
     pause(3); // 180deg turn
     //get to next base
-    ontoTheNextOne(6);
+    ontoTheNextOne(6, heading);
   } else if(AT_BASE_WITH_FREQUENCY(8)) {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
@@ -64,7 +72,7 @@ int dance() {
     orientStraightAndDrive(1);
     pause(1);
     //  get to new base
-    ontoTheNextOne(8);
+    ontoTheNextOne(8, heading);
   } else { // no reasonable frequency detected
     timer.frequency = 0;
     return 0;
@@ -232,12 +240,12 @@ void behave() {
         BehaviorLog("I'm fed up with this station... :( I'm moving on");
         if (state.sawFrequency && state.movedOntoTheNextOne) {
           if (AT_BASE_WITH_FREQUENCY((int)timer.frequency)) {
-            ontoTheNextOne((int)timer.frequency);
+            ontoTheNextOne((int)timer.frequency, Straight);
           } else {
-            ontoTheNextOne((int)timer.frequency + 1);
+            ontoTheNextOne((int)timer.frequency + 1, Straight);
           }
         } else {
-          ontoTheNextOne(100);
+          ontoTheNextOne(100, Straight);
         }
       }
     }

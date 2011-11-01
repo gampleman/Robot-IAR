@@ -6,6 +6,7 @@
 
 enum Movement {Backwards, None, Forwards};
 enum Direction {Left, Right};
+enum Heading {Leftish, Straight, Rightish};
 
 /*
 Describes state of the robots sensory inputs.

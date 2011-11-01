@@ -139,30 +139,40 @@ int goTowards(double angle, double percent)
 
 int randomMovement()
 {//TODO define this. it can also be the spiral movement that we want our robot to make or just something random.
+  orientStraightAndDrive(1);
 }
 
-int ontoTheNextOne(int frequency)
+/** 
+* Heading is just a little clue as to how much rotation to apply.
+*/
+int ontoTheNextOne(int frequency, Heading h)
 {
+  double mod = 1;
+  if(h == Leftish) {
+    mod = 1.5;
+  } else if(h == Rightish) {
+    mod = 0.666667;
+  }
   MovementLog("ontoTheNextOne(%d)", frequency);
   if (frequency == 1)
   {
     turnOnSpotLeft();
-    pause(4);
+    pause(4.0/mod);
     orientStraightAndDrive(1);
     pause(2);
   } else if (frequency == 2) {
     turnOnSpotRight();
-    pause(2.6);
+    pause(2.6*mod);
     orientStraightAndDrive(1);
     pause(2);
   } else if (frequency == 4) {
     turnOnSpotRight();
-    pause(7);
+    pause(7*mod);
     orientStraightAndDrive(1);
     pause(2);
   } else if (frequency == 8) {
     turnOnSpotLeft();
-    pause(8);
+    pause(8.0/mod);
     orientStraightAndDrive(1);
     pause(2);
   } else {
