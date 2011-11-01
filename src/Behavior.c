@@ -217,23 +217,29 @@ void behave() {
           msleep(800L);
           state.IRcausedExitFromBlack = 1;
         } else*/ if(state.lastWhiskerTriggered == Right) {
-          driveBack();
+          /*driveBack();
           sleep(1);
           turnOnSpotRight();
           sleep(2);
           retreat(Right);
           sleep(3);
           turnOnSpotRight();
-          sleep(1);
+          sleep(1);*/
+          turnOnSpotLeft();
+          pause(0.6);
+          orientStraightAndDrive(1);
         } else {
-          driveBack();
+          /*driveBack();
           sleep(1);
           turnOnSpotLeft();
           sleep(2);
           retreat(Left);
           sleep(3);
           turnOnSpotLeft();
-          sleep(1);
+          sleep(1);*/
+            turnOnSpotRight();
+            pause(0.6);
+            orientStraightAndDrive(1);
         }
         state.exitTrialCounter = state.exitTrialCounter + 1;
       } else {

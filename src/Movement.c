@@ -147,6 +147,7 @@ int randomMovement()
 */
 int ontoTheNextOne(int frequency, Heading h)
 {
+  /*
   double mod = 1;
   if(h == Leftish) {
     mod = 1.5;
@@ -185,5 +186,6 @@ int ontoTheNextOne(int frequency, Heading h)
     // do some random movement to explore the area
     randomMovement();
   }
+  */
   return 0;
 }
