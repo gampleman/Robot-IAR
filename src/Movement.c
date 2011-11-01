@@ -85,14 +85,14 @@ int retreat(Direction direction)
 	{
 	  MovementLog("retreat(Right)");
 		SERVO(190);
-		DRIVE_LEFT(-10);
-		DRIVE_RIGHT(-60);
+		DRIVE_LEFT(-30);
+		DRIVE_RIGHT(-100);
 	} else
 	{
 	  MovementLog("retreat(Left)");
 		SERVO(50);
-		DRIVE_LEFT(-60);
-		DRIVE_RIGHT(-10);
+		DRIVE_LEFT(-100);
+		DRIVE_RIGHT(-30);
 	}
 	//pause(0.8);
 	//state.expectedMovement = Backwards;
