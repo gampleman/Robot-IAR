@@ -11,7 +11,7 @@ int dance() {
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
     BehaviorLog("Dancin' to the tune of a frequency 0.5");
     driveBack();
-    sleep(1);
+    msleep(500L);
     turnOnSpotLeft();
     sleep(6);
     // get to a new base
@@ -20,7 +20,7 @@ int dance() {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 1");
     driveBack();
-    sleep(1);
+    msleep(500L);
     turnOnSpotRight();
     sleep(6);
     //  get to new base
@@ -29,7 +29,7 @@ int dance() {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
     driveBack();
-    sleep(1);
+    msleep(500L);
     stop();
     sleep(1);
     driveBack();
@@ -39,7 +39,7 @@ int dance() {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
     driveBack();
-    sleep(1);
+    msleep(500L);
     turnOnSpotRight();
     sleep(3); // 180deg turn
     // get to next base
@@ -47,7 +47,7 @@ int dance() {
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
     BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
-    sleep(1);
+    msleep(500L);
     turnOnSpotRight();
     sleep(3); // 180deg turn
     //get to next base
@@ -56,7 +56,7 @@ int dance() {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    sleep(1);
+    msleep(500L);
     stop();
     sleep(1);
     orientStraightAndDrive(1);
@@ -82,7 +82,7 @@ Called every 50ms unless something happens.
 */
 void behave() {
   // Stuck detection
-  BehaviorLog("current spin input: %d, previous spin input %d", state.SpinSensor, state.previousState);
+  //SensorLog("current spin input: %d, previous spin input %d", state.SpinSensor, state.previousState);
   if(state.SpinSensor == state.previousState) {
     state.stuckCounter++;
   } else {
@@ -95,10 +95,8 @@ void behave() {
       BehaviorLog("stuck cycle %d", state.expectedFor);
   }
   state.previousState = state.SpinSensor;
-  BehaviorLog("expectedfor weirdo value %d and stuckcounter %d", state.expectedFor, state.stuckCounter);
   if(state.expectedMovement != None && state.expectedFor > 4) { // stuck
-    // i know this printout shouldn't belong to behavior but i want to see them for testing
-    BehaviorLog("expectedfor weirdo value %f", state.expectedFor);
+    SensorLog("expectedfor weirdo value %f", state.expectedFor);
     state.expectedFor = 0;
     if(state.expectedMovement == Forwards) {
       BehaviorLog("Stuck and was moving forward");
@@ -127,6 +125,7 @@ void behave() {
   }*/
   else if (LEFT_LIGHT || RIGHT_LIGHT) {
    state.wasOnBlackInLastIteration = 1;
+   state.IRcausedExitFromBlack = 1;
    // if(state.SonarValue > )
     /*if(TOP_LIGHT)  {
       BehaviorLog("Top Lights. Frequency: %f", timer.frequency);
@@ -179,6 +178,7 @@ void behave() {
     }  else if(state.FrontFacingIR > 470) {
       BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
       driveBack();
+      state.IRcausedExitFromBlack = 0;
       if(state.lastWhiskerTriggered == Right) {
         retreat(Right);
         state.lastWhiskerTriggered = Left;
@@ -199,7 +199,13 @@ void behave() {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
       if(state.exitTrialCounter < 5) {
-        if(state.lastWhiskerTriggered == Right) {
+        if (state.IRcausedExitFromBlack) {
+          turnOnSpotRight();
+          sleep(1);
+          orientStraightAndDrive(1);
+          msleep(800L);
+          state.IRcausedExitFromBlack = 1;
+        } else if(state.lastWhiskerTriggered == Right) {
           driveBack();
           sleep(1);
           turnOnSpotRight();
