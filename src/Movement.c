@@ -20,7 +20,7 @@ void DRIVE_LEFT(double Value) {
     state.expectedMovement = move;
     state.expectedFor = 0;
   }
-  CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.75 *Value));
+  CPhidgetMotorControl_setVelocity (motoControl, 0, round(-0.9 *Value));
 }
 
 //int firstRetreat = 1;
