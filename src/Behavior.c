@@ -66,7 +66,7 @@ int dance() {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    pause(1);
+    pause(2);
     stop();
     pause(1);
     orientStraightAndDrive(1);
