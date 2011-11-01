@@ -26,12 +26,15 @@ struct stateT {
   bool firstTopAverage;
   int ServoAngle;
   Movement expectedMovement;
-  int expectedFor;
+  int expectedFor; //this name is kinda like whateverbool => i have no idea what the heck it's supposed to do...
   Direction lastWhiskerTriggered;
   bool wasOnBlackInLastIteration;
   int exitTrialCounter;
   bool sawFrequency;
   bool movedOntoTheNextOne;
+  int previousState; // another obvious variable name, try to find out what this is doing - lol. 
+  int stuckCounter; // i just <3 counting. btw, it sounds a bit like stock counter. i wish i had some stocks...
+  int tempStuckCounter; // more counters!!!111one1!1
 } state;
 
 

@@ -80,16 +80,34 @@ Called every 50ms unless something happens.
 */
 void behave() {
   // Stuck detection
-  if(state.expectedMovement != None && state.SpinSensor < 1 && state.expectedFor > 3) { // stuck
-    
+  if(state.SpinSensor == state.previousState) {
+    state.stuckCounter++;
+    state.previousState = state.SpinSensor;
+  } else {
+    if (state.stuckCounter > 9) {
+      state.expectedFor++;
+    } else {
+      state.stuckCounter = 0;
+    }
+  }
+  // i know this printout shouldn't belong to behavior but i want to see them for testing
+  BehaviorLog("expectedfor weirdo value %f", state.expectedFor);
+  if(state.expectedMovement != None && /*state.SpinSensor < 1 &&*/ state.expectedFor > 5) { // stuck
+    state.expectedFor = 0;
     if(state.expectedMovement == Forwards) {
       BehaviorLog("Stuck and was moving forward");
-      CPhidgetMotorControl_setVelocity (motoControl, 0, -75);
-      msleep(800L);
+      driveBack();
+      sleep(1);
+      if(state.lastWhiskerTriggered == Left) {
+        retreat(Right);
+      } else {
+        retreat(Left);
+      }
+      msleep(1500L);
     } else {
       BehaviorLog("Stuck and was moving backwards");
-      CPhidgetMotorControl_setVelocity (motoControl, 0, 75);
-      msleep(800L);
+      orientStraightAndDrive(1);
+      msleep(1500L);
     }
   } /*else if(LEFT_LIGHT && !RIGHT_LIGHT) {
     goTowards(80,0.5);
@@ -236,13 +254,13 @@ void behave() {
       driveBack();
       timer.enteredFrom = Unknown;
     }
-	  else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
+	  /*else if(timer.iteration > timer.threshold && timer.iteration < (timer.threshold + TURNING_DURATION)) {
       BehaviorLog("Turning %d, threshold: %d, iteration: %d", timer.threshold + TURNING_DURATION - timer.iteration, timer.threshold, timer.iteration);
       goTowards(30,1);
       timer.enteredFrom = Unknown;
-	  }
+	  }*/
 	  else {
-	    BehaviorLog("Driving straight out of black area.");
+	    BehaviorLog("Driving straight, (maybe) out of black area."); // well, this is not really true.......
       timer.enteredFrom = Unknown;
 		  orientStraightAndDrive(1);
 	  }

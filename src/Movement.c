@@ -10,10 +10,7 @@ void DRIVE_LEFT(double Value) {
   } else { 
     move = Backwards;
   }
-  if(state.expectedMovement == move) {
-    if(state.SpinSensor < 1)
-      state.expectedFor++;
-  } else {
+  if(state.expectedMovement != move) {
     state.expectedMovement = move;
     state.expectedFor = 0;
   }
@@ -71,7 +68,7 @@ int orientStraightAndDrive(double percent)
 	DRIVE_LEFT(70);
 	//goTowards(90);
 	state.ServoPosition = 0;
-	state.expectedMovement = Forwards;
+	//state.expectedMovement = Forwards;
 	return 0;
 }
 
@@ -92,7 +89,7 @@ int retreat(Direction direction)
 		DRIVE_RIGHT(-10);
 	}
 	//sleep(0.8);
-	state.expectedMovement = Backwards;
+	//state.expectedMovement = Backwards;
 	return 0;
 }
 
@@ -103,7 +100,7 @@ int driveBack()
 	DRIVE_RIGHT(-75);
 	DRIVE_LEFT(-75);
 	sleep(1);
-	state.expectedMovement = Backwards;
+	//state.expectedMovement = Backwards;
 	return 0;
 }
 
@@ -144,7 +141,7 @@ int ontoTheNextOne(int frequency)
   if (frequency == 1)
   {
     turnOnSpotLeft();
-    sleep(5);
+    sleep(4);
     orientStraightAndDrive(1);
     sleep(2);
   } else if (frequency == 2) {
