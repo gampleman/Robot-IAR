@@ -134,7 +134,7 @@ void behave() {
     BehaviorLog("Right light triggered");
     //Enter(Left)
   }*/
-  else if (LEFT_LIGHT || RIGHT_LIGHT) {
+  else /*if (LEFT_LIGHT || RIGHT_LIGHT)*/ {
    state.wasOnBlackInLastIteration = 1;
    state.IRcausedExitFromBlack = 1;
    // if(state.SonarValue > )
@@ -205,7 +205,9 @@ void behave() {
       BehaviorLog("Both light and no whiskers");
       orientStraightAndDrive(0.5);
       //goTowards(130,0.5);
+  
     }
+  #if 0
   } else {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
@@ -295,4 +297,5 @@ void behave() {
 	  }
 	  state.wasOnBlackInLastIteration = 0;
 	 }
+	 #endif
 }
