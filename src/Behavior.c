@@ -80,6 +80,7 @@ int dance() {
   BehaviorLog("Danced");
   state.AverageBaseLight = (float)10000;
   timer.frequency = 0;
+  state.wasOnBlackInLastIteration = 0;
   return 1;
   state.movedOntoTheNextOne = 0;
 }
