@@ -134,7 +134,7 @@ void behave() {
     BehaviorLog("Right light triggered");
     //Enter(Left)
   }*/
-  else /*if (LEFT_LIGHT || RIGHT_LIGHT)*/ {
+  else if (LEFT_LIGHT || RIGHT_LIGHT) {
    state.wasOnBlackInLastIteration = 1;
    state.IRcausedExitFromBlack = 1;
    // if(state.SonarValue > )
@@ -209,7 +209,7 @@ void behave() {
     }
   
   } 
-  #if 0
+  #if 1
   else {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
