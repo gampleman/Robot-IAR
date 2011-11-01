@@ -1,7 +1,7 @@
 #define TURNING_DURATION 4
 #define LIGHT_INCREASE_THRESHOLD 0.3
 
-#define Enter(what) if(timer.enteredFrom == Unknown) { BehaviorLog("Entered from what"); timer.enteredFrom = what;} else {timer.enteredFrom = Unknown;} 
+#define Enter(what) if(timer.enteredFrom == Unknown) { BehaviorLog("Entered from " #what); timer.enteredFrom = what;} else {timer.enteredFrom = Unknown;} 
 
 
 enum Movement {Backwards, None, Forwards};

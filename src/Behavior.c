@@ -209,13 +209,13 @@ void behave() {
     if(state.wasOnBlackInLastIteration) {
       BehaviorLog("Exited black area and trying to return.");
       if(state.exitTrialCounter < 5) {
-        if (state.IRcausedExitFromBlack) {
+        /*if (state.IRcausedExitFromBlack) {
           turnOnSpotRight();
           sleep(1);
           orientStraightAndDrive(1);
           msleep(800L);
           state.IRcausedExitFromBlack = 1;
-        } else if(state.lastWhiskerTriggered == Right) {
+        } else*/ if(state.lastWhiskerTriggered == Right) {
           driveBack();
           sleep(1);
           turnOnSpotRight();
