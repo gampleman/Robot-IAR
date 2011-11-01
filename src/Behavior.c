@@ -1,6 +1,9 @@
 // Macro to match imprecise measurements to a range of possible values
 #define DELTA(a,b,c) (a < b + c && a > b - c)  
 #define AT_BASE_WITH_FREQUENCY(n) (DELTA(timer.frequency, n, 0.3))
+
+
+
 /*
 Attempts to match frequency to one of the known frequencies of stations. 
 If a frequency is matched it executes a 'dance' and returns 1 (may not return immediately).
@@ -10,27 +13,27 @@ int dance() {
   if(AT_BASE_WITH_FREQUENCY(0.5)) {
     BehaviorLog("Dancin' to the tune of a frequency 0.5");
     driveBack();
-    msleep(500L);
+    pause(0.5);
     turnOnSpotLeft();
-    sleep(6);
+    pause(6);
     // get to a new base
     ontoTheNextOne(0);
   } else if(AT_BASE_WITH_FREQUENCY(1)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 1");
     driveBack();
-    msleep(500L);
+    pause(0.5);
     turnOnSpotRight();
-    sleep(6);
+    pause(6);
     //  get to new base
     ontoTheNextOne(1);
   } else if(AT_BASE_WITH_FREQUENCY(2)) {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 2");
     driveBack();
-    msleep(500L);
+    pause(0.5);
     stop();
-    sleep(1);
+    pause(1);
     driveBack();
     // get to new base
     ontoTheNextOne(2);
@@ -38,28 +41,28 @@ int dance() {
     // dance
     BehaviorLog("Dancin' to the tune of a frequency 4");
     driveBack();
-    msleep(500L);
+    pause(0.5);
     turnOnSpotRight();
-    sleep(3); // 180deg turn
+    pause(3); // 180deg turn
     // get to next base
     ontoTheNextOne(4);
   } else if(AT_BASE_WITH_FREQUENCY(6)) {
     BehaviorLog("Dancin' to the tune of a frequency 6");
     driveBack();
-    msleep(500L);
+    pause(0.5);
     turnOnSpotRight();
-    sleep(3); // 180deg turn
+    pause(3); // 180deg turn
     //get to next base
     ontoTheNextOne(6);
   } else if(AT_BASE_WITH_FREQUENCY(8)) {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    msleep(500L);
+    pause(0.5);
     stop();
-    sleep(1);
+    pause(1);
     orientStraightAndDrive(1);
-    sleep(1);
+    pause(1);
     //  get to new base
     ontoTheNextOne(8);
   } else { // no reasonable frequency detected
@@ -95,7 +98,7 @@ void behave() {
   }
   state.previousState = state.SpinSensor;
   if(state.expectedMovement != None && state.expectedFor > 4) { // stuck
-    SensorLog("expectedfor weirdo value %f", state.expectedFor);
+    SensorLog("expectedfor weirdo value %d", state.expectedFor);
     state.expectedFor = 0;
     if(state.expectedMovement == Forwards) {
       BehaviorLog("Stuck and was moving forward");

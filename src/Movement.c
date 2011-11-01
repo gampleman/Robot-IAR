@@ -1,6 +1,12 @@
 #define DRIVE_RIGHT(Value) CPhidgetMotorControl_setVelocity (motoControl, 1, round(0.75 * Value))
 #define SERVO(Value) CPhidgetAdvancedServo_setPosition(servo, 0, Value)
 
+#ifndef BATTERY
+#define BATTERY 1
+#endif
+
+#define pause(t) msleep((long)round(t * BATTERY * 1000))
+
 void DRIVE_LEFT(double Value) {
   Movement move;
   if(Value > 0) { 
@@ -36,7 +42,7 @@ int turnOnSpotLeft()
 	{
 		//stop();
 		SERVO(50);
-		//sleep(0.5);
+		//pause(0.5);
 		state.ServoPosition = 1;
 	}
 	DRIVE_RIGHT(100);
@@ -52,7 +58,7 @@ int turnOnSpotRight()
 	{
 		//stop();
 		SERVO(190);
-		//sleep(0.5);
+		//pause(0.5);
 		state.ServoPosition = -1;
 	}
 	DRIVE_RIGHT(-80);
@@ -63,7 +69,7 @@ int orientStraightAndDrive(double percent)
 {
   MovementLog("orientStraightAndDrive()");
 	SERVO(120);
-	//sleep(0.8);
+	//pause(0.8);
 	DRIVE_RIGHT(70);
 	DRIVE_LEFT(70);
 	//goTowards(90);
@@ -88,7 +94,7 @@ int retreat(Direction direction)
 		DRIVE_LEFT(-60);
 		DRIVE_RIGHT(-10);
 	}
-	//sleep(0.8);
+	//pause(0.8);
 	//state.expectedMovement = Backwards;
 	return 0;
 }
@@ -99,7 +105,7 @@ int driveBack()
 	SERVO(120);
 	DRIVE_RIGHT(-75);
 	DRIVE_LEFT(-75);
-	sleep(1);
+	pause(1);
 	//state.expectedMovement = Backwards;
 	return 0;
 }
@@ -108,11 +114,11 @@ int driveBack()
 int sweepWithSonar() {
   SERVO(20);
   ResetMeasurements();
-  msleep(500);
+  pause(0.5);
   for(state.ServoAngle = 20; state.ServoAngle < 120; state.ServoAngle += 5)
   {
     SERVO(state.ServoAngle);
-    msleep(50);
+    pause(0.050);
   }
   SERVO(120);
 }
@@ -137,28 +143,28 @@ int randomMovement()
 
 int ontoTheNextOne(int frequency)
 {
-  MovementLog("ontoTheNextOne(%f)", frequency);
+  MovementLog("ontoTheNextOne(%d)", frequency);
   if (frequency == 1)
   {
     turnOnSpotLeft();
-    sleep(4);
+    pause(4);
     orientStraightAndDrive(1);
-    sleep(2);
+    pause(2);
   } else if (frequency == 2) {
     turnOnSpotRight();
-    msleep(2600L);
+    pause(2.6);
     orientStraightAndDrive(1);
-    sleep(2);
+    pause(2);
   } else if (frequency == 4) {
     turnOnSpotRight();
-    sleep(7);
+    pause(7);
     orientStraightAndDrive(1);
-    sleep(2);
+    pause(2);
   } else if (frequency == 8) {
     turnOnSpotLeft();
-    sleep(8);
+    pause(8);
     orientStraightAndDrive(1);
-    sleep(2);
+    pause(2);
   } else {
     // do some random movement to explore the area
     randomMovement();
