@@ -247,6 +247,7 @@ int setup()
   state.movedOntoTheNextOne = 1;
   state.stuckCounter = 0;
   state.previousState = 2;
+  state.IRcausedExitFromBlack = 1;
   gettimeofday(&timer.lastFlashSighted, NULL);
   gettimeofday(&timer.lastSpinChange, NULL);
   //#ifdef FREQUENCY

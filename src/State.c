@@ -35,6 +35,7 @@ struct stateT {
   int previousState; // another obvious variable name, try to find out what this is doing - lol. 
   int stuckCounter; // i just <3 counting. btw, it sounds a bit like stock counter. i wish i had some stocks...
   int tempStuckCounter; // more counters!!!111one1!1
+  bool IRcausedExitFromBlack; // in this case usually the robot is moving fast and exiting the black area after the IR was triggered within the dock
 } state;
 
 
