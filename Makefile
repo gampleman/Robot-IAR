@@ -6,7 +6,7 @@ ifeq ($(UNAME),Linux)
 	g++ src/Main.c -o bin/main -lphidget21 -lpowerbutton $(DEBUG_ARG) -D FREQUENCY=$(FREQUENCY)
 endif
 ifeq ($(UNAME),Darwin)
-	g++ src/Main.c -o bin/main -framework Phidget21 -I /Library/Frameworks/Phidget21.framework/Headers -D NO_POWERLIB $(DEBUG_ARG) -D FREQUENCY=$(FREQUENCY)
+	g++ src/Main.c -o bin/main -framework Phidget21 -I /Library/Frameworks/Phidget21.framework/Headers -D NO_POWERLIB $(DEBUG_ARG) -D FREQUENCY=$(FREQUENCY) $(OPTS)
 endif
 
 report:
