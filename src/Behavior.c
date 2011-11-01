@@ -155,7 +155,7 @@ void behave() {
         retreat(Left);
       //}
       msleep(700);
-      driveBack();
+      //driveBack();
       state.lastWhiskerTriggered = Right;
   	  //goTowards(120,0.5);
     } else if(state.RightWhisker == 0 && state.LeftWhisker)  {
@@ -166,7 +166,7 @@ void behave() {
         retreat(Right);
       //}
       msleep(700);
-      driveBack();
+      //driveBack();
       state.lastWhiskerTriggered = Left;
   	  //goTowards(60,0.5);
     } else if(state.RightWhisker && state.LeftWhisker) {
@@ -174,7 +174,7 @@ void behave() {
       retreat(Left);
       sleep(1);
       driveBack();
-    }  else if(state.FrontFacingIR > 470) {
+    }  else if(state.FrontFacingIR > 490) {
       BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
       driveBack();
       state.IRcausedExitFromBlack = 0;
