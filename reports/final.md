@@ -13,10 +13,23 @@ The goal of this project was to build a robot that was supposed to move around a
 
 ![picture of resource site]
 
-The robot had five minutes to find as many as possible of these resource sites. When a resource site was found the robot was expected to trigger the switch and measure the frequency that was emitted by the light switch.
+The robot had five minutes to find as many as possible of these resource sites. When a resource site was found the robot was expected to trigger the switch and measure the frequency that was emitted by the light switch. Then one of the following victory dances should have been made based on the frequency of the light switch:
+
+Frequency | Movement
+----------|---------
+0.5Hz     | Backwards, 360&deg; turn left
+1Hz       | Backwards, 360&deg; turn right
+2Hz       | Backwards, stop, backwards
+4Hz       | Backwards, 180&deg; turn left
+6Hz       | Backwards, 180&deg; turn right
+8Hz       | Backwards, stop, forwards
+
+
 
 ---
 
+
+# Method
 
 ###Structure of the robot###
 
@@ -52,17 +65,32 @@ Both the front-facing IR sensor and the whiskers have been part of our robot sin
 
 ## Robotic control
 
-One of our first design decisions was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that 
+One of our first design decisions was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that we managed to have the robot navigate around in this manner, without the need to use planning or active sensing. 
 
-##General structure##
+Our control algorithm is layered where bottom layers effect how the bottom layers react to sensory input. However each of these layers are directly dependent on sensory input (there is a bit of state retained in the robot, however there is so little that calling it a model would be exaggerated). 
 
-##Functions##
-#Stuck detection#
+A top level priority is finding out whether the robot is stuck somewhere. If not (or this hasn't been detected yet, see bellow for details), then we use light sensors on the bottom of the robot to detect dark flooring. When on the dark floor all movements tend to be smaller and less pronounced. Also the reaction to the whisker sensors becomes smaller to have a more wall hugging behaviour.
+
+The lowest level are reactions to the whisker sensors and the front IR sensors. The remaining sensors are checked for values only when the other sensors mandate a possibility of them being useful.
+
+### Strategies
+
+Since creating reactive robots is all about using simple reactions to orchestrate more complex behaviours. 
+
+#### Wall hugging
+
+Inspired by Schank et al. (2006) we have used the two whisker sensors to avoid hitting a wall but intend the robot will back up a little in the direction that the whisker was triggered and then continue driving forwards presumably to hit the wall a couple of centimetres onwards. With this property we have tried to exploit two important properties of the environment. Our robots will have a high probability of ending up in corners (as discussed in Schank et al.; although they generate this behaviour by virtue of the robot's shape only, we considered that approach impractical with LEGO robots) and corners are where all of the light switches are. The second important property was that in a large number TBD of cases walls of the resource sites aim at walls of other resource sites. So when the robot follows such a wall when the wall ends it will continue straight and hit the wall in the next resource site and then it will follow that wall all the way to the switch.
 
 
-###Objectives###
-## Week 1 ##
-##Week 2##
-##Week 3## etc
 
-###Testing###
+
+
+---
+
+# Results
+
+# Disscusion
+
+# References
+
+1. Schank, J., Joshi, S., Tran, J., Taylor, R., May, C. J., & Scott, I.-E. (2006). Rat pups and random robots generate similar self‐organized and intentional behavior. *Complexity*.
