@@ -32,7 +32,10 @@ Frequency | Movement
 # Method
 
 ## Hardware specification
-
+Main Components of the robot :
+          - Fit pc
+          - PowerBoard
+          - PhidgetInterfaceKit 8 digital 8 analog ....... 
 ##Design##
 Evolution of the robot:
 
