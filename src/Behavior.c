@@ -66,15 +66,15 @@ int dance() {
     BehaviorLog("Dancin' to the tune of a frequency 8");
     // dance
     driveBack();
-    pause(2);
+    pause(3);
     stop();
     pause(1);
     orientStraightAndDrive(1);
-    pause(0.5);
+    pause(1);
     stop();
     pause(0.8);
     turnOnSpotRight();
-    pause(1);
+    pause(1.5);
     //  get to new base
     ontoTheNextOne(8, heading);
   } else { // no reasonable frequency detected
@@ -104,13 +104,13 @@ void behave() {
     state.stuckCounter = 0;
     state.expectedFor = 0;
   }
-  if (state.stuckCounter > 9) {
+  if (state.stuckCounter > 6) {
       state.expectedFor = state.expectedFor + 1;
       state.stuckCounter = 0;
       BehaviorLog("stuck cycle %d", state.expectedFor);
   }
   state.previousState = state.SpinSensor;
-  if(state.expectedMovement != None && state.expectedFor > 4) { // stuck
+  if(state.expectedMovement != None && state.expectedFor > 2) { // stuck
     SensorLog("expectedfor weirdo value %d", state.expectedFor);
     state.expectedFor = 0;
     if(state.expectedMovement == Forwards) {

@@ -40,6 +40,21 @@ Evolution of the robot:
 #Version3#
 fail
 #Version4#
+Measurements:
+Greatest width: 23.5cm
+Total length: 39cm
+Length of whiskers 14.5cm
+Whiskers sticking out: 2cm
+Height of front-facing IR: 5.9cm
+end of whiskers are 6.5cm away from front-facing IR
+Height of Top light sensors: 15.4cm
+Top Light sensors are 5.1cm away from each other
+Height of Top IR: 22cm (also the height of the robot)
+whiskers are 2.5cm away  
+Wheelbase: 8.9cm
+Rear wheels' axises are 8cm away from the back
+Distance between bottom light sensors: 8.4cm
+
 TODO write about design
 
 ## Sensors
