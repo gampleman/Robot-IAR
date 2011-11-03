@@ -74,7 +74,7 @@ int dance() {
     stop();
     pause(0.8);
     turnOnSpotRight();
-    pause(1.5);
+    pause(3);
     //  get to new base
     ontoTheNextOne(8, heading);
   } else { // no reasonable frequency detected
