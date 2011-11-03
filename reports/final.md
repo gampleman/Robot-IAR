@@ -31,29 +31,27 @@ Frequency | Movement
 
 # Method
 
-###Structure of the robot###
+## Hardware specification
 
 ##Design##
 Evolution of the robot:
-#Version1#
-#Version2#
-#Version3#
-fail
-#Version4#
-Measurements:
-Greatest width: 23.5cm
-Total length: 39cm
-Length of whiskers 14.5cm
-Whiskers sticking out: 2cm
-Height of front-facing IR: 5.9cm
-end of whiskers are 6.5cm away from front-facing IR
-Height of Top light sensors: 15.4cm
-Top Light sensors are 5.1cm away from each other
-Height of Top IR: 22cm (also the height of the robot)
-whiskers are 2.5cm away  
-Wheelbase: 8.9cm
-Rear wheels' axises are 8cm away from the back
-Distance between bottom light sensors: 8.4cm
+
+## Measurements:
+
+Greatest width | 23.5cm
+---|---
+Total length | 39cm
+Length of whiskers | 14.5cm
+Whiskers sticking out | 2cm
+Height of front-facing IR | 5.9cm
+end of whiskers are | 6.5cm away from front-facing IR
+Height of Top light sensors |15.4cm
+Top Light sensors are  | 5.1cm away from each other
+Height of Top IR | 22cm (also the height of the robot)
+whiskers are | 2.5cm away  
+Wheelbase | 8.9cm
+Rear wheels' axises are | 8cm away from the back
+Distance between bottom light sensors | 8.4cm
 
 TODO write about design
 
@@ -97,10 +95,14 @@ Since creating reactive robots is all about using simple reactions to orchestrat
 
 #### Wall hugging
 
-Inspired by Schank et al. (2006) we have used the two whisker sensors to avoid hitting a wall but intend the robot will back up a little in the direction that the whisker was triggered and then continue driving forwards presumably to hit the wall a couple of centimetres onwards. With this property we have tried to exploit two important properties of the environment. Our robots will have a high probability of ending up in corners (as discussed in Schank et al.; although they generate this behaviour by virtue of the robot's shape only, we considered that approach impractical with LEGO robots) and corners are where all of the light switches are. The second important property was that in a large number TBD of cases walls of the resource sites aim at walls of other resource sites. So when the robot follows such a wall when the wall ends it will continue straight and hit the wall in the next resource site and then it will follow that wall all the way to the switch.
+Inspired by Schank et al. (2006) we have used the two whisker sensors to avoid hitting a wall but intend the robot will back up a little in the direction that the whisker was triggered and then continue driving forwards presumably to hit the wall a couple of centimetres onwards. With this property we have tried to exploit two important properties of the environment. Our robots will have a high probability of ending up in corners (as discussed in Schank et al.; although they generate this behaviour by virtue of the robot's shape only, we considered that approach impractical with LEGO robots) and corners are where all of the light switches are. The second important property was that 6 out of the 10 walls of the resource sites aim at walls of other resource sites. So when the robot follows such a wall when the wall ends it will continue straight and hit the wall in the next resource site and then it will follow that wall all the way to the switch. The 8Hz resource site had the nice property that both of its walls led to another resource site, and this was in fact often exploited by the robot.
 
 ### Stuck Detection
 In order to ensure that our robot does not get stuck for an extended period of time, we have installed the Hall sensor to recognise when the wheels are stationary (see Sensors/Hall-sensor for more info). The input from the sensor changes parity when the bar inside it makes a full turn. We exploit this behavior along with the fact that our main function, which defines every movement, is called every 50ms to determine the state "being stuck". The simplest approach to it was to count the number of loops when the sensory input has not changed. A single cycle of "being stuck" is defined by 10 iterations of the main code called without change in the input. The robot considers itself being stuck after the fifth such cycle. If at any time the input changes, both the number of cycles and iterations are reset to 0. After the robot has realised that it is stuck, it makes the opposite movement that it was making previously, i.e. either go forward or back. This is done by setting the intended movement when the robot starts to move in a given direction. (test: getting stuck and being able to move out of it. check if it only moves forwards/backwards after being stuck!)
+
+## Experimental Design
+
+Our main concern was the performance of the robot on its main task. We tested this in eight repeated 5 minute trials. We measured how many resource sites would the robot  reach, how many light switches would it manage to trigger and how many victory dances it performed correctly. The robot was always placed in the centre of the arena with a constant starting orientation facing one of the switches. The experimenters did not interfere with the operation of the robot.
 
 
 
@@ -108,7 +110,28 @@ In order to ensure that our robot does not get stuck for an extended period of t
 
 # Results
 
+### Main performance results
+
+Run | Black areas reached | Lights triggered | Dances performed
+----|---------------------|------------------|------------------
+#1  | 3                   |                3 |                2
+#2  | 2                   |                1 |                1
+#3  | 1                   |                1 |                1
+#4  | 4                   |                2 |                2
+#5  | 2                   |                2 |                2
+#6  | 3                   |                3 |                2
+#7  | 1                   |                1 |                1
+#8  | 3                   |                1 |                1
+Mean |        2.625       |            1.625 |               1.5 
+Standard Deviation |  0.916 |       0.744    | 0.535
+
+### Corner oscillation 
+
+An interesting side effect of our various behaviours interacting was when the robot got to a corner in the lab it tended to oscillate between driving out in one direction or the other. This is caused by the fact that the robot is basically designed to reach centres of corners (where we presume the light switches are). The robot didn't get stuck in the oscillatory pattern for ever, due to subtle differences in turning on both sides (caused by one wheel having additional friction caused by the Hall sensor) it would eventually manage to get out.
+
 # Discussion
+
+TBD
 
 # References
 
