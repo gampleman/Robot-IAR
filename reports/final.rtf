@@ -6,6 +6,9 @@
 
 \f0\fs24 \cf0 ###### FINAL REPORT ######\
 \
+###Abstract###\
+\
+###Introduction###\
 \
 ###Structure of the robot###\
 \
@@ -30,14 +33,19 @@ We have attached two whiskers to the robot that are pointing forwards and outwar
 Both the front-facing IR sensor and the whiskers have been part of our robot since the first version.\
 \
 #Bottom light sensors#\
-\
+For the task in Week 4, our robot had to distinguish dark floor from light floor, hence we needed sensors that give information about the floor to our system. Therefore we installed two light sensors to the bottom of the robot which measure the brightness of the object . To minimise the effect of the changes in light conditions, we have attached a lightbulb to the bottom of the robot between the two sensors. This provides a consistent source of light and minimises the variance between brightness values obtained from dark and light floor. We use thresholding based on the average of the first values obtained from the left and right sensors after starting our program, assuming our robot starts on light floor. We also use the position of the sensors to navigate into resource sites. (image of the bottom of the robot) // also add measurements: how far are the light sensors from each other and from the light\
 \
 #Top light sensors#\
+For Week 5 our robot had to recognise the frequencies with which the lights above the switches were flashing. In order to be able to do that, we have installed two light sensors to the front of the robot at the same height as the flashing LEDs are. These sensors are at the two sides of the robot and we take an average (?? have to check this) of the values to use for frequency detection (more about this in Functions/Frequency detection). The reasoning behind the placement of these sensors is that our robot might not be perfectly in front of the light when it triggers the switch, however, this way we can ensure that either of the sensors will reach the threshold required to determine the frequency. (picture of the front of the robot)\
 \
 #Hall sensor#\
+The Hall sensor can detect whether the wheels are moving by changing the output whenever the bar inside it makes a full turn. We use this sensor to identify the case when our robot is stuck even though none of the other sensors indicate that as they are not triggered. It can also be used to detect obstacles behind the robot by believing that the robot got stuck whilst driving backwards. The Hall sensor is attached to the top of the rear left wheel and is connected via a track to the axis of the wheel (see image). The reasoning behind placing it there is that whenever the robot is stuck the wheels stop moving (even powered wheels) and it was easier to install them then to place them on the front wheel.\
 \
 #Top IR#\
+We have attached an IR sensor, facing approximately 45\uc0\u730  upwards, to the front of the robot to detect the gap at the resource site between the walls and help in guidance to the switch (see image of gap and IR sensor). This idea was implemented after seeing it working successfully on the robot of group A5. (all the others told us that we better mention them...)\
 \
+#Sonar#\
+why we didn't use it\
 \
 ###Structure of the code###\
 \
@@ -45,11 +53,13 @@ Both the front-facing IR sensor and the whiskers have been part of our robot sin
 \
 ##Functions##\
 #Stuck detection#\
-\
+In order to ensure that our robot does not get stuck for an extended period of time, we have installed the Hall sensor to recognise when the wheels are stationary (see Sensors/Hall-sensor for more info). The input from the sensor changes parity when the bar inside it makes a full turn. We exploit this behavior along with the fact that our main function, which defines every movement, is called every 50ms to determine the state "being stuck". The simplest approach to it was to count the number of loops when the sensory input has not changed. A single cycle of "being stuck" is defined by 10 iterations of the main code called without change in the input. The robot considers itself being stuck after the fifth such cycle. If at any time the input changes, both the number of cycles and iterations are reset to 0. After the robot has realised that it is stuck, it makes the opposite movement that it was making previously, i.e. either go forward or back. This is done by setting the intended movement when the robot starts to move in a given direction. (test: getting stuck and being able to move out of it. check if it only moves forwards/backwards after being stuck!)\
 \
 ###Objectives###\
 ## Week 1 ##\
 ##Week 2##\
 ##Week 3## etc\
 \
-###Testing###}
+###Testing&Results###\
+\
+###Self-evaluation/Discussion###}
