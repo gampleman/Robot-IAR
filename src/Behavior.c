@@ -190,7 +190,7 @@ void behave() {
       retreat(Left);
       sleep(1);
       driveBack();
-    }  else if(state.FrontFacingIR > 490) {
+    }  else if(state.FrontFacingIR > 420) {
       BehaviorLog("Light & IR triggered (%d)", state.FrontFacingIR);
       driveBack();
       state.IRcausedExitFromBlack = 0;
