@@ -134,7 +134,7 @@ An interesting side effect of our various behaviours interacting was when the ro
 
 # Discussion
 
-TBD
+Pictures of the robot https://picasaweb.google.com/107734719485006917029/ScrapbookPhotos?authuser=0&feat=directlink uploaded here. Will upload text later on.
 
 # References
 
