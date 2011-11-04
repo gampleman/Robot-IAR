@@ -111,16 +111,19 @@ The lowest level are reactions to the whisker sensors and the front IR sensors. 
 
 Since creating reactive robots is all about using simple reactions to orchestrate more complex behaviours. 
 
-#### Wall hugging
+### Wall hugging
 
 Inspired by Schank et al. (2006) we have used the two whisker sensors to avoid hitting a wall but intend the robot will back up a little in the direction that the whisker was triggered and then continue driving forwards presumably to hit the wall a couple of centimetres onwards. With this property we have tried to exploit two important properties of the environment. Our robots will have a high probability of ending up in corners (as discussed in Schank et al.; although they generate this behaviour by virtue of the robot's shape only, we considered that approach impractical with LEGO robots) and corners are where all of the light switches are. The second important property was that 6 out of the 10 walls of the resource sites aim at walls of other resource sites. So when the robot follows such a wall when the wall ends it will continue straight and hit the wall in the next resource site and then it will follow that wall all the way to the switch. The 8Hz resource site had the nice property that both of its walls led to another resource site, and this was in fact often exploited by the robot.
 
 ### Stuck Detection
+
 In order to ensure that our robot does not get stuck for an extended period of time, we have installed the Hall sensor to recognise when the wheels are stationary. The input from the sensor changes parity when the magnet on the bar passes the sensor, i.e. makes a full turn. We exploit this behavior along with the fact that our main function, which defines every movement, is called every 50ms to determine the state "being stuck". The simplest approach was to count the number of loops when the input from the sensor has not changed. A single cycle of "being stuck" is defined by seven iterations of the main code called without change in the input. The robot considers itself being stuck after the third such cycle. If at any time the input changes, both the number of cycles and iterations are reset to zero. After the robot has realised that it is stuck, it makes the opposite movement that it was making previously, i.e. either go forward or back. This is done by storing the intended orientation when the robot starts to move in a given direction.
 
-### Frequency recognition
-TODO explain frequency recognition
-We have carried out several tests to define the efficiency of the algorithm. In these experiments the robot was aligned facing the switch, the program was started and we let the robot find the switch, trigger it and readings of frequencies were recorded. For all lights that were available in the laboratory, we have measured the frequencies ten times and the result is shown by Figure x. We can see that the algorithm performs constantly well for lower frequencies with a standard deviation and mean of 0.0024 and 0.9835 for frequency 1 and 0.0097 and 1.9562 for frequency 2. For higher frequencies, the standard deviation has increased and thus we obtained 0.1208 with a mean of 3.9843 for frequency 4, 0.0862 with 5.9253 mean for frequency 6 and 0.1141 with 7.8632 mean for frequency 8. Even though the precision of the obtained values decreased as the frequencies became higher, the 0.3Hz wide area around the frequencies guarantee that the correct frequency is recognised.
+### Frequency measurement
+
+Frequency of the light switch mainly exploits the hardware configuration of the robot which guarantees that if the light is triggered at least one of its two light sensors will be in front of it. Once one of these sensors reach a certain threshold of activation, we stored the time this happened. When both of the sensors went bellow the threshold and again above it we subtract the two times to get the period and then derived $f = \frac{1}{T}$.
+
+We carried out tests to verify the efficiency of this method. In these experiments the robot was aligned facing the switch, the program was started and we let the robot find the switch, trigger it and readings of frequencies were recorded. For all lights that were available in the laboratory, we have measured the frequencies ten times and the result is shown by Figure x. The algorithm performs constantly well for lower frequencies with a mean of 0.984Hz (SD=0.002) for the 1Hz switch and 1.956Hz (SD=0.009) for the 2Hz switch. The higher frequencies showed more variance but still were very accurate with a mean of 3.984Hz (SD=0.121) for the 4Hz light,  with 5.925Hz (SD=0.086) for the 6Hz light and 7.863Hz (SD=0.114) for the 8Hz light.
 
 ## Experimental Design
 
