@@ -33,9 +33,24 @@ Frequency | Movement
 
 ## Hardware specification
 Main Components of the robot :
-          - Fit pc
-          - PowerBoard
-          - PhidgetInterfaceKit 8 digital 8 analog ....... 
+          Hardware specification: 
+          The main components of the robots are: 
+				- Fit pc 
+				- PowerBoard 
+				- Interface Board(PhidgetInterfaceKit 8 digital outputs, 8 digital inputs and 8 analog input).
+				- Sensors.
+				- Standart lego kit
+				- 2 x DC Motors and a Servo Motor
+				- Cables - usb, digital and analog cabels.
+	
+	How to build such a robot: Design part probably.
+	We have three main deattachable parts of our robot. The first part 
+is the main frame. This is the part where batery, Dc motors and wheels are. 
+We diceded to use chains for our robot.WHY ??? 
+The second component is the where the middle frame is. 
+It consists of interface board and power board. The last part is the front 
+wheel - the servo motor. We are using the servo motors to the front so the robot could perform smoother turns.
+Wheel spin measurement 12 cm.  
 ##Design##
 Evolution of the robot:
 
