@@ -11,7 +11,7 @@ We designed, built and programmed a robot capable of autonomous exploration and 
 
 The goal of this project was to build a robot that was supposed to move around in a lab environment searching for "resource sites". Resource sites were represented as black cardboard parallelograms taped to the floor. Two sides of the resource site had walls 50 centimetres high with a slight gap where they would meet. Here a switch was attached to a light diode that emitted a light pulsing at a specified frequency.
 
-![picture of resource site](images/resource_site.jpg)
+![Arena Layout](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/arena-layout.png)
 
 The robot had five minutes to find as many as possible of these resource sites. When a resource site was found the robot was expected to trigger the switch and measure the frequency that was emitted by the light switch. Then one of the following victory dances should have been made based on the frequency of the light switch:
 
@@ -26,88 +26,75 @@ Frequency | Movement
 
 
 
----
+# Methodology
+
+## Hardware specification ##
 
 
-# Method
+The robot has gone through several changes and reached its final state on the last week. It consists of three main distinguishable parts: rear, middle, and front.
 
-## Hardware specification
-Main Components of the robot :
-          Hardware specification: 
-          The main components of the robots are: 
-				- Fit pc 
-				- PowerBoard 
-				- Interface Board(PhidgetInterfaceKit 8 digital outputs, 8 digital inputs and 8 analog input).
-				- Sensors.
-				- Standart lego kit
-				- 2 x DC Motors and a Servo Motor
-				- Cables - usb, digital and analog cabels.
-	
-The robot have three main deattachable parts . The first part 
-is the main frame. This is where batery, Dc motors and wheels are. 
-We diceded to use chains for our robot in order to ???. The length of the chains is 16 cm.
-The second component is the where the middle frame is. 
-It consists of interface board and power board. Those boards are mounted to lego parts and added to the robot as part
-of the whole frame.
-The last part is the front wheel and the  the servo motor attached to it. 
-We are using the servo motors to the front so the robot could perform smoother turns.
-Wheel spin measurement of the back wheel 12 cm.
-Wheel spin measurement of the front wheel 5 cm.
-##Design##
-Evolution of the robot:
+The rear part had the two wheels on the sides powered by a motor which is attached via a track. The use of the track makes placing the wheels simpler and thus allows more flexibility. We have also used cross-bracing in the rear to make the structure more robust. To avoid outer interaction with the wheels, we have surrounded them by lego. Also, as the rear is the most robust part of the robot, we have centered most of the weight here by placing the battery and the Fit PC on top of it.
+The middle part consist of the power board and the interface board which are part of our structure and integrated into the Lego parts. On the bottom of the middle part, we installed two light sensors and a light bulb. We used cross-bracing in the middle part as well to increase robustness.
 
-## Measurements:
+The front part holds the servo motor which has a wheel attached to it for steering. It also includes the two whisker sensors, the front-facing and the top IR sensor and the top light sensors. The only weak point of the design is the attachment of the front wheel to the servo, however, it proved to be satisfactory for our purposes during the test runs. For more information about the sensors see below, also see figures 2, 6, 7, 8 for pictures of the structure and Table 2 for basic measurements.
+
+![Hardware view](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/Hardware1.png)
+
 
 Greatest width | 23.5cm
 ---|---
 Total length | 39cm
-Length of whiskers | 14.5cm
-Whiskers sticking out | 2cm
-Height of front-facing IR | 5.9cm
-end of whiskers are | 6.5cm away from front-facing IR
-Height of Top light sensors |15.4cm
-Top Light sensors are  | 5.1cm away from each other
-Height of Top IR | 22cm (also the height of the robot)
-whiskers are | 2.5cm away  
+Height  | 22cm
 Wheelbase | 8.9cm
-Rear wheels' axises are | 8cm away from the back
-Distance between bottom light sensors | 8.4cm
 
-TODO write about design
 
 ## Sensors
 
 ### Front-Facing IR
 
-The primary task that our robot had to achieve in order to succeed in subsequent objectives was obstacle avoidance. The easiest and primary solution to this problem was given by the front-facing infrared sensor on our robot. This sensor measures the closeness of the objects in front of it and returns an integer. It should give the greatest value when the object is touching the sensor, however, due to the implementation of the sensor, the highest value is obtained when the obstacle in front of the robot is approximately 8 cms away. To have a greater understanding about the values returned by the sensor, we have carried out a test and measured the values obtained from the sensor between 0 and 17 centimeters with 0.5 cm increments and the result is shown in Figure x. The robot is programmed to obtain readings from the sensors continuously and retreats when the value from the sensor rises above a certain threshold, which represents a slightly greater distance than the length of the whiskers. In this case, the robot drives back and turns to avoid the obstacle.
+This sensor measures the closeness of the objects in front of it and returns an integer. It should give the greatest value when the object is touching the sensor, however, due to the implementation of the sensor, the highest value is obtained when the obstacle in front of the robot is approximately 8 cm away. To have a greater understanding about the values returned by the sensor, we have carried out a test and measured the values received from the sensor between 0 and 17 centimeters with 0.5 cm increments and the result is shown in Figure 3. The robot is programmed to obtain readings from the sensors continuously and retreats when the value from the sensor rises above a certain threshold, which represents a greater distance than the length of the whiskers (6.5 cm from the IR). In this case, the robot drives back and turns to avoid the obstacle.
+
+![Graph showing the values obtained from the IR sensor with respect to distance. Our threshold is also indicated.](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/chart1.png)
 
 ### Whiskers
 
-We have attached two whiskers to the robot that are pointing forwards and outwards from the robot - one on the left and one on the right. These sensors are triggered when the whisker touches the ring that surrounds it at its base and returns the value 1, otherwise 0 (see figure x). The purpose of the using the whisker sensors is to avoid obstacles that are invisible to the front-facing IR sensor and making sure that the robot does not attempt to enter a gap that is thinner than itself and this use of them was inspired by cats' whiskers which serve the same purpose. The whiskers are x cms long and sticking out x cms to the side. The robot's reactive behavior to the whiskers being triggered is shown in figure x (insert the picture of that behavior here). The problem with the whiskers is, however, that the input we obtain is noisy due to the oscillation of the whiskers. In our implementation we overlook this fact as the oscillation usually settles down by the time the reactive behavior is executed.
-Both the front-facing IR sensor and the whiskers have been part of our robot since the first version.
+Two whiskers were attached to the robot that are pointing forwards and outwards - one on the left and one on the right. These sensors are triggered when the whisker touches the ring that surrounds it at its base and returns the value 1, otherwise 0 (see Figure 4). The purpose of using the whisker sensors is to avoid obstacles that are invisible to the front-facing IR sensor and making sure that the robot does not attempt to enter a gap that is thinner than itself. This latter use of them was inspired by cats' whiskers which serve the same purpose. The whiskers are 14.5 cm long and sticking out 2 cm to the side. The robot's reactive behavior to the whiskers being triggered is shown in Figure 5. The drawback of the whiskers is, however, that the input we obtain is noisy due to the oscillation of the whiskers. In our implementation we overlook this fact as they usually settle down by the time the reactive behavior is executed.
+
+![Input obtained from the whiskers](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/whiskers.png)
+
+![Reactive behavior performed by our robot to triggering the whisker](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/reaction-whiskers.png)
 
 ### Bottom light sensors
-For the task in Week 4, our robot had to distinguish dark floor from light floor, hence we needed sensors that give information about the floor to our system. Therefore we installed two light sensors to the bottom of the robot which measure the brightness of the object . To minimise the effect of the changes in light conditions, we have attached a lightbulb to the bottom of the robot between the two sensors. This provides a consistent source of light and minimises the variance between brightness values obtained from dark and light floor. We use thresholding based on the average of the first values obtained from the left and right sensors after starting our program, assuming our robot starts on light floor. We also use the position of the sensors to navigate into resource sites. (image of the bottom of the robot) // also add measurements: how far are the light sensors from each other and from the light
+For the task in Week 4, our robot had to distinguish dark floor from light floor, hence we needed sensors that give information about the floor. We installed two light sensors 8.4 cm apart to the bottom of the robot which measure the brightness of the object. To minimise the effect of changes in light conditions, we have attached a lightbulb to the bottom of the robot between the two sensors (see Figure 6). This provides a consistent source of light and minimises the variance between brightness values obtained from dark and light floor. We use thresholding based on the average of the first values obtained from the left and right sensors after starting our program, assuming our robot starts on light floor. We also use the position of the sensors to navigate into resource sites.
 
 ### Top light sensors
-For Week 5 our robot had to recognise the frequencies with which the lights above the switches were flashing. In order to be able to do that, we have installed two light sensors to the front of the robot at the same height as the flashing LEDs are. These sensors are at the two sides of the robot and we take an average (?? have to check this) of the values to use for frequency detection (more about this in Functions/Frequency detection). The reasoning behind the placement of these sensors is that our robot might not be perfectly in front of the light when it triggers the switch, however, this way we can ensure that either of the sensors will reach the threshold required to determine the frequency. (picture of the front of the robot)
+For Week 5 our robot had to recognise the frequencies with which the lights above the switches were flashing. In order to be able to do that, we have installed two light sensors to the front of the robot at the same height as the flashing LEDs are (15.4 cm). These sensors are at the two sides of the robot as our robot might not be perfectly in front of the light when it triggers the switch, however, this way we can ensure that either of the sensors will reach the threshold required to determine the frequency. 
+
+![Image showing the bottom of the robot with the light sensors and the light bulb in between them](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/bottom.jpg)
+
+![Image showing the front of the robot with the front-facing IR sensor, the top light sensors and the top IR sensor.](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/front.jpg)
+
 
 ### Hall sensor
-The Hall sensor can detect whether the wheels are moving by changing the output whenever the bar inside it makes a full turn. We use this sensor to identify the case when our robot is stuck even though none of the other sensors indicate that as they are not triggered. It can also be used to detect obstacles behind the robot by believing that the robot got stuck whilst driving backwards. The Hall sensor is attached to the top of the rear left wheel and is connected via a track to the axis of the wheel (see image). The reasoning behind placing it there is that whenever the robot is stuck the wheels stop moving (even powered wheels) and it was easier to install them then to place them on the front wheel.
+The Hall sensor can detect whether the wheels are moving by changing the output when the bar inside it makes a full turn. We use this sensor to identify the case when our robot is stuck even though none of the other sensors indicate an obstacle. It can also be used to detect objects behind the robot by believing that the robot got stuck whilst driving backwards. The Hall sensor is attached to the top of the rear left wheel and is connected via a track to the axis of the wheel (see Figure 8). The reasoning behind placing it there is that whenever the robot is stuck even powered wheels stop moving and it was easier to install them then to place them on the front wheel.
+
+![Image of the robot’s left side showing the Hall sensor (3) attached to the rear left wheel](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/left.jpg)
 
 ### Top IR
-We have attached an IR sensor, facing approximately 45˚ upwards, to the front of the robot to detect the gap at the resource site between the walls and help in guidance to the switch (see image of gap and IR sensor). This idea was implemented after seeing it working successfully on the robot of group A5. (all the others told us that we better mention them...)
+We have attached an IR sensor, facing approximately 45˚ upwards, to the front of the robot to detect the gap at the resource site between the walls and help in guidance to the switch (see Figure 9 of gap and IR sensor). This idea was implemented after seeing it working successfully on the robot of group A5.
 
+![Image of the gap between the walls and the top IR sensor pointing through it](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/top.jpg)
 
 ## Robotic control
 
-One of our first design decisions (inspired by  Brooks, 1990) was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that we managed to have the robot navigate around in this manner, without the need to use planning or active sensing. 
+One of our first design decisions (inspired by  Brooks, 1990) was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that we managed to have the robot navigate around in this manner, without the need to use planning or active sensing. 
 
-Our control algorithm is built in layers, where top layers effect how the bottom layers react to sensory input. Each of these layers are directly dependent on sensory input (there is a bit of state retained in the robot, however there is so little that calling it a model would be exaggerated). 
+Our control algorithm is built in layers, where top layers effect how the bottom layers react to sensory input. Each of these layers are directly dependent on sensory input (there is a bit of state retained in the robot, however there is so little that calling it a model would be exaggerated).
 
-A top level priority is finding out whether the robot is stuck somewhere. If not (or this hasn't been detected yet, see bellow for details), then we use light sensors on the bottom of the robot to detect dark flooring. When on the dark floor all movements tend to be smaller and less pronounced. Also the reaction to the whisker sensors becomes smaller to have a more wall hugging behaviour.
+A top level priority is finding out whether the robot is stuck somewhere. If not (or this hasn't been detected yet, see bellow for details), then we use light sensors on the bottom of the robot to detect dark flooring. When on the dark floor all movements tend to be smaller and less pronounced. Also the reaction to the whisker sensors becomes smaller to have a more wall hugging behavior.
 
 The lowest level are reactions to the whisker sensors and the front IR sensors. The remaining sensors are checked for values only when the other sensors mandate a possibility of them being useful.
+
 
 ### Strategies
 
@@ -127,6 +114,8 @@ Frequency of the light switch mainly exploits the hardware configuration of the 
 
 We carried out tests to verify the efficiency of this method. In these experiments the robot was aligned facing the switch, the program was started and we let the robot find the switch, trigger it and readings of frequencies were recorded. For all lights that were available in the laboratory, we have measured the frequencies ten times and the result is shown by Figure x. The algorithm performs constantly well for lower frequencies with a mean of 0.984Hz (SD=0.002) for the 1Hz switch and 1.956Hz (SD=0.009) for the 2Hz switch. The higher frequencies showed more variance but still were very accurate with a mean of 3.984Hz (SD=0.121) for the 4Hz light,  with 5.925Hz (SD=0.086) for the 6Hz light and 7.863Hz (SD=0.114) for the 8Hz light.
 
+![Graph showing the recognised frequencies](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/chart.png)
+
 ## Experimental Design
 
 Our main concern was the performance of the robot on its main task. We tested this in eight repeated 5 minute trials. We measured how many resource sites would the robot  reach, how many light switches would it manage to trigger and how many victory dances it performed correctly. The robot was always placed in the centre of the arena with a constant starting orientation facing one of the switches. The experimenters did not interfere with the operation of the robot.
@@ -134,8 +123,6 @@ Our main concern was the performance of the robot on its main task. We tested th
 We counted as reaching a resource site if the full body of the robot was over the dark area (NB we did not judge whether the robot in fact recognised it was over the dark area since its behaviour was very similar to that when it was outside and it was impossible to be sure whilst still keeping the robot autonomous). We counted as triggering the light switch if at least two consecutive flashes were seen and counted as a successful dance if the robot did the prescribed motions within a roughly &plusmn;35&deg; range as judged visually by the experimenters.
 
 
-
----
 
 # Results
 

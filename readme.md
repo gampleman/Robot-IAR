@@ -1,5 +1,7 @@
 # Dodo #
 
+For a paper about the design of this robot see the [Final Report](https://github.com/gampleman/Robot-IAR/blob/master/reports/final.md).
+
 # Connection specs #
 
 ## Sensors ##
