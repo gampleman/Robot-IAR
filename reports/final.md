@@ -43,14 +43,16 @@ Main Components of the robot :
 				- 2 x DC Motors and a Servo Motor
 				- Cables - usb, digital and analog cabels.
 	
-How to build such a robot: Design part probably.
-We have three main deattachable parts of our robot. The first part 
-is the main frame. This is the part where batery, Dc motors and wheels are. 
-We diceded to use chains for our robot.WHY ??? 
+The robot have three main deattachable parts . The first part 
+is the main frame. This is where batery, Dc motors and wheels are. 
+We diceded to use chains for our robot in order to ???. The length of the chains is 16 cm.
 The second component is the where the middle frame is. 
-It consists of interface board and power board. The last part is the front 
-wheel - the servo motor. We are using the servo motors to the front so the robot could perform smoother turns.
-Wheel spin measurement 12 cm.  
+It consists of interface board and power board. Those boards are mounted to lego parts and added to the robot as part
+of the whole frame.
+The last part is the front wheel and the  the servo motor attached to it. 
+We are using the servo motors to the front so the robot could perform smoother turns.
+Wheel spin measurement of the back wheel 12 cm.
+Wheel spin measurement of the front wheel 5 cm.
 ##Design##
 Evolution of the robot:
 
