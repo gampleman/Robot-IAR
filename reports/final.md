@@ -3,7 +3,7 @@
 ### D. Findrik (0808798), J. Hampl (0802690), L. Kamburov (0838290)
 
 
-Abstract: TBD
+We designed, built and programmed a robot capable of autonomous exploration and recognition of resource sites in its environment. Resource sites consisted of dark flooring which we used two light sensors to detect, walls and a switch that we used two whiskers and two IR sensors to detect and light of a specific frequency emitted after triggering the switch that we detected with two light sensors. A Hall sensor was used to avoid getting stuck. We used a purely reactive architecture for the robot. We carried out an experiment to test the efficiency of our robot in completing its task and we found that out of eight runs it found an average of 2.6 sites and performed 1.5 dances correctly. The main restraint of our robot is the lack of high level planning that could help optimising its site searching strategy.
 
 # Introduction
 
