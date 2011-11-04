@@ -9,9 +9,9 @@ Abstract: TBD
 
 ### Task Description
 
-The goal of this project was to build a robot that was supposed to move around in a lab environment searching for "resource sites". Resource sites were represented as black cardboard parallelograms taped to the floor. Two sides of the resource site had walls XXX centimetres high with a slight gap where they would meet. Here a switch was attached to a light diode that emitted a light pulsing at a specified frequency.
+The goal of this project was to build a robot that was supposed to move around in a lab environment searching for "resource sites". Resource sites were represented as black cardboard parallelograms taped to the floor. Two sides of the resource site had walls TBD centimetres high with a slight gap where they would meet. Here a switch was attached to a light diode that emitted a light pulsing at a specified frequency.
 
-![picture of resource site]
+![picture of resource site](images/resource_site.jpg)
 
 The robot had five minutes to find as many as possible of these resource sites. When a resource site was found the robot was expected to trigger the switch and measure the frequency that was emitted by the light switch. Then one of the following victory dances should have been made based on the frequency of the light switch:
 
@@ -111,6 +111,8 @@ We have carried out several tests to define the efficiency of the algorithm. In 
 
 Our main concern was the performance of the robot on its main task. We tested this in eight repeated 5 minute trials. We measured how many resource sites would the robot  reach, how many light switches would it manage to trigger and how many victory dances it performed correctly. The robot was always placed in the centre of the arena with a constant starting orientation facing one of the switches. The experimenters did not interfere with the operation of the robot.
 
+We counted as reaching a resource site if the full body of the robot was over the dark area (NB we did not judge whether the robot in fact recognised it was over the dark area since its behaviour was very similar to that when it was outside and it was impossible to be sure whilst still keeping the robot autonomous). We counted as triggering the light switch if at least two consecutive flashes were seen and counted as a successful dance if the robot did the prescribed motions within a roughly &plusmn;35&deg; range as judged visually by the experimenters.
+
 
 
 ---
@@ -119,7 +121,9 @@ Our main concern was the performance of the robot on its main task. We tested th
 
 ### Main performance results
 
-Run | Black areas reached | Lights triggered | Dances performed
+The robot managed on average to find 52.5% (=2.63 sites, SD=0.92) of the resource sites in the allocated 5 minutes. It's average success rate of triggering the switch after finding the site was 66.7% (SD=0.30). If the light switch was triggered the robot performed the dance correctly 95.8% of the time (SD=0.12; the one time it managed to fail was because it got stuck due to its unfortunate angle).
+
+Run | Resource sites reached | Lights triggered | Dances performed
 ----|---------------------|------------------|------------------
 #1  | 3                   |                3 |                2
 #2  | 2                   |                1 |                1
@@ -132,11 +136,17 @@ Run | Black areas reached | Lights triggered | Dances performed
 Mean |        2.625       |            1.625 |               1.5 
 Standard Deviation |  0.916 |       0.744    | 0.535
 
+# Discussion
+
+### Strengths and Weaknesses of current design
+
+
+
 ### Corner oscillation 
 
 An interesting side effect of our various behaviours interacting was when the robot got to a corner in the lab it tended to oscillate between driving out in one direction or the other. This is caused by the fact that the robot is basically designed to reach centres of corners (where we presume the light switches are). The robot didn't get stuck in the oscillatory pattern for ever, due to subtle differences in turning on both sides (caused by one wheel having additional friction caused by the Hall sensor) it would eventually manage to get out.
 
-# Discussion
+
 
 Pictures of the robot https://picasaweb.google.com/107734719485006917029/ScrapbookPhotos?authuser=0&feat=directlink uploaded here. Will upload text later on.
 
