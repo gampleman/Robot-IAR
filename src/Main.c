@@ -21,7 +21,7 @@
 int main(int argc, char* argv[])
 {
 	setup();
-	orientStraightAndDrive(1);
+	orientStraightAndDrive();
 	// Makes it compile on OSX for faster development
 	#ifdef NO_POWERLIB
 	while(1)
@@ -29,13 +29,7 @@ int main(int argc, char* argv[])
 	while(power_button_get_value()<2)
 	#endif
 	{
-    timer.iteration++;
-    timer.timeSinceLastLight++;
     behave();
-    if(timer.iteration == (timer.threshold + TURNING_DURATION)) {
-      timer.iteration = 0;
-      timer.threshold += 4;
-    }
 		msleep(50L);
 	}
 	stop();

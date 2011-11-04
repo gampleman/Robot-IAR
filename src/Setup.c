@@ -223,35 +223,24 @@ int setup()
 	ASDisplayProperties(servo);
   CPhidgetAdvancedServo_setEngaged(servo, 0, 1);
 	state.ServoPosition = 0;
-	state.RightWhisker = 0;
-	state.LeftWhisker = 0;
-	state.FrontFacingIR = 0;
-	state.TopIR = 0;
-  timer.threshold = 10;
-  timer.iteration = 0;
+	sensor.RightWhisker = 0;
+	sensor.LeftWhisker = 0;
+	sensor.FrontFacingIR = 0;
+	sensor.TopIR = 0;
   state.AverageBaseLight = (float)10000;
-  state.TopLeftLight = 0;
-  state.TopRightLight = 0;
-  state.AverageTopLight = (float)10000;
-  state.firstTopAverage = 1;
-  timer.whateverbool = 0;
-  timer.timeSinceLastLight = 0;
-  timer.enteredFrom = Unknown;
-  timer.foundStation = 0;
+  sensor.TopLeftLight = 0;
+  sensor.TopRightLight = 0;
+  state.flashWasOn = 0;
   state.wasOnBlackInLastIteration = 0;
-  state.SpinSensor = 10.0;
+  sensor.SpinSensor = 10.0;
   state.expectedMovement = None;
   state.expectedFor = 0;
   state.exitTrialCounter = 0;
-  state.sawFrequency = 1;
-  state.movedOntoTheNextOne = 1;
   state.stuckCounter = 0;
   state.previousState = 2;
-  state.IRcausedExitFromBlack = 1;
-  gettimeofday(&timer.lastFlashSighted, NULL);
-  gettimeofday(&timer.lastSpinChange, NULL);
+  gettimeofday(&state.lastFlashSighted, NULL);
   //#ifdef FREQUENCY
-  //timer.frequency = FREQUENCY;
+  //state.frequency = FREQUENCY;
   //#endif
 	#ifndef NO_POWERLIB
 	power_button_reset();
@@ -272,8 +261,6 @@ int teardown()
   #ifndef NO_POWERLIB
 	power_button_reset();
 	#endif
-  free(measurements);
-	
 	CPhidgetAdvancedServo_setPosition(servo, 0, 120);
 	sleep(2);
 	// Close IFKIT

@@ -43,8 +43,8 @@ Main Components of the robot :
 				- 2 x DC Motors and a Servo Motor
 				- Cables - usb, digital and analog cabels.
 	
-	How to build such a robot: Design part probably.
-	We have three main deattachable parts of our robot. The first part 
+How to build such a robot: Design part probably.
+We have three main deattachable parts of our robot. The first part 
 is the main frame. This is the part where batery, Dc motors and wheels are. 
 We diceded to use chains for our robot.WHY ??? 
 The second component is the where the middle frame is. 

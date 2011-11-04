@@ -3,11 +3,9 @@ This file containes the main sensor callbacks, that mainly just assign some vari
 Implements connection specs described in readme.md.
 */
 
-#define LEFT_LIGHT (state.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-#define RIGHT_LIGHT (state.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
-//define TOP_LIGHT ((float)state.TopRightLight / state.AverageTopLight > 1.9 || (float)state.TopLeftLight / state.AverageTopLight > 1.9)
-
-#define TOP_LIGHT (state.TopRightLight > 100 || state.TopLeftLight  > 100)
+#define LEFT_LIGHT (sensor.LeftLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
+#define RIGHT_LIGHT (sensor.RightLight / state.AverageBaseLight  > 1 + LIGHT_INCREASE_THRESHOLD)
+#define TOP_LIGHT (sensor.TopRightLight > 100 || sensor.TopLeftLight  > 100)
 
 
 //callback that will run if the sensor value changes by more than the OnSensorChange trigger.
@@ -21,75 +19,59 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 		case 1:
 			SensorLog("Top IR: %d", Value);
-      state.TopIR = Value;
+      sensor.TopIR = Value;
 			break;
 		case 2:
 			SensorLog("Front-facing IR: %d", Value);
-			state.FrontFacingIR = Value;
-			break;
-		case 3: 
-			SensorLog("Sonar: %d", Value);
-      BehaviorLog("Sensing sonar strength: %d ", Value);
-      //if(Value < 40)
-      //  BehaviorLog("Sensor is close");
-      Measurement sensor;
-      sensor.ServoAngle = state.ServoAngle;
-      sensor.SonarValue = Value;
-      AddMeasurement(sensor);
+			sensor.FrontFacingIR = Value;
 			break;
 		case 4:
 			SensorLog("Right Light sensor: %d", Value);
-      state.RightLight = Value;
+      sensor.RightLight = Value;
 			break;
 		case 5:
 			SensorLog("Left Light sensor: %d", Value);
-			state.LeftLight = Value;
+			sensor.LeftLight = Value;
 			break;
 		case 6:
 			SensorLog("Top Right Light sensor: %d", Value);
-      state.TopRightLight = Value;
+      sensor.TopRightLight = Value;
 			break;
 		case 7:
 			SensorLog("Top Left Light sensor: %d", Value);
-			state.TopLeftLight = Value;
+			sensor.TopLeftLight = Value;
 			break;
 	}
 	
 	if(!LEFT_LIGHT && !RIGHT_LIGHT && state.AverageBaseLight > 200) {
-    state.AverageBaseLight = ((float)state.LeftLight + (float)state.RightLight) / 2;
+    state.AverageBaseLight = ((float)sensor.LeftLight + (float)sensor.RightLight) / 2;
     SensorLog("Current base average: %f and current threshold: %f", state.AverageBaseLight, state.AverageBaseLight*(1+LIGHT_INCREASE_THRESHOLD));
   }
 	
 	// light is on and we haven't executed this block for this flash yet
-	if(TOP_LIGHT && !timer.whateverbool) {
+	if(TOP_LIGHT && !state.flashWasOn) {
     // Get precise current time
     timeval tim;
     gettimeofday(&tim, NULL);
     // convert to double in seconds
     double t2=tim.tv_sec+(tim.tv_usec/1000000.0);
     // convert last measuerd time to seconds
-    double t1 = timer.lastFlashSighted.tv_sec + (timer.lastFlashSighted.tv_usec/1000000.0);
+    double t1 = state.lastFlashSighted.tv_sec + (state.lastFlashSighted.tv_usec/1000000.0);
     // convert time to frequency
     double f = 1.0 / (t2 - t1);
     // sanity check
     if(f < 10 && f > 0.1)
-      timer.frequency = f;
+      state.frequency = f;
     SensorLog("Top Left delta"); 
-    BehaviorLog("Sensed frequency in left top light %f (t = %f, t1 = %f, t2 = %f)", timer.frequency, t2 - t1, t1, t2);
+    BehaviorLog("Sensed frequency in left top light %f (t = %f, t1 = %f, t2 = %f)", state.frequency, t2 - t1, t1, t2);
     // a blink was detected, don't execute this until the light is off
-    timer.whateverbool = 1;
+    state.flashWasOn = 1;
     // store measured value for next iteration
-    timer.lastFlashSighted = tim;
-    //timer.timeSinceLastLight = 0;
+    state.lastFlashSighted = tim;
 	}
 	// light is off
 	if(!TOP_LIGHT) {
-	  timer.whateverbool = 0;
-	  //if(state.firstTopAverage == 1) {
-	    state.AverageTopLight = ((float)state.TopLeftLight + (float)state.TopRightLight) / 2;
-	    SensorLog("Assigned top average: %f", state.AverageTopLight);
-	    state.firstTopAverage = 0;
-	  //}  
+	  state.flashWasOn = 0;
 	}
 	return 0;
 }
@@ -105,44 +87,17 @@ int IKInputChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Index
 	switch(Index)
 	{
 		case 1: 
-			state.LeftWhisker = State;
-      SensorLog("LeftWhisker = %d", state.LeftWhisker);
+			sensor.LeftWhisker = State;
+      SensorLog("LeftWhisker = %d", sensor.LeftWhisker);
 			break;
 		case 2: 
-			state.RightWhisker = State;
-      SensorLog("RightWhisker = %d", state.RightWhisker);
+			sensor.RightWhisker = State;
+      SensorLog("RightWhisker = %d", sensor.RightWhisker);
 			break;
 		case 7:
-		  state.SpinSensor = State;
-		  SensorLog("Spinsensor = %f", state.SpinSensor);
-      /*tim;
-      gettimeofday(&tim, NULL);
-      // convert to double in seconds
-      t2=tim.tv_sec+(tim.tv_usec/1000000.0);
-      // convert last measuerd time to seconds
-      t1 = timer.lastSpinChange.tv_sec + (timer.lastSpinChange.tv_usec/1000000.0);
-      // convert time to speed
-      v = 1.0 / (t2 - t1);
-      state.SpinSensor = v;
-      SensorLog("SpinSensor = %f, delta t = %f", state.SpinSensor, t2 - t1);
-      timer.lastSpinChange = tim;*/
+		  sensor.SpinSensor = State;
+		  SensorLog("Spinsensor = %f", sensor.SpinSensor);
       break;
-		//case 3:
-		//	state.BlackBumper = State;
-		//	printf("Black Bumper: %d", State);
-		//	break;
-		//case 4:
-		//	state.RedBumper = State;
-		//	printf("Red Bumper: %d", State);
-		//	break;
-		//case 5:
-		//	state.RedPlateBumper = State;
-		//	printf("Red plate Bumper: %d", State);
-		//	break;
-		//case 6:
-		//	state.BlueBumper = State;
-		//	printf("Blue Bumper: %d", State);
-		//	break;
 		default: 
 			SensorLog("Digital Input: %d > State: %d", Index, State);
 	}
