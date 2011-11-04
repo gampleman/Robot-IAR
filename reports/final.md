@@ -99,7 +99,7 @@ We have attached an IR sensor, facing approximately 45˚ upwards, to the front o
 
 ## Robotic control
 
-One of our first design decisions was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that we managed to have the robot navigate around in this manner, without the need to use planning or active sensing. 
+One of our first design decisions (inspired by  Brooks, 1990) was to try to create a purely reactive control architecture to solve the task assigned to us. This was partially successful in the sense that we managed to have the robot navigate around in this manner, without the need to use planning or active sensing. 
 
 Our control algorithm is layered where bottom layers effect how the bottom layers react to sensory input. However each of these layers are directly dependent on sensory input (there is a bit of state retained in the robot, however there is so little that calling it a model would be exaggerated). 
 
@@ -137,9 +137,7 @@ We counted as reaching a resource site if the full body of the robot was over th
 
 # Results
 
-### Main performance results
-
-The robot managed on average to find 52.5% (=2.63 sites, SD=0.92) of the resource sites in the allocated 5 minutes. It's average success rate of triggering the switch after finding the site was 66.7% (SD=0.30). If the light switch was triggered the robot performed the dance correctly 95.8% of the time (SD=0.12; the one time it managed to fail was because it got stuck due to its unfortunate angle).
+The robot managed on average to find 52.5% (=2.63 sites, SD=0.92) of the resource sites in the allocated 5 minutes. It's average success rate of triggering the switch after finding the site was 70.8% (SD=0.32). If the light switch was triggered the robot performed the dance correctly 91.7% of the time (SD=0.15).
 
 Run | Resource sites reached | Lights triggered | Dances performed
 ----|---------------------|------------------|------------------
@@ -158,21 +156,21 @@ Standard Deviation |  0.916 |       0.744    | 0.535
 
 ### Strengths and Weaknesses of current design
 
+Based on the results we can see that there is much to be done in terms of finding the resource sites. The five minute time period seems too short to reach all of the resource sites without a very well planned strategy and some idea of the global layout of the arena. Also performance in this matter was very unreliable, with some runs being very successful and others quite tragic. This seems to have depended on minute physical variance in the environment since the code of the robot is entirely deterministic.
 
+The strength of our robot was that it always acted and almost never got permanently stuck. Another interesting property we observed is that even when some of its sensors malfunctioned or disconnected it managed to continue in its task (albeit with lower efficiency).
 
 ### Corner oscillation 
 
 An interesting side effect of our various behaviours interacting was when the robot got to a corner in the lab it tended to oscillate between driving out in one direction or the other. This is caused by the fact that the robot is basically designed to reach centres of corners (where we presume the light switches are). The robot didn't get stuck in the oscillatory pattern for ever, due to subtle differences in turning on both sides (caused by one wheel having additional friction caused by the Hall sensor) it would eventually manage to get out.
 
+---
 
-
-We started to build this robot with the aim of it being able to explore the arena, finding the resource sites and after triggering the light and recognising the frequency at which it flashes, making the correct movement. Our aim was also to implement this behavior in a robot that is robust enough to withstand small collisions and no parts would fall off it. As we have described in this report, we achieved a robust structure through centering most of the weight on the rear wheels and using several cross-bracing across the robot. However, the front wheel remained a weaker part of the robot due to the issues of attaching the front wheel adequately to the servo motor. To complete its weekly tasks, we have installed several sensors that proved to be useful in our reactive approach for the robot's behavior. As the experiments have shown, we expected our robot to perform one or two dances in the final competition due to the lack of a simple yet sophisticated search algorithm that could have helped our robot in finding resource sites. For this approach we could have used, for example, random search or spiral-like movement, however, we tried to keep our code and behavior as simple as possible. Another approach that we considered was the use of a sonar sensor to create a basic map of the arena, however, this approach was discarded after a small number of experiments with the sonar that showed that the values we obtain are non-linear and the relation to distance was not obvious. 
-
-# Read this!!
-Pictures of the robot https://picasaweb.google.com/107734719485006917029/ScrapbookPhotos?authuser=0&feat=directlink uploaded here. Will upload text later on.
+We started to build this robot with the aim of it being able to explore the arena, finding the resource sites and after triggering the light and recognising the frequency at which it flashes, making the correct movement. Our aim was also to implement this behavior in a robot that is robust enough to withstand small collisions and no parts would fall off it. As we have described in this report, we achieved a robust structure through centering most of the weight on the rear wheels and using several cross-bracing across the robot. However, the front wheel remained a weaker part of the robot due to the issues of attaching the front wheel adequately to the servo motor. To complete its weekly tasks, we have installed several sensors that proved to be useful in our reactive approach for the robot's behavior. As the experiments have shown, we expected our robot to perform one or two dances in the final competition due to the lack of a sophisticated search algorithm that could have helped our robot in finding resource sites. 
 
 # References
 
+0. Brooks, R. (1990). Elephants Don't Play Chess. *Robotics and Autonomous Systems*.
 1. Schank, J., Joshi, S., Tran, J., Taylor, R., May, C. J., & Scott, I.-E. (2006). Rat pups and random robots generate similar self‐organized and intentional behavior. *Complexity*.
 
 # Source code
