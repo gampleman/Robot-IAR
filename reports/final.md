@@ -9,7 +9,7 @@ We designed, built and programmed a robot capable of autonomous exploration and 
 
 ### Task Description
 
-The goal of this project was to build a robot that was supposed to move around in a lab environment searching for "resource sites". Resource sites were represented as black cardboard parallelograms taped to the floor. Two sides of the resource site had walls TBD centimetres high with a slight gap where they would meet. Here a switch was attached to a light diode that emitted a light pulsing at a specified frequency.
+The goal of this project was to build a robot that was supposed to move around in a lab environment searching for "resource sites". Resource sites were represented as black cardboard parallelograms taped to the floor. Two sides of the resource site had walls 50 centimetres high with a slight gap where they would meet. Here a switch was attached to a light diode that emitted a light pulsing at a specified frequency.
 
 ![picture of resource site](images/resource_site.jpg)
 
@@ -166,9 +166,6 @@ The strength of our robot was that it always acted and almost never got permanen
 
 An interesting side effect of our various behaviours interacting was when the robot got to a corner in the lab it tended to oscillate between driving out in one direction or the other. This is caused by the fact that the robot is basically designed to reach centres of corners (where we presume the light switches are). The robot didn't get stuck in the oscillatory pattern for ever, due to subtle differences in turning on both sides (caused by one wheel having additional friction caused by the Hall sensor) it would eventually manage to get out.
 
----
-
-We started to build this robot with the aim of it being able to explore the arena, finding the resource sites and after triggering the light and recognising the frequency at which it flashes, making the correct movement. Our aim was also to implement this behavior in a robot that is robust enough to withstand small collisions and no parts would fall off it. As we have described in this report, we achieved a robust structure through centering most of the weight on the rear wheels and using several cross-bracing across the robot. However, the front wheel remained a weaker part of the robot due to the issues of attaching the front wheel adequately to the servo motor. To complete its weekly tasks, we have installed several sensors that proved to be useful in our reactive approach for the robot's behavior. As the experiments have shown, we expected our robot to perform one or two dances in the final competition due to the lack of a sophisticated search algorithm that could have helped our robot in finding resource sites. 
 
 # References
 
