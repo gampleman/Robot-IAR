@@ -114,7 +114,7 @@ Frequency of the light switch mainly exploits the hardware configuration of the 
 
 We carried out tests to verify the efficiency of this method. In these experiments the robot was aligned facing the switch, the program was started and we let the robot find the switch, trigger it and readings of frequencies were recorded. For all lights that were available in the laboratory, we have measured the frequencies ten times and the result is shown by Figure x. The algorithm performs constantly well for lower frequencies with a mean of 0.984Hz (SD=0.002) for the 1Hz switch and 1.956Hz (SD=0.009) for the 2Hz switch. The higher frequencies showed more variance but still were very accurate with a mean of 3.984Hz (SD=0.121) for the 4Hz light,  with 5.925Hz (SD=0.086) for the 6Hz light and 7.863Hz (SD=0.114) for the 8Hz light.
 
-![Graph showing the recognised frequencies](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/chart.png)
+![Graph showing the recognised frequencies](https://github.com/gampleman/Robot-IAR/raw/master/reports/images/chart2.png)
 
 ## Experimental Design
 
