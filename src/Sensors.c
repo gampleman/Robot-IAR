@@ -43,6 +43,7 @@ int IKSensorChangeHandler(CPhidgetInterfaceKitHandle IFK, void *usrptr, int Inde
 			break;
 	}
 	
+	// Creates an initial light threshold, since AverageBaseLight should be bigger then 200 only on initialization
 	if(!LEFT_LIGHT && !RIGHT_LIGHT && state.AverageBaseLight > 200) {
     state.AverageBaseLight = ((float)sensor.LeftLight + (float)sensor.RightLight) / 2;
     SensorLog("Current base average: %f and current threshold: %f", state.AverageBaseLight, state.AverageBaseLight*(1+LIGHT_INCREASE_THRESHOLD));

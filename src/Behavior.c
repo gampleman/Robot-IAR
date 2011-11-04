@@ -1,5 +1,6 @@
 // Macro to match imprecise measurements to a range of possible values
 #define DELTA(a,b,c) (a < b + c && a > b - c)  
+// Returns true when frequency measurements match n
 #define AT_BASE_WITH_FREQUENCY(n) (DELTA(state.frequency, n, 0.3))
 
 
@@ -80,22 +81,22 @@ Called every 50ms unless something happens.
 */
 void behave() {
   // Stuck detection
-  if(sensor.SpinSensor == state.previousState) {
-    state.stuckCounter++;
+  if(sensor.SpinSensor == state.previousState) { // This means that the hall sensor hasn't turned 180deg
+    state.stuckCounter++; // Improvement could be done by using a time measurement rather then a simple counter
   } else {
     state.stuckCounter = 0;
     state.expectedFor = 0;
   }
-  if (state.stuckCounter > 6) {
+  if (state.stuckCounter > 6) { // we expect the Hall sensor to turn 180deg every 6 iterations. or roughly every 300ms.
       state.expectedFor = state.expectedFor + 1;
       state.stuckCounter = 0;
       BehaviorLog("stuck cycle %d", state.expectedFor);
   }
   state.previousState = sensor.SpinSensor;
-  if(state.expectedMovement != None && state.expectedFor > 2) { // stuck
-    SensorLog("expectedfor weirdo value %d", state.expectedFor);
+  if(state.expectedMovement != None && state.expectedFor > 2) { // if we expect to be moving and are not for 900ms we are stuck
+    SensorLog("expectedFor value %d", state.expectedFor);
     state.expectedFor = 0;
-    if(state.expectedMovement == Forwards) {
+    if(state.expectedMovement == Forwards) { // we more or less reverse direction of movement when stuck
       BehaviorLog("Stuck and was moving forward");
       driveBack();
       sleep(1);
@@ -111,9 +112,9 @@ void behave() {
       msleep(1500L);
     }
   }
-  else if (LEFT_LIGHT || RIGHT_LIGHT) {
+  else if (LEFT_LIGHT || RIGHT_LIGHT) { // one of the bottom light sensors triggered = we are over black area
     state.wasOnBlackInLastIteration = 1;
-    if(sensor.FrontFacingIR > 420 && sensor.TopIR < 200 || state.frequency > 0.1) { // We see the gap
+    if(sensor.FrontFacingIR > 420 && sensor.TopIR < 200 || state.frequency > 0.1) { // We see the gap or the blinking light
       if(state.frequency > 0.1)  {
         BehaviorLog("Seeing the gap (F: %d, T: %d)", sensor.FrontFacingIR, sensor.TopIR);
         BehaviorLog("Top Lights. Frequency: %f", state.frequency);
@@ -138,11 +139,11 @@ void behave() {
       msleep(700);
       state.lastWhiskerTriggered = Left;
     } else if(sensor.RightWhisker && sensor.LeftWhisker) {
-      BehaviorLog("Both whiskers");
+      BehaviorLog("Both whiskers and light");
       retreat(Left);
       sleep(1);
       driveBack();
-    }  else if(sensor.FrontFacingIR > 420) {
+    }  else if(sensor.FrontFacingIR > 420) { // when IR triggers we move away from last whisker trigger
       BehaviorLog("Light & IR triggered (%d)", sensor.FrontFacingIR);
       driveBack();
       if(state.lastWhiskerTriggered == Right) {
@@ -159,8 +160,8 @@ void behave() {
     }
   
   } else {
-    if(state.wasOnBlackInLastIteration) {
-      BehaviorLog("Exited black area and trying to return.");
+    if(state.wasOnBlackInLastIteration) { // this is sort of legacy code, however it was accidentaly used in the demo and was responsible for some odd behaviors
+      BehaviorLog("Exited black area.");
       if(state.exitTrialCounter < 5) {
         if(state.lastWhiskerTriggered == Right) {
           turnOnSpotLeft();

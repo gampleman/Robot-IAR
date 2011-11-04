@@ -9,11 +9,12 @@ struct Sensors {
 	unsigned int RightWhisker;
 	int FrontFacingIR;
   int TopIR;
+  // These two are the bottom sensors
   int LeftLight;
   int RightLight;
   int TopRightLight;
   int TopLeftLight;
-  double SpinSensor;
+  double SpinSensor; // = Hall sensor
 } sensor;
 
 
@@ -21,18 +22,18 @@ struct Sensors {
 Describes state of the robot.
 */
 struct stateT {
-	unsigned int ServoPosition;
-  float AverageBaseLight;
-  Movement expectedMovement;
-  int expectedFor; //this name is kinda like flashWasOn => i have no idea what the heck it's supposed to do...
-  Direction lastWhiskerTriggered;
-  bool wasOnBlackInLastIteration;
+	unsigned int ServoPosition;     // used to indicate whether or not the servo is set straight
+  float AverageBaseLight;         // simply average of both of the bottom light sensors 
+  Movement expectedMovement;      // Which way is the robot expected to move based on motor commands (simplest feedback possible)
+  int expectedFor;                // How many cyckles is the robot stuck (TBD rename)
+  Direction lastWhiskerTriggered; // Which whisker was last triggered
+  bool wasOnBlackInLastIteration; 
   int exitTrialCounter;
-  int previousState; // another obvious variable name, try to find out what this is doing - lol. 
-  int stuckCounter; // i just <3 counting. btw, it sounds a bit like stock counter. i wish i had some stocks...
-  float frequency;
-  bool flashWasOn; // a boolean to use for frequency calculation to indicate the start or end of a flash
-  timeval lastFlashSighted;
+  int previousState;              // Previous state of the Hall sensor
+  int stuckCounter;               // For how many iterations has the Hall sensor not changed
+  float frequency;                // Frequency detected so far
+  bool flashWasOn;                // a boolean to use for frequency calculation to indicate the start or end of a flash
+  timeval lastFlashSighted;       // Time when the last flash was seen
 } state;
 
 

@@ -1,5 +1,7 @@
 /*
 Debugging utilities. Enable debugging in one area by compling with `make DEBUG=flag` where flag is one of BEHAVIOR, MOVEMENT, SETUP or SENSOR.
+
+Running this program will produce four files named behavior.log, movement.log, sensor.log & setup.log. Each has timestamped logging messages relative to program start. I recommend running them trough `uniq` to get rid of many uninteresting messages.
 */
 
 FILE *logbehavior;
